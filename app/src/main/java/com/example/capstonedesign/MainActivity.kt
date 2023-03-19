@@ -2,6 +2,7 @@ package com.example.capstonedesign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -19,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         setupJetpackNavigation()
 
-        binding.fab.bringToFront()
     }
 
     private fun setupJetpackNavigation() {
@@ -27,5 +27,6 @@ class MainActivity : AppCompatActivity() {
         navController = host.navController
         binding.bottomNavigationView.setupWithNavController(navController)
 
+        binding.bottomNavigationView.menu.getItem(1).isEnabled = false
     }
 }
