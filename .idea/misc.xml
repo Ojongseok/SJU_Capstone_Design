@@ -11,13 +11,17 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/activity_test.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/dialog_bottom_sheet.xml" value="0.4" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_board.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_board.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_bottom_sheet_dialog.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_mypage.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_plants_inspect.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_request_board.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_tip_board.xml" value="0.2390625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_modal_bottom_sheet.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_request_post.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/menu/bottom_navigation.xml" value="0.25364583333333335" />
       </map>
     </option>

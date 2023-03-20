@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/fragment_board"
-        android:title="BoardFragment"
+        android:id="@+id/fragment_home"
+        android:title="홈"
         android:icon="@drawable/ic_board"/>
 
     <item
-        android:id="@+id/fragment_home"
+        android:id="@+id/fragment_main"
         android:title="병해 검출/검사" />
 
     <item
-        android:id="@+id/fragment_mypage"
-        android:title="MypageFragment"
+        android:id="@+id/fragment_board"
+        android:title="커뮤니티"
         android:icon="@drawable/ic_mypage" />
 </menu>
