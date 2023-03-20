@@ -8,8 +8,7 @@
 
     <item
         android:id="@+id/fragment_home"
-        android:title="homeFragment"
-        android:icon="@drawable/ic_camera"/>
+        android:title="병해 검출/검사" />
 
     <item
         android:id="@+id/fragment_mypage"

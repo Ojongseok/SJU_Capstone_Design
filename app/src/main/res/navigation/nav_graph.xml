@@ -20,4 +20,9 @@
         android:name="com.example.capstonedesign.MypageFragment"
         android:label="MypageFragment"
         tools:layout="@layout/fragment_mypage" />
+    <fragment
+        android:id="@+id/plantsInspectFragment"
+        android:name="com.example.capstonedesign.PlantsInspectFragment"
+        android:label="fragment_plants_inspect"
+        tools:layout="@layout/fragment_plants_inspect" />
 </navigation>
