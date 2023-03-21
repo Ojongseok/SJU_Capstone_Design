@@ -6,23 +6,40 @@
     app:startDestination="@id/fragment_home">
 
     <fragment
-        android:id="@+id/fragment_home"
-        android:name="com.example.capstonedesign.HomeFragment"
-        android:label="BoardFragment"
-        tools:layout="@layout/fragment_board" />
-    <fragment
         android:id="@+id/fragment_main"
-        android:name="com.example.capstonedesign.MainFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/fragment_board"
-        android:name="com.example.capstonedesign.BoardFragment"
-        android:label="MypageFragment"
+        android:name="com.example.capstonedesign.view.main.MainFragment"
+        android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
     <fragment
-        android:id="@+id/plantsInspectFragment"
-        android:name="com.example.capstonedesign.PlantsInspectFragment"
+        android:id="@+id/fragment_plants_inspect"
+        android:name="com.example.capstonedesign.view.main.PlantsInspectFragment"
         android:label="fragment_plants_inspect"
         tools:layout="@layout/fragment_plants_inspect" />
+    <dialog
+        android:id="@+id/dialog_bottom_sheet"
+        android:name="com.example.capstonedesign.view.main.BottomSheetDialog"
+        android:label="dialog_bottom_sheet"
+        tools:layout="@layout/dialog_bottom_sheet">
+        <action
+            android:id="@+id/action_dialog_bottom_sheet_to_fragment_plants_inspect"
+            app:destination="@id/fragment_plants_inspect"/>
+    </dialog>
+    <fragment
+        android:id="@+id/fragment_board"
+        android:name="com.example.capstonedesign.view.board.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board">
+        <action
+            android:id="@+id/action_fragment_board_to_dialog_bottom_sheet"
+            app:destination="@id/dialog_bottom_sheet" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.example.capstonedesign.view.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragment_home_to_dialog_bottom_sheet"
+            app:destination="@id/dialog_bottom_sheet" />
+    </fragment>
 </navigation>

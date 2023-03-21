@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black">
+    android:background="@drawable/background_rec_10dp_green_stroke"
+    android:padding="12dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_post_thumbnail"
         android:layout_width="0dp"
-        android:layout_height="160dp"
+        android:layout_height="140dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/plants" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_post_thumbnail_title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:textColor="@color/text_1"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/iv_post_thumbnail"
+        app:layout_constraintStart_toStartOf="@+id/iv_post_thumbnail"
+        app:layout_constraintTop_toBottomOf="@+id/iv_post_thumbnail" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/grey_divide"
+        app:layout_constraintTop_toBottomOf="@+id/tv_post_thumbnail_title"
+        tools:layout_editor_absoluteX="12dp">
+
+    </FrameLayout>
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_post_thumbnail_contents"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:textColor="@color/text_1"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_post_thumbnail_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_post_thumbnail_title"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

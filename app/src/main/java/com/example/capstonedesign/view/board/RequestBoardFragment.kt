@@ -1,4 +1,4 @@
-package com.example.capstonedesign
+package com.example.capstonedesign.view.board
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capstonedesign.databinding.FragmentMainBinding
+import com.example.capstonedesign.PostTest
 import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
 
 class RequestBoardFragment: Fragment() {
@@ -25,19 +25,16 @@ class RequestBoardFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setRvPost()
-
     }
 
     private fun setRvPost() {
         val list = mutableListOf<PostTest>()
-        list.add(PostTest("null", "안녕", "하이"))
-        list.add(PostTest("null", "안녕", "하이"))
-        list.add(PostTest("null", "안녕", "하이"))
-        list.add(PostTest("null", "안녕", "하이"))
-        list.add(PostTest("null", "안녕", "하이"))
-        list.add(PostTest("null", "안녕", "하이"))
-        list.add(PostTest("null", "안녕", "하이"))
-        list.add(PostTest("null", "안녕", "하이"))
+        list.add(PostTest("null", "캡스톤디자인입니다.", "컴공 1분반 캡스톤디자인입니다."))
+        list.add(PostTest("null", "파릇파릇 팀입니다.", "안녕하세요."))
+        list.add(PostTest("null", "제가 기르고 있는 식물인데 이름이 뭔가요?", "이름을 모르겠습니다..ㅠㅠ"))
+        list.add(PostTest("null", "이럴 때는 어떤 농약을 사용하나요?", "알려주세요~"))
+        list.add(PostTest("null", "이번에 귀농한 xx살입니다.", "잘 부탁드립니다."))
+        list.add(PostTest("null", "제목", "내용"))
         list.add(PostTest("null", "안녕", "하이"))
 
         requestBoardPostAdapter = BoardPostAdapter(requireContext(), list)
@@ -46,6 +43,7 @@ class RequestBoardFragment: Fragment() {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = requestBoardPostAdapter
+            // spanCount -> grid 수, space->여백
             val spanCount = 2
             val space = 36
             addItemDecoration(GridSpaceItemDecoration(spanCount, space))

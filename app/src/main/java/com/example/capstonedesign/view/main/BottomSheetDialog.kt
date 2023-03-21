@@ -1,19 +1,19 @@
-package com.example.capstonedesign
+package com.example.capstonedesign.view.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.databinding.DialogBottomSheetBinding
-import com.example.capstonedesign.databinding.FragmentBoardBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetDialog(context: Context) : BottomSheetDialogFragment() {
+class BottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: DialogBottomSheetBinding? = null
     private val binding get() = _binding!!
+    private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DialogBottomSheetBinding.inflate(inflater, container, false)
@@ -23,8 +23,10 @@ class BottomSheetDialog(context: Context) : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonMenu1.setOnClickListener{
 
+        binding.buttonMenu1.setOnClickListener{
+            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPlantsInspect()
+            findNavController().navigate(action)
         }
 
         binding.buttonMenu2.setOnClickListener{
@@ -33,6 +35,9 @@ class BottomSheetDialog(context: Context) : BottomSheetDialogFragment() {
 
         binding.buttonMenu3.setOnClickListener {
             Toast.makeText(context, "Bottom Sheet 안의 버튼 클릭", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.buttonMenu4.setOnClickListener {
             dismiss()
         }
     }

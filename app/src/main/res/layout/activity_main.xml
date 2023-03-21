@@ -11,7 +11,6 @@
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
         app:layout_constraintEnd_toEndOf="@+id/bottom_navigation_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,7 +41,7 @@
             android:background="@android:color/transparent"
             app:menu="@menu/bottom_navigation"
             app:itemIconTint="@drawable/menu_selector_color"
-            app:itemTextColor="@drawable/menu_selector_color"/>
+            app:itemTextColor="@drawable/menu_selector_color" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 

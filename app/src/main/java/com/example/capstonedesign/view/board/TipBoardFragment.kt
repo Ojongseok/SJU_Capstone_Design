@@ -1,4 +1,4 @@
-package com.example.capstonedesign
+package com.example.capstonedesign.view.board
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

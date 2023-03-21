@@ -13,5 +13,5 @@
     <item
         android:id="@+id/fragment_board"
         android:title="커뮤니티"
-        android:icon="@drawable/ic_mypage" />
+        android:icon="@drawable/ic_group" />
 </menu>

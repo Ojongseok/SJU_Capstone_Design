@@ -8,20 +8,22 @@
     style="@style/AppBottomSheetDialogTheme" >
 
     <LinearLayout
+        android:id="@+id/button_menu_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
 
         <ImageView
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_camera"
-            app:tint="@color/green_3" />
+            app:tint="@color/main_green" />
 
         <TextView
-            android:id="@+id/button_menu_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,31 +37,33 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:background="@color/grey_divide">
 
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/button_menu_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
 
         <ImageView
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_home"
-            app:tint="@color/green_2" />
+            android:src="@drawable/ic_pencil"
+            app:tint="@color/main_green" />
 
         <TextView
-            android:id="@+id/button_menu_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="뭐할까"
+            android:text="질문/노하우 글쓰기"
             android:textColor="@color/text_1"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -68,27 +72,64 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:background="@color/grey_divide">
 
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/button_menu_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
 
         <ImageView
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_flower"
-            app:tint="@color/green_1" />
+            app:tint="@color/main_green" />
 
         <TextView
-            android:id="@+id/button_menu_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="무언가 하나 더"
+            android:textColor="@color/text_1"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/grey_divide">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/button_menu_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/main_green" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
