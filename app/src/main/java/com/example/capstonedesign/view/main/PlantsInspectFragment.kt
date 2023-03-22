@@ -1,14 +1,15 @@
 package com.example.capstonedesign.view.main
 
-import android.content.Intent
+import android.Manifest
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPlantsInspectBinding
 
@@ -18,6 +19,21 @@ class PlantsInspectFragment: Fragment() {
     private val binding get() = _binding!!
     private var selectedPlants = 0
 
+//    private val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+//    private val checkPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+//        result.forEach {
+//            if(!it.value) {
+//                Toast.makeText(requireContext(), "접근 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
+//            } else {
+//                pickImage()
+//            }
+//        }
+//    }
+//
+//    private val readImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+//        Glide.with(requireContext()).load(uri).into(binding.ivInspectSelectImg)
+//    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPlantsInspectBinding.inflate(inflater, container, false)
         return binding.root
@@ -26,13 +42,12 @@ class PlantsInspectFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        selectPlantsCategory()
         binding.ivInspectSelectImg.clipToOutline = true
+        selectPlantsCategory()
 
-        binding.ivInspectSelectImg.setOnClickListener {
-            openImagePickOption()
-        }
+//        binding.ivInspectSelectImg.setOnClickListener {
+//            openImagePickOption()
+//        }
     }
 
     fun openImagePickOption() {
@@ -43,7 +58,7 @@ class PlantsInspectFragment: Fragment() {
             if (items[position] == "사진 촬영") {
                 Toast.makeText(requireContext(), items[position], Toast.LENGTH_SHORT).show()
             } else if (items[position] == "앨범에서 선택") {
-                Toast.makeText(requireContext(), items[position], Toast.LENGTH_SHORT).show()
+//                checkPermission.launch(permissionList)
             } else if (items[position] == "취소") {
                 dialog.dismiss()
             }
@@ -51,7 +66,9 @@ class PlantsInspectFragment: Fragment() {
         builder.show()
     }
 
-
+//    private fun pickImage() {
+//        readImage.launch("image/*")
+//    }
 
     private fun selectPlantsCategory() {
         binding.btnInspectCategory1.setOnClickListener {

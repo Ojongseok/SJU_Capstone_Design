@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupJetpackNavigation()
+
+
     }
 
     private fun setupJetpackNavigation() {
@@ -50,6 +52,14 @@ class MainActivity : AppCompatActivity() {
             else{
                 binding.bottomAppBar.visibility = View.GONE
                 binding.fab.visibility = View.GONE
+
+                val layoutParam = FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+                )
+
+                layoutParam.setMargins(0,0,0, 0)
+                binding.navHostFragment.layoutParams = layoutParam
             }
         }
 

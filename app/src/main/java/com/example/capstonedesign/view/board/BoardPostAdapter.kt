@@ -14,6 +14,8 @@ class BoardPostAdapter(private val context: Context, private val list: List<Post
             binding.ivPostThumbnail
             binding.tvPostThumbnailTitle.text = item.title
             binding.tvPostThumbnailContents.text = item.contents
+            binding.tvPostThumbnailDate.text = "2023-03-22 13:27"
+            binding.tvPostThumbnailFavoriteCount.text = "3"
         }
     }
 
