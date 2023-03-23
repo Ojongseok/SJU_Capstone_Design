@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.marginBottom
 import androidx.core.view.setMargins
 import androidx.navigation.NavController
@@ -23,13 +24,15 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private lateinit var navController: NavController
+    var navState : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupJetpackNavigation()
+        binding.activity = this
 
+        setupJetpackNavigation()
 
     }
 
@@ -47,19 +50,27 @@ class MainActivity : AppCompatActivity() {
                 || destination.id == R.id.dialog_bottom_sheet) {
                 binding.bottomAppBar.visibility = View.VISIBLE
                 binding.fab.visibility = View.VISIBLE
+
+                navState = true
+//                val layoutParams = CoordinatorLayout.LayoutParams(
+//                    CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT
+//                )
+//                layoutParams.setMargins(0,0,0, 100)
+//
+//                binding.frameLayout.layoutParams = layoutParams
             }
             // 바텀 네비게이션이 표시되지 않는 Fragment
-            else{
+            else {
                 binding.bottomAppBar.visibility = View.GONE
                 binding.fab.visibility = View.GONE
 
-                val layoutParam = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT
-                )
-
-                layoutParam.setMargins(0,0,0, 0)
-                binding.navHostFragment.layoutParams = layoutParam
+                navState = false
+//                val layoutParams = CoordinatorLayout.LayoutParams(
+//                    CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT
+//                )
+//                layoutParams.setMargins(0,0,0,0)
+//
+//                binding.frameLayout.layoutParams = layoutParams
             }
         }
 
