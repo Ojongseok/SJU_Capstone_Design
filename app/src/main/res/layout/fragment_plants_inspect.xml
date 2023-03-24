@@ -268,6 +268,7 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="360dp"
         android:layout_height="360dp"
         android:layout_marginStart="20dp"
@@ -276,13 +277,13 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/background_rec_10dp_green_stroke"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btn_inspect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <ImageView
-            android:id="@+id/iv_inspect_select_img"
+            android:id="@+id/iv_plants_inspect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -291,7 +292,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_inspect"
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginStart="20dp"
@@ -305,5 +306,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_frg_plants_inspect"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_inspect"
+        app:layout_constraintEnd_toEndOf="@+id/btn_inspect"
+        app:layout_constraintStart_toStartOf="@+id/btn_inspect"
+        app:layout_constraintTop_toTopOf="@+id/btn_inspect" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,15 @@
         android:id="@+id/fragment_plants_inspect"
         android:name="com.example.capstonedesign.view.main.PlantsInspectFragment"
         android:label="fragment_plants_inspect"
-        tools:layout="@layout/fragment_plants_inspect" />
+        tools:layout="@layout/fragment_plants_inspect" >
+        <action
+            android:id="@+id/action_fragment_plants_inspect_to_inspectResultFragment"
+            app:destination="@id/fragment_inspect_result"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <dialog
         android:id="@+id/dialog_bottom_sheet"
         android:name="com.example.capstonedesign.view.main.BottomSheetDialog"
@@ -42,4 +50,9 @@
             android:id="@+id/action_fragment_home_to_dialog_bottom_sheet"
             app:destination="@id/dialog_bottom_sheet" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_inspect_result"
+        android:name="com.example.capstonedesign.view.main.InspectResultFragment"
+        android:label="fragment_inspect_result"
+        tools:layout="@layout/fragment_inspect_result"/>
 </navigation>

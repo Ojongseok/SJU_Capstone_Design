@@ -2,9 +2,11 @@ package com.example.capstonedesign.view.main
 
 import android.Manifest
 import android.app.Activity
+import android.app.Activity.CAMERA_SERVICE
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -20,8 +22,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPlantsInspectBinding
@@ -34,14 +39,13 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class PlantsInspectFragment: Fragment() {
     private var _binding: FragmentPlantsInspectBinding? = null
     private val binding get() = _binding!!
     private var selectedPlants = 0
-    private val PICK_FROM_CAMERA = 1
-    private val PICK_FROM_GALLERY = 2
     private val REQUEST_IMAGE_CAPTURE = 3
+    private var imageFilePath: String? = null
+    private var permissionedCnt = 0
     private lateinit var cropActivityResultLauncher : ActivityResultLauncher<Any?>
 
     private val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -65,17 +69,6 @@ class PlantsInspectFragment: Fragment() {
 //            }
 //        }
 //    }
-//    private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
-//        override fun createIntent(context: Context, input: Any?): Intent {
-//            return CropImage.activity()
-//                .setAspectRatio(1,1)
-//                .getIntent(requireActivity())
-//        }
-//
-//        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
-//            return CropImage.getActivityResult(intent)?.uri
-//        }
-//    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPlantsInspectBinding.inflate(inflater, container, false)
@@ -92,35 +85,62 @@ class PlantsInspectFragment: Fragment() {
             openImagePickOption()
         }
 
-//        cropActivityResultLauncher = registerForActivityResult(cropActivityResultContract) {
-//            it?.let {
-//                binding.ivInspectSelectImg.setImageURI(it)
-//            }
-//        }
+        binding.btnInspect.setOnClickListener {
+            val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment()
+            findNavController().navigate(action)
+        }
     }
 
     fun openImagePickOption() {
-        val items = arrayOf<String>("사진 촬영", "앨범에서 선택", "취소")
+        val items = arrayOf<String>("카메라 촬영 / 갤러리 선택", "취소")
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("사진 선택")
+        builder.setTitle("업로드 방법 선택")
         builder.setItems(items) { dialog, position ->
-            if (items[position] == "사진 촬영") {
+            if (items[position] == "카메라 촬영 / 갤러리 선택") {
 //                checkPermission2.launch(permissionList2)
-                dispatchTakePictureIntent()
-            } else if (items[position] == "앨범에서 선택") {
-                checkPermission.launch(permissionList)
+                checkPermission()
             } else if (items[position] == "취소") {
                 dialog.dismiss()
             }
         }
         builder.show()
     }
+
+
+    fun checkPermission() {
+        val WRITE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE
+        val READ_PERMISSION = Manifest.permission.READ_EXTERNAL_STORAGE
+        val CAMERA_PERMISSION = Manifest.permission.CAMERA
+
+        var writePermission = ContextCompat.checkSelfPermission(requireContext(), WRITE_PERMISSION)
+        var readPermission = ContextCompat.checkSelfPermission(requireContext(), READ_PERMISSION)
+        var cameraPermission = ContextCompat.checkSelfPermission(requireContext(), CAMERA_PERMISSION)
+
+        //권한이 없는 경우
+        if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED
+            || cameraPermission == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(requireActivity(),
+                arrayOf(WRITE_PERMISSION, READ_PERMISSION, CAMERA_PERMISSION),
+                1 //사용자 임의 상수 (1로 설정해줌)
+            )
+        }
+
+        if (writePermission == PackageManager.PERMISSION_GRANTED || readPermission == PackageManager.PERMISSION_GRANTED
+            || cameraPermission == PackageManager.PERMISSION_GRANTED) {
+            //권한이 있는 경우 실행할 동작
+            dispatchTakePictureIntent()
+        }
+    }
+
+    fun reCheck() {
+        // 권한 한번에 할 수 있게 고쳐야 할 듯
+    }
+
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             if (takePictureIntent.resolveActivity(this.requireContext().packageManager) != null) {
                 // 찍은 사진을 그림파일로 만들기
-                val photoFile: File? =
-                    try {
+                val photoFile: File? = try {
                         createImageFile()
                     } catch (ex: IOException) {
                         Log.d("TAG", "그림파일 만드는도중 에러생김")
@@ -200,8 +220,6 @@ class PlantsInspectFragment: Fragment() {
             .start(requireContext(), this)
     }
 
-    private var imageFilePath: String? = null
-    private var photoUri: Uri? = null
     @Throws(IOException::class)
     private fun createImageFile(): File? {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
@@ -215,22 +233,6 @@ class PlantsInspectFragment: Fragment() {
         imageFilePath = image.absolutePath
         return image
     }
-//    private fun sendTakePhotoIntent() {
-//        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        if (takePictureIntent.resolveActivity(requireContext().packageManager) != null) {
-//            var photoFile: File? = null
-//            try {
-//                photoFile = createImageFile()
-//            } catch (ex: IOException) {
-//                // Error occurred while creating the File
-//            }
-//            if (photoFile != null) {
-//                photoUri = FileProvider.getUriForFile(requireContext(), requireContext().packageName, photoFile)
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-//                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//            }
-//        }
-//    }
 
     private fun selectPlantsCategory() {
         binding.btnInspectCategory1.setOnClickListener {

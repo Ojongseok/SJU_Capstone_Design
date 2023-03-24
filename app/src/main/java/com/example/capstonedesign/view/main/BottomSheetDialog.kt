@@ -13,7 +13,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class BottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: DialogBottomSheetBinding? = null
     private val binding get() = _binding!!
-    private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DialogBottomSheetBinding.inflate(inflater, container, false)
@@ -22,7 +21,6 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         binding.buttonMenu1.setOnClickListener{
             val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPlantsInspect()
