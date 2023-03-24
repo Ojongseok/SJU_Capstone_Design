@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="36dp"
-        android:text="진단할 작물의 이미지를 첨부해주세요."
+        android:text="영역을 터치해 진단할 작물의 이미지를 첨부해주세요."
         android:textColor="@color/text_1"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -268,14 +268,14 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/background_rec_10dp_green_stroke"
-        android:padding="36dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -285,6 +285,7 @@
             android:id="@+id/iv_inspect_select_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:scaleType="fitXY"
             android:src="@drawable/ic_search_image" />
     </FrameLayout>
@@ -292,7 +293,7 @@
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"

@@ -2,6 +2,7 @@ package com.example.capstonedesign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.activity = this
+
 
         setupJetpackNavigation()
 
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 binding.fab.visibility = View.VISIBLE
 
                 navState = true
+                binding.navState = navState
 //                val layoutParams = CoordinatorLayout.LayoutParams(
 //                    CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT
 //                )
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                 binding.fab.visibility = View.GONE
 
                 navState = false
+                binding.navState = navState
 //                val layoutParams = CoordinatorLayout.LayoutParams(
 //                    CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT
 //                )

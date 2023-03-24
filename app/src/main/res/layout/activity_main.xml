@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.example.capstonedesign.databinding.ActivityMainBindingImpl"/>
         <variable
-            name="activity"
-            type="com.example.capstonedesign.MainActivity" />
+            name="navState"
+            type="Boolean" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -21,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="@+id/bottom_navigation_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="@dimen/nav_off">
+            app:layoutMarginBottom="@{navState ? @dimen/nav_on : @dimen/nav_off}">
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/nav_host_fragment"

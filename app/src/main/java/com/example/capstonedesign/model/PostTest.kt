@@ -1,4 +1,4 @@
-package com.example.capstonedesign
+package com.example.capstonedesign.model
 
 data class PostTest(
     val img: String? = null,
