@@ -78,10 +78,10 @@ class PlantsInspectFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ivInspectSelectImg.clipToOutline = true
+        binding.ivPlantsInspect.clipToOutline = true
         selectPlantsCategory()
 
-        binding.ivInspectSelectImg.setOnClickListener {
+        binding.ivPlantsInspect.setOnClickListener {
             openImagePickOption()
         }
 
@@ -89,6 +89,8 @@ class PlantsInspectFragment: Fragment() {
             val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment()
             findNavController().navigate(action)
         }
+
+        binding.pbFrgPlantsInspect.bringToFront()
     }
 
     fun openImagePickOption() {
@@ -105,7 +107,6 @@ class PlantsInspectFragment: Fragment() {
         }
         builder.show()
     }
-
 
     fun checkPermission() {
         val WRITE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -200,11 +201,10 @@ class PlantsInspectFragment: Fragment() {
                 }
             }
             CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
-                Log.d("tag",requestCode.toString())
                 val result = CropImage.getActivityResult(data)
                 if(resultCode == RESULT_OK){
                     result.uri?.let {
-                        binding.ivInspectSelectImg.setImageURI(result.uri)
+                        binding.ivPlantsInspect.setImageURI(result.uri)
                     }
                 } else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                     val error = result.error

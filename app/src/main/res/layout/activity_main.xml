@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_camera"
+            android:src="@drawable/ic_light"
             app:backgroundTint="@color/main_green"
             android:tint="@color/white"
             app:tint="@null"

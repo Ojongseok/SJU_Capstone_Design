@@ -59,6 +59,8 @@ dependencies {
     // Crop
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
+    // Pie Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 
     implementation 'androidx.core:core-ktx:1.6.0'

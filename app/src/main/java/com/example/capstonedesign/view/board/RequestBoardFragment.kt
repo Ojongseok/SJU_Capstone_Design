@@ -56,12 +56,7 @@ class RequestBoardFragment: Fragment() {
     }
 
     inner class GridSpaceItemDecoration(private val spanCount: Int, private val space: Int): RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             val position = parent.getChildAdapterPosition(view)
             val column = position % spanCount + 1      // 1부터 시작
 
@@ -76,8 +71,6 @@ class RequestBoardFragment: Fragment() {
             /** 모든 아이템의 좌측과 하단에 [space] 만큼의 여백을 추가한다. */
             outRect.left = space
             outRect.bottom = space
-
         }
-
     }
 }
