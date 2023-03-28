@@ -65,7 +65,7 @@ class PostWriteFragment: Fragment() {
             val title = binding.etPostWriteTitle.text.toString()
             val contents = binding.etPostWriteContents.text.toString()
 
-
+            Toast.makeText(requireContext(), "게시글 작성이 완료되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 

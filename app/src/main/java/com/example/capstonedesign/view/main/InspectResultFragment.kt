@@ -102,7 +102,7 @@ class InspectResultFragment: Fragment() {
         // data set
         val entries = ArrayList<PieEntry>()
         entries.add(PieEntry(2f, "정상"))
-        entries.add(PieEntry(97f, "딸기잿빛곰파이병"))
+        entries.add(PieEntry(97f, "딸기잿빛곰팡이병"))
         entries.add(PieEntry(1f, "딸기흰가루병"))
         entries.add(PieEntry(0f, "진단 불가"))
 

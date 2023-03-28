@@ -98,7 +98,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_home_alert_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -115,11 +115,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:text="딸기잿빛곰팡이병이 매우 의심됩니다."
         android:textColor="@color/text_1"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toStartOf="@+id/tv_home_alert_2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_home_alert_2" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
