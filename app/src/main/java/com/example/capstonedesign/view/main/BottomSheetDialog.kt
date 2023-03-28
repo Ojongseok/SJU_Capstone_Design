@@ -33,7 +33,7 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         binding.buttonMenu3.setOnClickListener {
-            Toast.makeText(context, "Bottom Sheet 안의 버튼 클릭", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Bottom Sheet 3번째 메뉴 클릭", Toast.LENGTH_SHORT).show()
         }
 
         binding.buttonMenu4.setOnClickListener {

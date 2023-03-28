@@ -1,12 +1,19 @@
 package com.example.capstonedesign.view.main
 
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
-import android.icu.text.Transliterator
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.capstonedesign.databinding.FragmentInspectResultBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
@@ -14,13 +21,17 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.ColorTemplate.COLORFUL_COLORS
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 class InspectResultFragment: Fragment() {
     private var _binding: FragmentInspectResultBinding? = null
     private val binding get() = _binding!!
+    private val args by navArgs<InspectResultFragmentArgs>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentInspectResultBinding.inflate(inflater, container, false)
@@ -31,6 +42,58 @@ class InspectResultFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setBarChart()
+        setImg()
+
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.btnInspectResultCapture.setOnClickListener {
+            val container = requireActivity().window.decorView
+            val screenShot = ScreenShot(container)
+
+            if (screenShot != null) {
+                requireContext().sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)))
+                Toast.makeText(requireContext(), "진단결과가 갤러리에 저장되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.btnInspectResultShare.setOnClickListener {
+
+        }
+
+        binding.btnInspectResultCheck.setOnClickListener {
+            val action = InspectResultFragmentDirections.actionFragmentInspectResultToFragmentHome()
+            findNavController().navigate(action)
+        }
+    }
+
+    fun ScreenShot(view: View): File? {
+        view.isDrawingCacheEnabled = true //화면에 뿌릴때 캐시를 사용하게 한다
+        val screenBitmap = view.drawingCache //캐시를 비트맵으로 변환
+        val filename = "screenshot.png"
+        val file = File(
+            Environment.getExternalStorageDirectory().toString() + "/Pictures",
+            filename
+        ) //Pictures폴더 screenshot.png 파일
+        var os: FileOutputStream? = null
+        try {
+            os = FileOutputStream(file)
+            screenBitmap.compress(Bitmap.CompressFormat.PNG, 90, os) //비트맵을 PNG파일로 변환
+            os.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return null
+        }
+        view.isDrawingCacheEnabled = false
+        return file
+    }
+
+
+    private fun setImg() {
+        val img = args.img
+        Log.d("tag",img.toString())
+        binding.ivInspectResult.setImageURI(img)
     }
 
     private fun setBarChart() {
@@ -38,11 +101,10 @@ class InspectResultFragment: Fragment() {
 
         // data set
         val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(1f, "Apple"))
-        entries.add(PieEntry(34f, "Mango"))
-        entries.add(PieEntry(29f, "RedOrange"))
-        entries.add(PieEntry(36f, "Other"))
-
+        entries.add(PieEntry(2f, "정상"))
+        entries.add(PieEntry(97f, "딸기잿빛곰파이병"))
+        entries.add(PieEntry(1f, "딸기흰가루병"))
+        entries.add(PieEntry(0f, "진단 불가"))
 
         // add a lot of colors
         val colorsItems = ArrayList<Int>()
@@ -88,9 +150,6 @@ class InspectResultFragment: Fragment() {
             formSize = 14f
             formToTextSpace = 6f
         }
-
-
-
     }
 
     override fun onDestroy() {

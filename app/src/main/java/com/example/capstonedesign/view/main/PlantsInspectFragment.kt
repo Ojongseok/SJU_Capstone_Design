@@ -1,13 +1,9 @@
 package com.example.capstonedesign.view.main
 
 import android.Manifest
-import android.app.Activity
-import android.app.Activity.CAMERA_SERVICE
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -27,11 +22,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPlantsInspectBinding
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File
@@ -47,6 +39,7 @@ class PlantsInspectFragment: Fragment() {
     private var imageFilePath: String? = null
     private var permissionedCnt = 0
     private lateinit var cropActivityResultLauncher : ActivityResultLauncher<Any?>
+    private var imgUri : Uri? = null
 
     private val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
     private val checkPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
@@ -86,11 +79,17 @@ class PlantsInspectFragment: Fragment() {
         }
 
         binding.btnInspect.setOnClickListener {
-            val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment()
-            findNavController().navigate(action)
+            if (imgUri != null && selectedPlants != 0) {
+                val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!)
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(requireContext(), "에러", Toast.LENGTH_SHORT).show()
+            }
         }
 
-        binding.pbFrgPlantsInspect.bringToFront()
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     fun openImagePickOption() {
@@ -108,7 +107,7 @@ class PlantsInspectFragment: Fragment() {
         builder.show()
     }
 
-    fun checkPermission() {
+    private fun checkPermission() {
         val WRITE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE
         val READ_PERMISSION = Manifest.permission.READ_EXTERNAL_STORAGE
         val CAMERA_PERMISSION = Manifest.permission.CAMERA
@@ -131,10 +130,6 @@ class PlantsInspectFragment: Fragment() {
             //권한이 있는 경우 실행할 동작
             dispatchTakePictureIntent()
         }
-    }
-
-    fun reCheck() {
-        // 권한 한번에 할 수 있게 고쳐야 할 듯
     }
 
     private fun dispatchTakePictureIntent() {
@@ -204,6 +199,7 @@ class PlantsInspectFragment: Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if(resultCode == RESULT_OK){
                     result.uri?.let {
+                        imgUri = it
                         binding.ivPlantsInspect.setImageURI(result.uri)
                     }
                 } else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
@@ -213,6 +209,7 @@ class PlantsInspectFragment: Fragment() {
             }
         }
     }
+
     private fun launchImageCrop(uri: Uri?){
         CropImage.activity(uri).setGuidelines(CropImageView.Guidelines.ON)
             .setCropShape(CropImageView.CropShape.RECTANGLE)
@@ -230,6 +227,7 @@ class PlantsInspectFragment: Fragment() {
             ".jpg",  /* suffix */
             storageDir /* directory */
         )
+
         imageFilePath = image.absolutePath
         return image
     }

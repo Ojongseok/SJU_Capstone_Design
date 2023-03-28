@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonedesign.databinding.FragmentMainBinding
@@ -48,6 +49,13 @@ class TipBoardFragment: Fragment() {
             val space = 36
             addItemDecoration(GridSpaceItemDecoration(spanCount, space))
         }
+
+        tipBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail()
+                findNavController().navigate(action)
+            }
+        })
     }
 
     override fun onDestroy() {
