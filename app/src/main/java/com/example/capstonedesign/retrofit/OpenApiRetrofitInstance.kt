@@ -1,5 +1,6 @@
 package com.example.capstonedesign.retrofit
 
+import com.example.capstonedesign.BuildConfig
 import com.google.gson.GsonBuilder
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object OpenApiRetrofitInstance {
-    const val API_KEY = "2023d617f87a47faecb47a7e73cca7c3fdc4"
+    const val API_KEY = BuildConfig.OPEN_API_KEY
 
     private val okHttpClient: OkHttpClient by lazy {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
