@@ -1,13 +1,12 @@
 package com.example.capstonedesign.view.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.capstonedesign.adapter.AlertMonthAdapter
 import com.example.capstonedesign.databinding.FragmentHomeBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +37,8 @@ class HomeFragment: Fragment() {
             initData()
 
             withContext(Dispatchers.Main) {
+                binding.pbHomeAlertMonth.visibility = View.GONE
+
                 alertMonthAdapter2 = AlertMonthAdapter(list2)
 
                 binding.rvHomeAlertMonth2.apply {
@@ -57,7 +58,6 @@ class HomeFragment: Fragment() {
                 }
                 binding.tvHomeAlert3.text = list3.size.toString()
 
-
             }
         }
     }
@@ -66,13 +66,11 @@ class HomeFragment: Fragment() {
         val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=206&ncpms.cmm.token.html.TOKEN=d9158d3782321ff65ee9da4ca2ac9ef6&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
         val doc = Jsoup.connect(url).get()
 
-//        list1 = doc.select("li.watch").select("ul.afterClear")    // 경보
+//        list1 = doc.select("li.watch").select("ul.afterClear").select("li")    // 경보
         list2 = doc.select("li.watch").select("ul.afterClear").select("li")    // 주의보
         list3 = doc.select("li.forecast").select("ul.afterClear").select("li")    // 예보
 
     }
-
-
 
     override fun onDestroy() {
         _binding = null

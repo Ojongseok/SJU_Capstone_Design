@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capstonedesign.databinding.FragmentMainBinding
-import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
+import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.databinding.FragmentTipBoardBinding
 import com.example.capstonedesign.model.PostTest
 

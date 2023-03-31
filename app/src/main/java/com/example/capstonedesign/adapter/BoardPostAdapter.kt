@@ -1,4 +1,4 @@
-package com.example.capstonedesign.view.board
+package com.example.capstonedesign.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

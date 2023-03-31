@@ -30,10 +30,21 @@
         tools:layout="@layout/dialog_bottom_sheet">
         <action
             android:id="@+id/action_dialog_bottom_sheet_to_fragment_plants_inspect"
-            app:destination="@id/fragment_plants_inspect"/>
+            app:destination="@id/fragment_plants_inspect"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_dialog_bottom_sheet_to_postWriteFragment"
+            android:id="@+id/action_dialog_bottom_sheet_to_fragment_post_write"
             app:destination="@id/fragment_post_write"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_dialog_bottom_sheet_to_fragment_search_disease"
+            app:destination="@id/fragment_search_disease"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -50,6 +61,13 @@
         <action
             android:id="@+id/action_fragment_board_to_fragment_post_detail"
             app:destination="@id/fragment_post_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_board_to_fragment_mypage"
+            app:destination="@id/fragment_mypage"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -88,4 +106,14 @@
         android:name="com.example.capstonedesign.view.board.PostDetailFragment"
         android:label="fragment_post_detail"
         tools:layout="@layout/fragment_post_detail" />
+    <fragment
+        android:id="@+id/fragment_mypage"
+        android:name="com.example.capstonedesign.view.board.MyPageFragment"
+        android:label="fragment_my_page"
+        tools:layout="@layout/fragment_my_page" />
+    <fragment
+        android:id="@+id/fragment_search_disease"
+        android:name="com.example.capstonedesign.view.main.SearchDiseaseFragment"
+        android:label="fragment_search_disease"
+        tools:layout="@layout/fragment_search_disease" />
 </navigation>

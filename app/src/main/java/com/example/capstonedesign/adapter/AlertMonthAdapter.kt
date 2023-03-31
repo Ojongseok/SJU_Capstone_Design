@@ -1,13 +1,9 @@
-package com.example.capstonedesign.view.home
+package com.example.capstonedesign.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonedesign.databinding.ItemHomeAlertMonthBinding
-import com.example.capstonedesign.model.PostTest
-import com.example.capstonedesign.databinding.ItemRequestPostBinding
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 

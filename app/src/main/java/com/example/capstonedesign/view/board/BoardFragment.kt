@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentBoardBinding
 import com.google.android.material.tabs.TabLayout
@@ -23,6 +25,14 @@ class BoardFragment: Fragment() {
 
         setTabLayout()
 
+        binding.btnBoardMypage.setOnClickListener {
+            val action = BoardFragmentDirections.actionFragmentBoardToFragmentMypage()
+            findNavController().navigate(action)
+        }
+
+        binding.btnBoardSearch.setOnClickListener {
+            Toast.makeText(requireContext(), "준비중입니다.", Toast.LENGTH_SHORT).show()
+        }
 
     }
 

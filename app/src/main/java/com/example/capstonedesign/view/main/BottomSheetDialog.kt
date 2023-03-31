@@ -28,12 +28,13 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         binding.buttonMenu2.setOnClickListener{
-            val action = BottomSheetDialogDirections.actionDialogBottomSheetToPostWriteFragment()
+            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPostWrite()
             findNavController().navigate(action)
         }
 
         binding.buttonMenu3.setOnClickListener {
-            Toast.makeText(context, "Bottom Sheet 3번째 메뉴 클릭", Toast.LENGTH_SHORT).show()
+            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentSearchDisease()
+            findNavController().navigate(action)
         }
 
         binding.buttonMenu4.setOnClickListener {

@@ -1,4 +1,4 @@
-package com.example.capstonedesign.view
+package com.example.capstonedesign.util
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("layoutMarginBottom")
-fun setLayoutMarginTop(view: View, dimen: Float) {
+fun setLayoutMarginBottom(view: View, dimen: Float) {
     (view.layoutParams as ViewGroup.MarginLayoutParams).let {
         it.bottomMargin = dimen.toInt()
         view.layoutParams = it

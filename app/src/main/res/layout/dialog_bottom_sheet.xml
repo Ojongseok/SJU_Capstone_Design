@@ -91,14 +91,14 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_flower"
+            android:src="@drawable/ic_search"
             app:tint="@color/main_green" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="오픈 API를 활용한 추가 정보 제공"
+            android:text="병해 정보 검색"
             android:textColor="@color/text_1"
             android:textSize="20sp"
             android:textStyle="bold" />
