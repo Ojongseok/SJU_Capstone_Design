@@ -11,14 +11,20 @@ data class SearchDiseaseResponse(
     @PropertyElement(name="buildTime")
     val buildTime: String,
     @Element(name = "list")
-    val list: List<Item>,
+    val list: Items,
     @PropertyElement(name="displayCount")
     val displayCount: Int,
     @PropertyElement(name="startPoint")
     val startPoint: String
 )
 
-@Xml(name = "item")
+@Xml(name= "item")
+data class Items(
+    @Element(name="item")
+    val item: List<Item>
+)
+
+@Xml
 data class Item(
     @PropertyElement(name="oriImg")
     val oriImg: String?,
