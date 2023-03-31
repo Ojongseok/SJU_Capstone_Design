@@ -37,3 +37,6 @@
 <img src="https://user-images.githubusercontent.com/98886487/227852438-50f2bdc2-f62d-48f9-bb6e-5a261634f852.png" width="700" height="350" /> 
 
 ## 4~5주차
+#### 유스케이스(Use Case) 작성
+
+#### 주요 기능 
