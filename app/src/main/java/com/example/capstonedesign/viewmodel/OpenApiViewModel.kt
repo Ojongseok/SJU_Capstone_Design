@@ -22,6 +22,9 @@ class OpenApiViewModel: ViewModel() {
     val diseaseGeneratedMonthly2 = MutableLiveData<List<Element>>()    // 주의보
     val diseaseGeneratedMonthly3 = MutableLiveData<List<Element>>()    // 예보
     val cropDetailInfo = MutableLiveData<CropDetailResponse>()    // 작물별 상세정보
+    val pbHome = MutableLiveData<Boolean>()
+    val pbCropList = MutableLiveData<Boolean>()
+    val pbCropDetailInfo = MutableLiveData<Boolean>()
 
     fun setDiseaseGeneratedMonthly() = CoroutineScope(Dispatchers.IO).launch {
         val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=206&ncpms.cmm.token.html.TOKEN=d9158d3782321ff65ee9da4ca2ac9ef6&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
@@ -33,12 +36,14 @@ class OpenApiViewModel: ViewModel() {
 
         diseaseGeneratedMonthly2.postValue(data2)
         diseaseGeneratedMonthly3.postValue(data3)
+        pbHome.postValue(true)
     }
 
     fun searchDetailCropInfo(cropName: String) = CoroutineScope(Dispatchers.IO).launch {
         val data = OpenApiRetrofitService.searchDetailCropInfo(API_KEY, "SVC01", "AA001", cropName)
 
         cropDetailInfo.postValue(data)
+        pbCropDetailInfo.postValue(true)
     }
 
     fun setCropList() = CoroutineScope(Dispatchers.IO).launch {
@@ -47,6 +52,7 @@ class OpenApiViewModel: ViewModel() {
         val data = doc.select("ul.floatDiv.mt20.ce.photoSearch").select("li").toMutableList()
 
         cropList.postValue(data)    // .value는 메인 쓰레드에서, postValue는 백그라운드 쓰레드에서
+        pbCropList.postValue(true)
     }
 
 

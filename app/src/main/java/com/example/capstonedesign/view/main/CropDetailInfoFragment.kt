@@ -49,6 +49,11 @@ class CropDetailInfoFragment: Fragment() {
             }
         }
 
+        viewModel.pbCropDetailInfo.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.pbCropDetailInfo.visibility = View.GONE
+            }
+        }
     }
 
     private fun setRv() {

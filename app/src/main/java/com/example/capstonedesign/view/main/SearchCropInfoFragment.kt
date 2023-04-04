@@ -61,6 +61,12 @@ class SearchCropInfoFragment: Fragment() {
         viewModel.cropList.observe(viewLifecycleOwner) {
             cropAdapter.setData(it)
         }
+
+        viewModel.pbCropList.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.pbSearchCropInfo.visibility = View.GONE
+            }
+        }
     }
 
     private fun initData() {

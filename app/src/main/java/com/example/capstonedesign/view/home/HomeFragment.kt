@@ -1,6 +1,7 @@
 package com.example.capstonedesign.view.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -62,11 +63,16 @@ class HomeFragment: Fragment() {
 
             binding.tvHomeAlert3.text = it.size.toString()
         }
+
+        viewModel.pbHome.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.pbHomeAlertMonth.visibility = View.GONE
+            }
+        }
     }
 
     private fun initData() {
-        val job = viewModel.setDiseaseGeneratedMonthly()
-//        binding.pbHomeAlertMonth.visibility = View.GONE
+        viewModel.setDiseaseGeneratedMonthly()
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter()
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter()

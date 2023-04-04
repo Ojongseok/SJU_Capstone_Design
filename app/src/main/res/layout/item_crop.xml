@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_green_stroke"
+    android:background="@drawable/background_rec_4dp_green_stroke"
     android:padding="2dp">
 
     <ImageView
