@@ -44,7 +44,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_dialog_bottom_sheet_to_fragment_search_disease"
-            app:destination="@id/fragment_search_disease"
+            app:destination="@id/fragment_search_crop_info"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -112,8 +112,25 @@
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" />
     <fragment
-        android:id="@+id/fragment_search_disease"
-        android:name="com.example.capstonedesign.view.main.SearchDiseaseFragment"
+        android:id="@+id/fragment_search_crop_info"
+        android:name="com.example.capstonedesign.view.main.SearchCropInfoFragment"
         android:label="fragment_search_disease"
-        tools:layout="@layout/fragment_search_disease" />
+        tools:layout="@layout/fragment_search_crop_info" >
+        <action
+            android:id="@+id/action_fragment_search_crop_info_to_fragment_crop_detail_info"
+            app:destination="@id/fragment_crop_detail_info"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_crop_detail_info"
+        android:name="com.example.capstonedesign.view.main.CropDetailInfoFragment"
+        android:label="fragment_crop_detail_info"
+        tools:layout="@layout/fragment_crop_detail_info">
+        <argument
+            android:name="crop_name"
+            app:argType="string" />
+    </fragment>
 </navigation>

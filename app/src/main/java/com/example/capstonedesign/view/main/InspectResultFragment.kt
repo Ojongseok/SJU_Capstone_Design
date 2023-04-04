@@ -89,10 +89,8 @@ class InspectResultFragment: Fragment() {
         return file
     }
 
-
     private fun setImg() {
         val img = args.img
-        Log.d("tag",img.toString())
         binding.ivInspectResult.setImageURI(img)
     }
 

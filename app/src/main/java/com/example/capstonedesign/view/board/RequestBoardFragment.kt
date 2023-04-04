@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.model.PostTest
 import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
+import com.example.capstonedesign.util.GridSpaceItemDecoration
 
 class RequestBoardFragment: Fragment() {
     private var _binding: FragmentRequestBoardBinding? = null
@@ -64,21 +65,4 @@ class RequestBoardFragment: Fragment() {
         super.onDestroy()
     }
 
-    inner class GridSpaceItemDecoration(private val spanCount: Int, private val space: Int): RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-            val position = parent.getChildAdapterPosition(view)
-            val column = position % spanCount + 1      // 1부터 시작
-
-            if (position < spanCount){
-                outRect.top = space
-            }
-
-            if (column == spanCount){
-                outRect.right = space
-            }
-
-            outRect.left = space
-            outRect.bottom = space
-        }
-    }
 }

@@ -1,27 +1,27 @@
-package com.example.capstonedesign.retrofit
+package com.example.capstonedesign.model
 
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
 
 @Xml(name = "service")
-data class SearchDiseaseResponse(
+data class CropDetailResponse(
     @PropertyElement(name="totalCount")
-    val totalCount: Int,
+    val totalCount: Int?,
     @PropertyElement(name="buildTime")
-    val buildTime: String,
+    val buildTime: String?,
     @Element(name = "list")
-    val list: Items,
+    val list: Items?,
     @PropertyElement(name="displayCount")
-    val displayCount: Int,
+    val displayCount: Int?,
     @PropertyElement(name="startPoint")
-    val startPoint: String
+    val startPoint: String?
 )
 
 @Xml(name= "item")
 data class Items(
     @Element(name="item")
-    val item: List<Item>
+    val item: List<Item>?
 )
 
 @Xml

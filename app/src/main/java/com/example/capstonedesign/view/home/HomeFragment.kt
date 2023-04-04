@@ -5,25 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.capstonedesign.adapter.AlertMonthAdapter
+import com.example.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
 import com.example.capstonedesign.databinding.FragmentHomeBinding
-import kotlinx.coroutines.CoroutineScope
+import com.example.capstonedesign.viewmodel.OpenApiViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.jsoup.Jsoup
-import org.jsoup.select.Elements
+import kotlinx.coroutines.newCoroutineContext
 
 class HomeFragment: Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var list1: Elements
-    private lateinit var list2: Elements
-    private lateinit var list3: Elements
-    private lateinit var alertMonthAdapter1: AlertMonthAdapter
-    private lateinit var alertMonthAdapter2: AlertMonthAdapter
-    private lateinit var alertMonthAdapter3: AlertMonthAdapter
+    private lateinit var diseaseGeneratedMonthlyAdapter1: DiseaseGeneratedMonthlyAdapter
+    private lateinit var diseaseGeneratedMonthlyAdapter2: DiseaseGeneratedMonthlyAdapter
+    private lateinit var diseaseGeneratedMonthlyAdapter3: DiseaseGeneratedMonthlyAdapter
+    private val viewModel: OpenApiViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -33,43 +29,47 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            initData()
+        binding.viewModel = viewModel
 
-            withContext(Dispatchers.Main) {
-                binding.pbHomeAlertMonth.visibility = View.GONE
+        initData()
+        setObserver()
+        setRv()
+    }
 
-                alertMonthAdapter2 = AlertMonthAdapter(list2)
+    private fun setRv() {
+        binding.rvHomeAlertMonth2.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = diseaseGeneratedMonthlyAdapter2
+        }
 
-                binding.rvHomeAlertMonth2.apply {
-                    setHasFixedSize(true)
-                    layoutManager = LinearLayoutManager(requireContext())
-                    adapter = alertMonthAdapter2
-                }
-                binding.tvHomeAlert2.text = list2.size.toString()
+        binding.rvHomeAlertMonth3.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = diseaseGeneratedMonthlyAdapter3
+        }
+    }
 
+    private fun setObserver() {
+        viewModel.diseaseGeneratedMonthly2.observe(viewLifecycleOwner) {
+            diseaseGeneratedMonthlyAdapter2.setData(it)
 
-                alertMonthAdapter3 = AlertMonthAdapter(list3)
+            binding.tvHomeAlert2.text = it.size.toString()
+        }
 
-                binding.rvHomeAlertMonth3.apply {
-                    setHasFixedSize(true)
-                    layoutManager = LinearLayoutManager(requireContext())
-                    adapter = alertMonthAdapter3
-                }
-                binding.tvHomeAlert3.text = list3.size.toString()
+        viewModel.diseaseGeneratedMonthly3.observe(viewLifecycleOwner) {
+            diseaseGeneratedMonthlyAdapter3.setData(it)
 
-            }
+            binding.tvHomeAlert3.text = it.size.toString()
         }
     }
 
     private fun initData() {
-        val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=206&ncpms.cmm.token.html.TOKEN=d9158d3782321ff65ee9da4ca2ac9ef6&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
-        val doc = Jsoup.connect(url).get()
+        val job = viewModel.setDiseaseGeneratedMonthly()
+//        binding.pbHomeAlertMonth.visibility = View.GONE
 
-//        list1 = doc.select("li.watch").select("ul.afterClear").select("li")    // 경보
-        list2 = doc.select("li.watch").select("ul.afterClear").select("li")    // 주의보
-        list3 = doc.select("li.forecast").select("ul.afterClear").select("li")    // 예보
-
+        diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter()
+        diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter()
     }
 
     override fun onDestroy() {
