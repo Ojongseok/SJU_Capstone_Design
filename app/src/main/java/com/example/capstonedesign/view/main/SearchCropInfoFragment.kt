@@ -46,7 +46,8 @@ class SearchCropInfoFragment: Fragment() {
             // spanCount -> grid 수, space->여백
             val spanCount = 3
             val space = 20
-            addItemDecoration(GridSpaceItemDecoration(spanCount, space))
+//            addItemDecoration(GridSpaceItemDecoration(spanCount, space))
+            addItemDecoration(GridSpaceItemDecoration(requireContext(), 3))
         }
 
         cropAdapter.setItemClickListener(object : CropAdapter.OnItemClickListener {

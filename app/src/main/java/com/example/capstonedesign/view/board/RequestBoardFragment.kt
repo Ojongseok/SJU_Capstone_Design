@@ -49,7 +49,8 @@ class RequestBoardFragment: Fragment() {
             // spanCount -> grid 수, space->여백
             val spanCount = 2
             val space = 36
-            addItemDecoration(GridSpaceItemDecoration(spanCount, space))
+//            addItemDecoration(GridSpaceItemDecoration(spanCount, space))
+            addItemDecoration(GridSpaceItemDecoration(requireContext(), 2))
         }
 
         requestBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
