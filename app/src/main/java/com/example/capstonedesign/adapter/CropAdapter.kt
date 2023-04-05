@@ -11,7 +11,6 @@ import org.jsoup.nodes.Element
 
 class CropAdapter(private val context: Context, private val cropImgList: List<String>) : RecyclerView.Adapter<CropAdapter.CustomViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
-    private val url = "https://ncpms.rda.go.kr/npms/"
     private var cropList = listOf<Element>()
 
     inner class CustomViewHolder(private val binding: ItemCropBinding): RecyclerView.ViewHolder(binding.root) {

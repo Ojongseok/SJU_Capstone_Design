@@ -46,10 +46,6 @@ class RequestBoardFragment: Fragment() {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = requestBoardPostAdapter
-            // spanCount -> grid 수, space->여백
-            val spanCount = 2
-            val space = 36
-//            addItemDecoration(GridSpaceItemDecoration(spanCount, space))
             addItemDecoration(GridSpaceItemDecoration(requireContext(), 2))
         }
 

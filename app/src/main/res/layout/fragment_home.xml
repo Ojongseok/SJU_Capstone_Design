@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="viewModel"
+            name="viewmodel"
             type="com.example.capstonedesign.viewmodel.OpenApiViewModel" />
     </data>
 
@@ -142,7 +142,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewmodel.diseaseGeneratedMonthly2.size())}"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold"
@@ -190,7 +190,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:text="0"
+                        android:text="@{Integer.toString(viewmodel.diseaseGeneratedMonthly3.size())}"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold"

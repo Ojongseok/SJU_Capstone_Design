@@ -37,16 +37,11 @@ class SearchCropInfoFragment: Fragment() {
         setRv()
     }
 
-
     private fun setRv() {
         binding.rvSearchDisease.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = cropAdapter
-            // spanCount -> grid 수, space->여백
-            val spanCount = 3
-            val space = 20
-//            addItemDecoration(GridSpaceItemDecoration(spanCount, space))
             addItemDecoration(GridSpaceItemDecoration(requireContext(), 3))
         }
 
@@ -55,7 +50,6 @@ class SearchCropInfoFragment: Fragment() {
                 val cropName = cropAdapter.getCropName(position)
                 val action = SearchCropInfoFragmentDirections.actionFragmentSearchCropInfoToFragmentCropDetailInfo(cropName)
                 findNavController().navigate(action)
-
             }
         })
     }

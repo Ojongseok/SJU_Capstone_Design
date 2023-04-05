@@ -42,11 +42,11 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="240dp"
+        android:layout_width="0dp"
         android:layout_height="240dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/background_rec_10dp_green_stroke"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"

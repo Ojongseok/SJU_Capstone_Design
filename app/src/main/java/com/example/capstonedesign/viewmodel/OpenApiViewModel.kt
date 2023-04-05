@@ -1,5 +1,6 @@
 package com.example.capstonedesign.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,17 +27,19 @@ class OpenApiViewModel: ViewModel() {
     val pbCropList = MutableLiveData<Boolean>()
     val pbCropDetailInfo = MutableLiveData<Boolean>()
 
-    fun setDiseaseGeneratedMonthly() = CoroutineScope(Dispatchers.IO).launch {
-        val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=206&ncpms.cmm.token.html.TOKEN=d9158d3782321ff65ee9da4ca2ac9ef6&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
-        val doc = Jsoup.connect(url).get()
+    fun setDiseaseGeneratedMonthly() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=206&ncpms.cmm.token.html.TOKEN=d9158d3782321ff65ee9da4ca2ac9ef6&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
+            val doc = Jsoup.connect(url).get()
 
 //        val data1 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()
-        val data2 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()
-        val data3 = doc.select("li.forecast").select("ul.afterClear").select("li").toMutableList()
+            val data2 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()
+            val data3 = doc.select("li.forecast").select("ul.afterClear").select("li").toMutableList()
 
-        diseaseGeneratedMonthly2.postValue(data2)
-        diseaseGeneratedMonthly3.postValue(data3)
-        pbHome.postValue(true)
+            diseaseGeneratedMonthly2.postValue(data2)
+            diseaseGeneratedMonthly3.postValue(data3)
+            pbHome.postValue(true)
+        }
     }
 
     fun searchDetailCropInfo(cropName: String) = CoroutineScope(Dispatchers.IO).launch {
