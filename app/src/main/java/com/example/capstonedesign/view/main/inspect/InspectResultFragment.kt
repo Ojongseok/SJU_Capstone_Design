@@ -1,4 +1,4 @@
-package com.example.capstonedesign.view.main
+package com.example.capstonedesign.view.main.inspect
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,8 +25,6 @@ import com.github.mikephil.charting.utils.ColorTemplate.COLORFUL_COLORS
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class InspectResultFragment: Fragment() {
     private var _binding: FragmentInspectResultBinding? = null

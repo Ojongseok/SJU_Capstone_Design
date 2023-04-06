@@ -1,10 +1,16 @@
 package com.example.capstonedesign.view.main
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,6 +36,19 @@ class SearchCropInfoFragment: Fragment() {
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.etSearchContents.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
+                Toast.makeText(requireContext(), binding.etSearchContents.text.toString(), Toast.LENGTH_SHORT).show()
+
+                binding.etSearchContents.clearFocus()
+                binding.etSearchContents.text?.clear()
+                val hideKeyboard = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                hideKeyboard.hideSoftInputFromWindow(binding.etSearchContents.windowToken, 0)
+                true
+            }
+            false
         }
 
         initData()

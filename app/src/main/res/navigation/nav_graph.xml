@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/fragment_plants_inspect"
-        android:name="com.example.capstonedesign.view.main.PlantsInspectFragment"
+        android:name="com.example.capstonedesign.view.main.inspect.PlantsInspectFragment"
         android:label="fragment_plants_inspect"
         tools:layout="@layout/fragment_plants_inspect" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <dialog
         android:id="@+id/dialog_bottom_sheet"
-        android:name="com.example.capstonedesign.view.main.BottomSheetDialog"
+        android:name="com.example.capstonedesign.BottomSheetDialog"
         android:label="dialog_bottom_sheet"
         tools:layout="@layout/dialog_bottom_sheet">
         <action
@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_inspect_result"
-        android:name="com.example.capstonedesign.view.main.InspectResultFragment"
+        android:name="com.example.capstonedesign.view.main.inspect.InspectResultFragment"
         android:label="fragment_inspect_result"
         tools:layout="@layout/fragment_inspect_result">
         <argument
@@ -131,6 +131,22 @@
         tools:layout="@layout/fragment_crop_detail_info">
         <argument
             android:name="crop_name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragment_crop_detail_info_to_fragment_disease_detail"
+            app:destination="@id/fragment_disease_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_disease_detail"
+        android:name="com.example.capstonedesign.view.main.inspect.DiseaseDetailFragment"
+        android:label="fragment_disease_detail"
+        tools:layout="@layout/fragment_disease_detail" >
+        <argument
+            android:name="sickKey"
             app:argType="string" />
     </fragment>
 </navigation>

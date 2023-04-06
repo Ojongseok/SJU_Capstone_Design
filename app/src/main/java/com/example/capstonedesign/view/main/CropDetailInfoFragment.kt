@@ -64,7 +64,9 @@ class CropDetailInfoFragment: Fragment() {
         }
         cropDetailInfoAdapter.setItemClickListener(object : CropDetailInfoAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-                Toast.makeText(requireContext(), position.toString(),Toast.LENGTH_SHORT).show()
+                val sickKey = viewModel.cropDetailInfo.value?.list?.item?.get(position)?.sickKey!!
+                val action = CropDetailInfoFragmentDirections.actionFragmentCropDetailInfoToFragmentDiseaseDetail(sickKey)
+                findNavController().navigate(action)
             }
         })
     }

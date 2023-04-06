@@ -1,11 +1,13 @@
 package com.example.capstonedesign.view.board
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.model.PostTest
 import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
 import com.example.capstonedesign.util.GridSpaceItemDecoration
+import kotlinx.android.synthetic.main.dialog_login.*
 
 class RequestBoardFragment: Fragment() {
     private var _binding: FragmentRequestBoardBinding? = null
@@ -51,15 +54,28 @@ class RequestBoardFragment: Fragment() {
 
         requestBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-                val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail()
-                findNavController().navigate(action)
+                setLoginDialog()
+//                val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail()
+//                findNavController().navigate(action)
             }
         })
+    }
+
+    private fun setLoginDialog() {
+        val loginDialog = LoginDialog(requireContext())
+        loginDialog.showDialog()
+
+        loginDialog.dialog.btn_dialog_login.setOnClickListener {
+            Toast.makeText(requireContext(), "로그인할게요",Toast.LENGTH_SHORT).show()
+        }
+
+        loginDialog.dialog.btn_dialog_login_close.setOnClickListener {
+            loginDialog.dialog.dismiss()
+        }
     }
 
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
     }
-
 }

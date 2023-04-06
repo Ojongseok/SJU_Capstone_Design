@@ -22,7 +22,6 @@ import androidx.core.content.FileProvider
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPostWriteBinding
-import com.example.capstonedesign.view.main.PlantsInspectFragment
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File

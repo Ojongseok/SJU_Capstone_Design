@@ -1,4 +1,4 @@
-package com.example.capstonedesign.view.main
+package com.example.capstonedesign.view.main.inspect
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
