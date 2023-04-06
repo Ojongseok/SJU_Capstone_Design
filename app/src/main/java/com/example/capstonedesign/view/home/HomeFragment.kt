@@ -73,7 +73,7 @@ class HomeFragment: Fragment() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.setDiseaseGeneratedMonthly()
+        viewModel.setDiseaseGeneratedMonthly().isCompleted
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)

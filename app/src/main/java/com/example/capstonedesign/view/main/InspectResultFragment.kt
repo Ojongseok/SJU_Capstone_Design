@@ -26,7 +26,8 @@ import com.github.mikephil.charting.utils.ColorTemplate.COLORFUL_COLORS
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class InspectResultFragment: Fragment() {
     private var _binding: FragmentInspectResultBinding? = null
@@ -55,6 +56,8 @@ class InspectResultFragment: Fragment() {
             if (screenShot != null) {
                 requireContext().sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)))
                 Toast.makeText(requireContext(), "진단결과가 갤러리에 저장되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "저장에 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -71,7 +74,7 @@ class InspectResultFragment: Fragment() {
     fun ScreenShot(view: View): File? {
         view.isDrawingCacheEnabled = true //화면에 뿌릴때 캐시를 사용하게 한다
         val screenBitmap = view.drawingCache //캐시를 비트맵으로 변환
-        val filename = "screenshot.png"
+        val filename = System.currentTimeMillis().toString() + "screenshot.png"
         val file = File(
             Environment.getExternalStorageDirectory().toString() + "/Pictures",
             filename

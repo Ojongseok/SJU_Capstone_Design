@@ -83,7 +83,11 @@ class PlantsInspectFragment: Fragment() {
                 val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!)
                 findNavController().navigate(action)
             } else {
-                Toast.makeText(requireContext(), "에러", Toast.LENGTH_SHORT).show()
+                if (selectedPlants == 0) {
+                    Toast.makeText(requireContext(), "작물 종류를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                } else if (imgUri == null) {
+                    Toast.makeText(requireContext(), "진단할 작물의 이미지를 첨부해주세요.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -93,11 +97,11 @@ class PlantsInspectFragment: Fragment() {
     }
 
     fun openImagePickOption() {
-        val items = arrayOf<String>("카메라 촬영 / 갤러리 선택", "취소")
+        val items = arrayOf<String>("카메라 촬영 / 앨범 선택", "취소")
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("업로드 방법 선택")
         builder.setItems(items) { dialog, position ->
-            if (items[position] == "카메라 촬영 / 갤러리 선택") {
+            if (items[position] == "카메라 촬영 / 앨범 선택") {
 //                checkPermission2.launch(permissionList2)
                 checkPermission()
             } else if (items[position] == "취소") {
@@ -149,6 +153,7 @@ class PlantsInspectFragment: Fragment() {
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     }
                 }
+
                 else{
                     // 그림파일을 성공적으로 만들었다면 startActivityForResult로 보내기
                     photoFile?.also {
@@ -180,17 +185,16 @@ class PlantsInspectFragment: Fragment() {
                     // 카메라로부터 받은 데이터가 있을경우에만
                     val file = File(imageFilePath)
                     val selectedUri = Uri.fromFile(file)
+
                     try{
                         selectedUri?.let {
                             if (Build.VERSION.SDK_INT < 28) {
                                 launchImageCrop(selectedUri)
-                            }
-                            else{
+                            } else{
                                 launchImageCrop(selectedUri)
                             }
                         }
-
-                    }catch (e: java.lang.Exception){
+                    } catch (e: java.lang.Exception){
                         e.printStackTrace()
                     }
                 }
@@ -201,6 +205,7 @@ class PlantsInspectFragment: Fragment() {
                     result.uri?.let {
                         imgUri = it
                         binding.ivPlantsInspect.setImageURI(result.uri)
+                        binding.ltImgPreview.visibility = View.GONE
                     }
                 } else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                     val error = result.error
@@ -227,7 +232,6 @@ class PlantsInspectFragment: Fragment() {
             ".jpg",  /* suffix */
             storageDir /* directory */
         )
-
         imageFilePath = image.absolutePath
         return image
     }
