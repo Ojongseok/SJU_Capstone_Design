@@ -59,9 +59,9 @@ class SearchCropInfoFragment: Fragment() {
     private fun setRv() {
         binding.rvSearchDisease.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = GridLayoutManager(requireContext(), 4)
             adapter = cropAdapter
-            addItemDecoration(GridSpaceItemDecoration(requireContext(), 3))
+            addItemDecoration(GridSpaceItemDecoration(requireContext(), 4,5,2))
         }
 
         cropAdapter.setItemClickListener(object : CropAdapter.OnItemClickListener {

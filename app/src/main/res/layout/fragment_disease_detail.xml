@@ -73,8 +73,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:layout_marginTop="4dp"
                         android:backgroundTint="@color/main_green"
                         app:cardCornerRadius="20dp"
@@ -299,8 +299,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView2"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:layout_marginTop="4dp"
                         android:backgroundTint="@color/main_green"
                         app:cardCornerRadius="20dp"
@@ -382,7 +382,7 @@
                         android:id="@+id/rv_disease_detail_virus_img"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="6dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/tv_disease_detail_virus_description"
                         app:layout_constraintStart_toStartOf="@+id/tv_disease_detail_virus_description"
@@ -413,8 +413,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView3"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:layout_marginTop="4dp"
                         android:backgroundTint="@color/main_green"
                         app:cardCornerRadius="20dp"

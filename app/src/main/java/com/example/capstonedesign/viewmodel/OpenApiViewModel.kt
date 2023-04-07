@@ -31,6 +31,7 @@ class OpenApiViewModel: ViewModel() {
 
 //        val data1 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()
         val data2 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()
+//        val data2 = doc.select("ul.pestSectionWatch").select("li").toMutableList()  // 1초..?
         val data3 = doc.select("li.forecast").select("ul.afterClear").select("li").toMutableList()
 
         diseaseGeneratedMonthly2.postValue(data2)

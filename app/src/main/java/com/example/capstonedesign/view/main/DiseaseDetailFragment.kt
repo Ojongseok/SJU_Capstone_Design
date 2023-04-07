@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.VirusImgAdapter
 import com.example.capstonedesign.databinding.FragmentDiseaseDetailBinding
 import com.example.capstonedesign.databinding.ItemVirusImgBinding
@@ -58,9 +59,11 @@ class DiseaseDetailFragment: Fragment() {
     private fun setView() {
         val response = viewModel.diseaseDetailInfo.value!!
 
-        Glide.with(requireActivity()).load(
-            response.imageList?.item!![0].image.toString().replace("amp;","")
-        ).into(binding.ivDiseaseDetailThumb)
+        if (response.imageList?.item?.isNotEmpty() == true) {
+            Glide.with(requireActivity()).load(
+                response.imageList?.item!![0].image.toString().replace("amp;","")
+            ).into(binding.ivDiseaseDetailThumb)
+        }
         binding.tvDiseaseDetailNameKor.text = response.sickNameKor
         binding.tvDiseaseDetailNameChi.text = response.sickNameChn
         binding.tvDiseaseDetailNameEng.text = response.sickNameEng
@@ -70,7 +73,7 @@ class DiseaseDetailFragment: Fragment() {
             binding.tvDiseaseDetailVirusName.text = response.virusList.item[0].virusName
             binding.tvDiseaseDetailVirusDescription.text = response.virusList.item[0].sfeNm?.replace("&lt;br/&gt;","")?.replace("&#xD;","")
 
-            virusImgAdapter = VirusImgAdapter(requireContext(), requireActivity(), response.imageList.item)
+            virusImgAdapter = VirusImgAdapter(requireContext(), requireActivity(), response.imageList?.item!!)
             binding.rvDiseaseDetailVirusImg.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
