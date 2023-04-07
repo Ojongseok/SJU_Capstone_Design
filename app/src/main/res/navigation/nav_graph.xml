@@ -142,7 +142,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_disease_detail"
-        android:name="com.example.capstonedesign.view.main.inspect.DiseaseDetailFragment"
+        android:name="com.example.capstonedesign.view.main.DiseaseDetailFragment"
         android:label="fragment_disease_detail"
         tools:layout="@layout/fragment_disease_detail" >
         <argument

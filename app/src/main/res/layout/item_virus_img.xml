@@ -10,5 +10,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="fitXY"
+        android:transitionName="image_transform"
         app:srcCompat="@drawable/ic_search_image" />
 </FrameLayout>

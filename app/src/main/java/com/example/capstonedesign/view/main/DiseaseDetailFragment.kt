@@ -1,10 +1,15 @@
-package com.example.capstonedesign.view.main.inspect
+package com.example.capstonedesign.view.main
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -12,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.capstonedesign.adapter.VirusImgAdapter
 import com.example.capstonedesign.databinding.FragmentDiseaseDetailBinding
+import com.example.capstonedesign.databinding.ItemVirusImgBinding
 import com.example.capstonedesign.viewmodel.OpenApiViewModel
 
 class DiseaseDetailFragment: Fragment() {
@@ -19,6 +25,7 @@ class DiseaseDetailFragment: Fragment() {
     private val binding get() = _binding!!
     private val args by navArgs<DiseaseDetailFragmentArgs>()
     private val viewModel: OpenApiViewModel by viewModels()
+    private lateinit var virusImgAdapter: VirusImgAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentDiseaseDetailBinding.inflate(inflater, container, false)
@@ -35,6 +42,8 @@ class DiseaseDetailFragment: Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+
+
     }
 
     private fun setObserver() {
@@ -59,17 +68,19 @@ class DiseaseDetailFragment: Fragment() {
 
         if (response.virusList?.item?.isNotEmpty() == true) {
             binding.tvDiseaseDetailVirusName.text = response.virusList.item[0].virusName
-            binding.tvDiseaseDetailVirusDescription.text = response.virusList.item[0].sfeNm
+            binding.tvDiseaseDetailVirusDescription.text = response.virusList.item[0].sfeNm?.replace("&lt;br/&gt;","")?.replace("&#xD;","")
+
+            virusImgAdapter = VirusImgAdapter(requireContext(), requireActivity(), response.imageList.item)
             binding.rvDiseaseDetailVirusImg.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-                adapter = VirusImgAdapter(requireContext(), response.imageList.item)
+                adapter = virusImgAdapter
             }
         }
 
-        binding.tvDiseaseDetailInfo1.text = response.developmentCondition
-        binding.tvDiseaseDetailInfo2.text = response.symptoms
-        binding.tvDiseaseDetailInfo3.text = response.preventionMethod
+        binding.tvDiseaseDetailInfo1.text = response.developmentCondition?.replace("&lt;br/&gt;","")?.replace("&#xD;","")
+        binding.tvDiseaseDetailInfo2.text = response.symptoms?.replace("&lt;br/&gt;","")?.replace("&#xD;","")
+        binding.tvDiseaseDetailInfo3.text = response.preventionMethod?.replace("&lt;br/&gt;","")?.replace("&#xD;","")
     }
 
     private fun initData() {
