@@ -1,5 +1,6 @@
 package com.example.capstonedesign.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,9 +10,11 @@ import com.example.capstonedesign.retrofit.OpenApiRetrofitInstance.API_KEY
 import com.example.capstonedesign.retrofit.OpenApiRetrofitInstance.OpenApiRetrofitService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
+import kotlin.math.log
 
 class OpenApiViewModel: ViewModel() {
     val cropList = MutableLiveData<List<Element>>()    // 작물 목록
@@ -26,12 +29,12 @@ class OpenApiViewModel: ViewModel() {
     val diseaseDetailInfoCompleted = MutableLiveData<Boolean>()
 
     fun setDiseaseGeneratedMonthly() = CoroutineScope(Dispatchers.IO).launch {
-        val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=206&ncpms.cmm.token.html.TOKEN=d9158d3782321ff65ee9da4ca2ac9ef6&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
+        // 매월 주소 갱신 필요
+        val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=207&ncpms.cmm.token.html.TOKEN=88e3f6f39dce1d92f15c0902185ef6cd&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
         val doc = Jsoup.connect(url).get()
 
 //        val data1 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()
         val data2 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()
-//        val data2 = doc.select("ul.pestSectionWatch").select("li").toMutableList()  // 1초..?
         val data3 = doc.select("li.forecast").select("ul.afterClear").select("li").toMutableList()
 
         diseaseGeneratedMonthly2.postValue(data2)
