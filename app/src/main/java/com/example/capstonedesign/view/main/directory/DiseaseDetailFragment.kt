@@ -1,24 +1,17 @@
-package com.example.capstonedesign.view.main
+package com.example.capstonedesign.view.main.directory
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.VirusImgAdapter
 import com.example.capstonedesign.databinding.FragmentDiseaseDetailBinding
-import com.example.capstonedesign.databinding.ItemVirusImgBinding
 import com.example.capstonedesign.viewmodel.OpenApiViewModel
 
 class DiseaseDetailFragment: Fragment() {

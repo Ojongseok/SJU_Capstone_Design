@@ -1,11 +1,9 @@
-package com.example.capstonedesign.view.main
+package com.example.capstonedesign.view.main.directory
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.ActivityImageBinding
-import com.example.capstonedesign.databinding.ActivityMainBinding
 
 class ImageActivity : AppCompatActivity() {
     private val binding: ActivityImageBinding by lazy {

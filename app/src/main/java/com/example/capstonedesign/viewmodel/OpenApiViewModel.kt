@@ -26,8 +26,10 @@ class OpenApiViewModel: ViewModel() {
     val pbCropList = MutableLiveData<Boolean>()    // ProgressBar 검색
     val pbCropDetailInfo = MutableLiveData<Boolean>()    // ProgressBar 상세정보
     val diseaseDetailInfo = MutableLiveData<DiseaseDetailResponse>()    // 병 상세정보
-    val diseaseDetailInfoCompleted = MutableLiveData<Boolean>()
+    val diseaseDetailInfoCompleted = MutableLiveData<Boolean>()    // ProgressBar 병 상세정보
+    val searchDiseaseListResult = MutableLiveData<CropDetailResponse>()
 
+    // [홈] - 월별 병해충 발생정보
     fun setDiseaseGeneratedMonthly() = CoroutineScope(Dispatchers.IO).launch {
         // 매월 주소 갱신 필요
         val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=207&ncpms.cmm.token.html.TOKEN=88e3f6f39dce1d92f15c0902185ef6cd&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
@@ -42,6 +44,7 @@ class OpenApiViewModel: ViewModel() {
         pbHome.postValue(true)
     }
 
+    // [검색 결과] - 작물별 병해 목록
     fun searchDetailCropInfo(cropName: String) = viewModelScope.launch {
         val response = OpenApiRetrofitService.searchDetailCropInfo(API_KEY, "SVC01", "AA001", cropName)
 
@@ -49,6 +52,7 @@ class OpenApiViewModel: ViewModel() {
         pbCropDetailInfo.postValue(true)
     }
 
+    // [병해 상세정보] - 병해 상세내용
     fun searchDiseaseDetailInfo(sickKey: String) = viewModelScope.launch {
         val response = OpenApiRetrofitService.searchDiseaseDetailInfo(API_KEY, "SVC05", sickKey)
 
@@ -56,6 +60,7 @@ class OpenApiViewModel: ViewModel() {
         diseaseDetailInfoCompleted.postValue(true)
     }
 
+    //[병해 정보 검색] - 작물 목록
     fun setCropList() = CoroutineScope(Dispatchers.IO).launch {
         val url = "https://ncpms.rda.go.kr/npms/VegitablesImageListR.np"
         val doc = Jsoup.connect(url).get()
@@ -63,5 +68,12 @@ class OpenApiViewModel: ViewModel() {
 
         cropList.postValue(data)    // .value는 메인 쓰레드에서, postValue는 백그라운드 쓰레드에서
         pbCropList.postValue(true)
+    }
+
+    // [병해 정보 검색] - 상단바 검색
+    fun searchDiseaseForKeyword(diseaseName: String) = viewModelScope.launch {
+        val response = OpenApiRetrofitService.searchDiseaseName(API_KEY, "SVC01", "AA001", diseaseName)
+
+        searchDiseaseListResult.postValue(response)
     }
 }

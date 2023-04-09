@@ -113,7 +113,7 @@
         tools:layout="@layout/fragment_my_page" />
     <fragment
         android:id="@+id/fragment_search_crop_info"
-        android:name="com.example.capstonedesign.view.main.SearchCropInfoFragment"
+        android:name="com.example.capstonedesign.view.main.directory.SearchCropInfoFragment"
         android:label="fragment_search_disease"
         tools:layout="@layout/fragment_search_crop_info" >
         <action
@@ -123,10 +123,17 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_search_crop_info_to_fragment_search_result"
+            app:destination="@id/fragment_search_result"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_crop_detail_info"
-        android:name="com.example.capstonedesign.view.main.CropDetailInfoFragment"
+        android:name="com.example.capstonedesign.view.main.directory.CropDetailInfoFragment"
         android:label="fragment_crop_detail_info"
         tools:layout="@layout/fragment_crop_detail_info">
         <argument
@@ -142,11 +149,20 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_disease_detail"
-        android:name="com.example.capstonedesign.view.main.DiseaseDetailFragment"
+        android:name="com.example.capstonedesign.view.main.directory.DiseaseDetailFragment"
         android:label="fragment_disease_detail"
         tools:layout="@layout/fragment_disease_detail" >
         <argument
             android:name="sickKey"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_search_result"
+        android:name="com.example.capstonedesign.view.main.directory.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <argument
+            android:name="disease_name"
             app:argType="string" />
     </fragment>
 </navigation>
