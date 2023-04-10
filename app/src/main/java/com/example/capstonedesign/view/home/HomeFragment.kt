@@ -1,23 +1,20 @@
 package com.example.capstonedesign.view.home
 
 import android.os.Bundle
-import android.sax.Element
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
 import com.example.capstonedesign.databinding.FragmentHomeBinding
-import com.example.capstonedesign.model.CropDetailResponse
 import com.example.capstonedesign.viewmodel.OpenApiViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.newCoroutineContext
+import java.util.*
 
 class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -51,6 +48,23 @@ class HomeFragment: Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = diseaseGeneratedMonthlyAdapter3
         }
+
+        diseaseGeneratedMonthlyAdapter2.setItemClickListener(object : DiseaseGeneratedMonthlyAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                val pair = diseaseGeneratedMonthlyAdapter2.getDiseaseName(position)
+                viewModel.getSickKey(pair.first, pair.second)
+
+
+            }
+        })
+
+        diseaseGeneratedMonthlyAdapter3.setItemClickListener(object : DiseaseGeneratedMonthlyAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                val pair = diseaseGeneratedMonthlyAdapter3.getDiseaseName(position)
+                viewModel.getSickKey(pair.first, pair.second)
+
+            }
+        })
     }
 
     private fun setObserver() {
@@ -60,6 +74,11 @@ class HomeFragment: Fragment() {
 
         viewModel.diseaseGeneratedMonthly3.observe(viewLifecycleOwner) {
             diseaseGeneratedMonthlyAdapter3.setData(it)
+        }
+
+        viewModel.singleSickKey.observe(viewLifecycleOwner) {
+            val action = HomeFragmentDirections.actionFragmentHomeToFragmentDiseaseDetail(it)
+            findNavController().navigate(action)
         }
 
         viewModel.pbHome.observe(viewLifecycleOwner) {
@@ -73,7 +92,7 @@ class HomeFragment: Fragment() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.setDiseaseGeneratedMonthly().isCompleted
+        viewModel.setDiseaseGeneratedMonthly()
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)

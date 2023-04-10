@@ -37,5 +37,13 @@ interface OpenApiService {
         @Query("sickKey") sickKey: String
     ) : DiseaseDetailResponse
 
-
+    // 작물병과 병해명으로 병해 상세정보 검색
+    @GET("npmsAPI/service")
+    suspend fun searchDiseaseHome (
+        @Query("apiKey") apiKey: String,
+        @Query("serviceCode") serviceCode: String,
+        @Query("serviceType") serviceType: String,
+        @Query("cropName") cropName: String,
+        @Query("sickNameKor") sickNameKor: String
+    ) : CropDetailResponse
 }

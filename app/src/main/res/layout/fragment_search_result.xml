@@ -165,7 +165,7 @@
         android:layout_marginTop="4dp"
         android:text="검색어"
         android:textColor="@color/text_1"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

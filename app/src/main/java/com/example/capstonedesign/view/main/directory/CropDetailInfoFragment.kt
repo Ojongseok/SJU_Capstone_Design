@@ -61,6 +61,7 @@ class CropDetailInfoFragment: Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = cropDetailInfoAdapter
         }
+
         cropDetailInfoAdapter.setItemClickListener(object : CropDetailInfoAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 val sickKey = viewModel.cropDetailInfo.value?.list?.item?.get(position)?.sickKey!!
