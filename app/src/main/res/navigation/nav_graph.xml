@@ -83,7 +83,11 @@
             app:destination="@id/dialog_bottom_sheet" />
         <action
             android:id="@+id/action_fragment_home_to_fragment_disease_detail"
-            app:destination="@id/fragment_disease_detail" />
+            app:destination="@id/fragment_disease_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_inspect_result"
@@ -167,5 +171,12 @@
         <argument
             android:name="disease_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragment_search_result_to_fragment_disease_detail"
+            app:destination="@id/fragment_disease_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 </navigation>

@@ -2,6 +2,7 @@ package com.example.capstonedesign.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,6 +13,7 @@ import com.example.capstonedesign.model.Item
 class SearchResultAdapter(private val context: Context)
     : RecyclerView.Adapter<SearchResultAdapter.CustomViewHolder>() {
     private var searchResultList = listOf<Item>()
+    private lateinit var itemClickListener: OnItemClickListener
 
     inner class CustomViewHolder(private val binding: ItemSearchResultBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
@@ -27,6 +29,10 @@ class SearchResultAdapter(private val context: Context)
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(searchResultList[position])
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it,position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -39,5 +45,16 @@ class SearchResultAdapter(private val context: Context)
         notifyDataSetChanged()
     }
 
+    fun getSickKey(position: Int) : String {
+        return searchResultList[position].sickKey.toString()
+    }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
     override fun getItemCount() = searchResultList.size
 }

@@ -52,6 +52,13 @@ class SearchResultFragment: Fragment() {
             adapter = searchResultAdapter
         }
 
+        searchResultAdapter.setItemClickListener(object : SearchResultAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                val sickKey = searchResultAdapter.getSickKey(position)
+                val action = SearchResultFragmentDirections.actionFragmentSearchResultToFragmentDiseaseDetail(sickKey)
+                findNavController().navigate(action)
+            }
+        })
     }
 
     private fun setObserver() {

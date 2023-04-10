@@ -1,9 +1,11 @@
 package com.example.capstonedesign.view.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -53,8 +55,6 @@ class HomeFragment: Fragment() {
             override fun onClick(v: View, position: Int) {
                 val pair = diseaseGeneratedMonthlyAdapter2.getDiseaseName(position)
                 viewModel.getSickKey(pair.first, pair.second)
-
-
             }
         })
 
@@ -62,7 +62,6 @@ class HomeFragment: Fragment() {
             override fun onClick(v: View, position: Int) {
                 val pair = diseaseGeneratedMonthlyAdapter3.getDiseaseName(position)
                 viewModel.getSickKey(pair.first, pair.second)
-
             }
         })
     }
