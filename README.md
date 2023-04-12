@@ -4,6 +4,7 @@
 https://develop-oj.tistory.com/55
 
 ## 3~4주차
+https://develop-oj.tistory.com/56
 ### 제안서 작성 및 기획안 발표   
 * [문서] 파일 첨부 - 과제 제안서, 발표자료
 ### 주요 기능 정의
