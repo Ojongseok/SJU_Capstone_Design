@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -37,6 +38,11 @@ class DiseaseDetailFragment: Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.ltDiseaseDetailPesticide.setOnClickListener {
+            Toast.makeText(requireContext(),"농약정보",Toast.LENGTH_SHORT).show()
+
+
+        }
 
     }
 
@@ -54,7 +60,7 @@ class DiseaseDetailFragment: Fragment() {
 
         if (response.imageList?.item?.isNotEmpty() == true) {
             Glide.with(requireActivity()).load(
-                response.imageList?.item!![0].image.toString().replace("amp;","")
+                response.imageList.item[0].image.toString().replace("amp;","")
             ).into(binding.ivDiseaseDetailThumb)
         }
         binding.tvDiseaseDetailNameKor.text = response.sickNameKor

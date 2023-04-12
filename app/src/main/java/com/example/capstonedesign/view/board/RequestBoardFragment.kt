@@ -55,8 +55,6 @@ class RequestBoardFragment: Fragment() {
         requestBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 setLoginDialog()
-//                val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail()
-//                findNavController().navigate(action)
             }
         })
     }
@@ -66,7 +64,10 @@ class RequestBoardFragment: Fragment() {
         loginDialog.showDialog()
 
         loginDialog.dialog.btn_dialog_login.setOnClickListener {
-            Toast.makeText(requireContext(), "로그인할게요",Toast.LENGTH_SHORT).show()
+            loginDialog.dialog.dismiss()
+
+            val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
+            findNavController().navigate(action)
         }
 
         loginDialog.dialog.btn_dialog_login_close.setOnClickListener {

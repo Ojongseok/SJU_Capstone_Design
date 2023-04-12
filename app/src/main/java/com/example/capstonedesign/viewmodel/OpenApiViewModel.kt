@@ -28,7 +28,7 @@ class OpenApiViewModel: ViewModel() {
     val pbCropDetailInfo = MutableLiveData<Boolean>()    // ProgressBar 상세정보
     val diseaseDetailInfo = MutableLiveData<DiseaseDetailResponse>()    // 병 상세정보
     val diseaseDetailInfoCompleted = MutableLiveData<Boolean>()    // ProgressBar 병 상세정보
-    val searchDiseaseListResult = MutableLiveData<CropDetailResponse>()
+    val searchDiseaseListResult = MutableLiveData<CropDetailResponse>()    // 병해 검색결과
 
     // [홈] - 월별 병해충 발생정보
     fun setDiseaseGeneratedMonthly() = CoroutineScope(Dispatchers.IO).launch {

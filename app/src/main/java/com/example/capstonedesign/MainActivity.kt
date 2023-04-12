@@ -52,12 +52,6 @@ class MainActivity : AppCompatActivity() {
 
                 navState = true
                 binding.navState = navState
-//                val layoutParams = CoordinatorLayout.LayoutParams(
-//                    CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT
-//                )
-//                layoutParams.setMargins(0,0,0, 100)
-//
-//                binding.frameLayout.layoutParams = layoutParams
             }
             // 바텀 네비게이션이 표시되지 않는 Fragment
             else {
@@ -66,12 +60,6 @@ class MainActivity : AppCompatActivity() {
 
                 navState = false
                 binding.navState = navState
-//                val layoutParams = CoordinatorLayout.LayoutParams(
-//                    CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT
-//                )
-//                layoutParams.setMargins(0,0,0,0)
-//
-//                binding.frameLayout.layoutParams = layoutParams
             }
         }
 
