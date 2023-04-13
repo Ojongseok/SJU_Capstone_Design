@@ -11,10 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
+import com.example.capstonedesign.adapter.RegionGeneratedAdapter
 import com.example.capstonedesign.databinding.FragmentHomeBinding
+import com.example.capstonedesign.util.GridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.OpenApiViewModel
 import java.util.*
 
@@ -23,6 +26,7 @@ class HomeFragment: Fragment() {
     private lateinit var diseaseGeneratedMonthlyAdapter1: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedMonthlyAdapter2: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedMonthlyAdapter3: DiseaseGeneratedMonthlyAdapter
+    private lateinit var diseaseGeneratedRegionAdapter: RegionGeneratedAdapter
     private val viewModel: OpenApiViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,8 +70,16 @@ class HomeFragment: Fragment() {
         })
 
         binding.rvHomeRegion.apply {
-
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = diseaseGeneratedRegionAdapter
+            addItemDecoration(GridSpaceItemDecoration(requireContext(), 2))
         }
+        diseaseGeneratedRegionAdapter.setItemClickListener(object : RegionGeneratedAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun setObserver() {
@@ -103,5 +115,6 @@ class HomeFragment: Fragment() {
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)
+        diseaseGeneratedRegionAdapter = RegionGeneratedAdapter(requireContext())
     }
 }

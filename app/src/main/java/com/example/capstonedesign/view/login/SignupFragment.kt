@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentLoginBinding
@@ -33,7 +34,10 @@ class SignupFragment: Fragment() {
             val nickname = binding.etSignupNickname.text.toString()
             val region = binding.autoCompleteTextView.text.toString()
 
+            Toast.makeText(requireContext(), "회원가입이 완료되었습니다?", Toast.LENGTH_SHORT).show()
 
+            val action = SignupFragmentDirections.actionFragmentSignupToFragmentBoard()
+            findNavController().navigate(action)
         }
 
         setRegionMenu()

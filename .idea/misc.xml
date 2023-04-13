@@ -34,7 +34,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_crop_detail.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_crop_detail_info.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_disease_detail.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_home.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_inspect_result.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_instpect_result.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_login.xml" value="0.264" />
@@ -54,6 +54,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_crop_detail_info.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_dropdown_menu.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_home_alert_month.xml" value="0.536" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_home_region_generated_disease.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_modal_bottom_sheet.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_request_post.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_search_disease_list.xml" value="0.16909722222222223" />
