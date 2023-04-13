@@ -48,13 +48,6 @@ class HomeFragment: Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = diseaseGeneratedMonthlyAdapter2
         }
-
-        binding.rvHomeAlertMonth3.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = diseaseGeneratedMonthlyAdapter3
-        }
-
         diseaseGeneratedMonthlyAdapter2.setItemClickListener(object : DiseaseGeneratedMonthlyAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 val pair = diseaseGeneratedMonthlyAdapter2.getDiseaseName(position)
@@ -62,6 +55,11 @@ class HomeFragment: Fragment() {
             }
         })
 
+        binding.rvHomeAlertMonth3.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = diseaseGeneratedMonthlyAdapter3
+        }
         diseaseGeneratedMonthlyAdapter3.setItemClickListener(object : DiseaseGeneratedMonthlyAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 val pair = diseaseGeneratedMonthlyAdapter3.getDiseaseName(position)

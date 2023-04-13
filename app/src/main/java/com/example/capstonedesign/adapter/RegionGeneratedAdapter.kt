@@ -20,6 +20,7 @@ class RegionGeneratedAdapter(private val context: Context) : RecyclerView.Adapte
     inner class CustomViewHolder(private val binding: ItemHomeRegionGeneratedDiseaseBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String) {
             binding.tvHomeRegionName.text = regionArray[position]
+            binding.tvHomeRegionGeneratedCount.text = position.toString()
         }
     }
 
