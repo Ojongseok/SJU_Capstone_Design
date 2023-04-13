@@ -64,6 +64,10 @@ class HomeFragment: Fragment() {
                 viewModel.getSickKey(pair.first, pair.second)
             }
         })
+
+        binding.rvHomeRegion.apply {
+
+        }
     }
 
     private fun setObserver() {
@@ -76,8 +80,12 @@ class HomeFragment: Fragment() {
         }
 
         viewModel.singleSickKey.observe(viewLifecycleOwner) {
-            val action = HomeFragmentDirections.actionFragmentHomeToFragmentDiseaseDetail(it)
-            findNavController().navigate(action)
+            if (it == "null") {
+                Toast.makeText(requireContext(), "등록되지 않은 질병입니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                val action = HomeFragmentDirections.actionFragmentHomeToFragmentDiseaseDetail(it!!)
+                findNavController().navigate(action)
+            }
         }
 
         viewModel.pbHome.observe(viewLifecycleOwner) {

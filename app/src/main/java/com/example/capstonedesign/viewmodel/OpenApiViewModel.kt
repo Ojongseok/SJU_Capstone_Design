@@ -79,7 +79,7 @@ class OpenApiViewModel: ViewModel() {
     }
 
     // [홈] - 홈에서 병해 상세정보로 이동하기 위해
-    val singleSickKey = SingleLiveEvent<String>()
+    val singleSickKey = SingleLiveEvent<String?>()
     fun getSickKey(cropName: String, diseaseName: String) = viewModelScope.launch {
         val response = OpenApiRetrofitService.searchDiseaseHome(API_KEY, "SVC01", "AA001", cropName, diseaseName)
 

@@ -1,21 +1,27 @@
 package com.example.capstonedesign.view.board
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.model.PostTest
 import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
 import com.example.capstonedesign.util.GridSpaceItemDecoration
 import kotlinx.android.synthetic.main.dialog_login.*
+import kotlin.math.log
 
 class RequestBoardFragment: Fragment() {
     private var _binding: FragmentRequestBoardBinding? = null
@@ -60,18 +66,23 @@ class RequestBoardFragment: Fragment() {
     }
 
     private fun setLoginDialog() {
-        val loginDialog = LoginDialog(requireContext())
-        loginDialog.showDialog()
+        val loginDialog = Dialog(requireContext())
 
-        loginDialog.dialog.btn_dialog_login.setOnClickListener {
-            loginDialog.dialog.dismiss()
+        loginDialog.setContentView(R.layout.dialog_login)
+        loginDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        loginDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loginDialog.setCanceledOnTouchOutside(false)
+        loginDialog.show()
+
+        loginDialog.btn_dialog_login.setOnClickListener {
+            loginDialog.dismiss()
 
             val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
             findNavController().navigate(action)
         }
 
-        loginDialog.dialog.btn_dialog_login_close.setOnClickListener {
-            loginDialog.dialog.dismiss()
+        loginDialog.btn_dialog_login_close.setOnClickListener {
+            loginDialog.dismiss()
         }
     }
 
