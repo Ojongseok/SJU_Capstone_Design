@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capstonedesign.model.PostTest
 import com.example.capstonedesign.databinding.ItemRequestPostBinding
+import com.example.capstonedesign.model.PostTest
 
 class BoardPostAdapter(private val context: Context, private val list: List<PostTest>)
     : RecyclerView.Adapter<BoardPostAdapter.CustomViewHolder>() {

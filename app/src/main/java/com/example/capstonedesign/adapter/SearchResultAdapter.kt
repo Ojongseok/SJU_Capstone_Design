@@ -1,16 +1,25 @@
 package com.example.capstonedesign.adapter
 
+import android.R
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.capstonedesign.databinding.ItemSearchResultBinding
-import com.example.capstonedesign.model.CropDetailResponse
 import com.example.capstonedesign.model.Item
 
-class SearchResultAdapter(private val context: Context)
+
+class SearchResultAdapter(private val context: Context, private val keyword: String)
     : RecyclerView.Adapter<SearchResultAdapter.CustomViewHolder>() {
     private var searchResultList = listOf<Item>()
     private lateinit var itemClickListener: OnItemClickListener
@@ -18,8 +27,19 @@ class SearchResultAdapter(private val context: Context)
     inner class CustomViewHolder(private val binding: ItemSearchResultBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
             binding.tvItemSearchResultCropName.text = item.cropName
-            binding.tvItemSearchResultName1.text = item.sickNameKor + "\n" + "(" + item.sickNameChn + ")"
             binding.tvItemSearchResultName2.text = item.sickNameEng
+//            binding.tvItemSearchResultName1.text = item.sickNameKor + "\n" + "(" + item.sickNameChn + ")"
+
+            val content = item.sickNameKor!!
+            val spannableString = SpannableString(content)
+
+            val start = content.indexOf(keyword)
+            val end = start + keyword.length
+
+            spannableString.setSpan(ForegroundColorSpan(Color.parseColor("#37C64B")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            binding.tvItemSearchResultName1.text = spannableString
+
 
             Glide.with(context).load(
                 item.oriImg.toString().replace("amp;", "")

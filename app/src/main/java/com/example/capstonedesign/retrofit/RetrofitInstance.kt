@@ -1,15 +1,13 @@
 package com.example.capstonedesign.retrofit
 
 import com.example.capstonedesign.BuildConfig
-import com.tickaroo.tikxml.TikXml
-import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    const val BASE_URL = ""
+    const val BASE_URL = BuildConfig.BASE_URL
 
     private val okHttpClient: OkHttpClient by lazy {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
