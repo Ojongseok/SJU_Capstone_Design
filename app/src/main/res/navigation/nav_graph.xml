@@ -44,6 +44,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_dialog_bottom_sheet_to_fragment_login"
+            app:destination="@id/fragment_login" />
     </dialog>
     <fragment
         android:id="@+id/fragment_board"

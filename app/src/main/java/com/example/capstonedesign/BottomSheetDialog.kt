@@ -1,12 +1,19 @@
 package com.example.capstonedesign
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.databinding.DialogBottomSheetBinding
+import com.example.capstonedesign.util.Constants.LOGIN_STATUS
+import com.example.capstonedesign.view.board.BoardFragmentDirections
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.dialog_login.*
 
 class BottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: DialogBottomSheetBinding? = null
@@ -26,8 +33,12 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         binding.buttonMenu2.setOnClickListener{
-            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPostWrite()
-            findNavController().navigate(action)
+            if (LOGIN_STATUS) {
+                val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPostWrite()
+                findNavController().navigate(action)
+            } else {
+                setLoginDialog()
+            }
         }
 
         binding.buttonMenu3.setOnClickListener {
@@ -37,6 +48,27 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
 
         binding.buttonMenu4.setOnClickListener {
             dismiss()
+        }
+    }
+
+    private fun setLoginDialog() {
+        val loginDialog = Dialog(requireContext())
+
+        loginDialog.setContentView(R.layout.dialog_login)
+        loginDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        loginDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loginDialog.setCanceledOnTouchOutside(false)
+        loginDialog.show()
+
+        loginDialog.btn_dialog_login.setOnClickListener {
+            loginDialog.dismiss()
+
+            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentLogin()
+            findNavController().navigate(action)
+        }
+
+        loginDialog.btn_dialog_login_close.setOnClickListener {
+            loginDialog.dismiss()
         }
     }
 

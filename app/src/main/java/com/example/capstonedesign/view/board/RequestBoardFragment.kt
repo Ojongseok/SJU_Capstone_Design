@@ -70,7 +70,6 @@ class RequestBoardFragment: Fragment() {
             override fun onClick(v: View, position: Int) {
                 if (LOGIN_STATUS) {
                     Log.d("tag", LOGIN_STATUS.toString())
-                    setLoginDialog()
                 } else {
                     setLoginDialog()
                 }

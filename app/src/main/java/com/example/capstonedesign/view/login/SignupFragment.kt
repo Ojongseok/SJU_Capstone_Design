@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentSignupBinding
 import com.example.capstonedesign.model.login.SignupPost
+import com.example.capstonedesign.repository.LoginRepository
 import com.example.capstonedesign.viewmodel.LoginViewModel
+import com.example.capstonedesign.viewmodel.LoginViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +25,7 @@ import kotlinx.coroutines.runBlocking
 class SignupFragment: Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
@@ -31,6 +34,9 @@ class SignupFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val repository = LoginRepository(requireContext())
+        val factory = LoginViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
