@@ -54,7 +54,6 @@ class SignupFragment: Fragment() {
         viewModel.signupResult.observe(viewLifecycleOwner) {
             if (it == 200) {
                 Toast.makeText(requireContext(), "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-
                 findNavController().navigateUp()
             }
         }

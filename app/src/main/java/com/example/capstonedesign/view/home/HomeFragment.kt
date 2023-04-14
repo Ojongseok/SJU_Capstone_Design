@@ -10,6 +10,7 @@ import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +18,13 @@ import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
 import com.example.capstonedesign.adapter.RegionGeneratedAdapter
 import com.example.capstonedesign.databinding.FragmentHomeBinding
+import com.example.capstonedesign.repository.LoginRepository
+import com.example.capstonedesign.util.Constants.ACCESS_TOKEN
+import com.example.capstonedesign.util.Constants.LOGIN_STATUS
 import com.example.capstonedesign.util.GridSpaceItemDecoration
+import com.example.capstonedesign.viewmodel.LoginViewModel
+import com.example.capstonedesign.viewmodel.LoginViewModelFactory
+import com.example.capstonedesign.viewmodel.MainViewModel
 import com.example.capstonedesign.viewmodel.OpenApiViewModel
 import java.util.*
 
@@ -28,6 +35,7 @@ class HomeFragment: Fragment() {
     private lateinit var diseaseGeneratedMonthlyAdapter3: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedRegionAdapter: RegionGeneratedAdapter
     private val viewModel: OpenApiViewModel by viewModels()
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
@@ -36,6 +44,9 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val repository = LoginRepository(requireContext())
+        val factory = LoginViewModelFactory(repository)
+        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         initDataSettings()
         setObserver()
@@ -110,6 +121,13 @@ class HomeFragment: Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.setDiseaseGeneratedMonthly()
+        if (loginViewModel.getAccessToken().isEmpty()) {
+            LOGIN_STATUS = false
+            ACCESS_TOKEN = ""
+        } else {
+            LOGIN_STATUS = true
+            ACCESS_TOKEN = loginViewModel.getAccessToken()
+        }
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)

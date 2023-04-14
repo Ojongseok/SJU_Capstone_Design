@@ -1,27 +1,39 @@
 package com.example.capstonedesign.view.board
 
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
 import com.example.capstonedesign.model.PostTest
+import com.example.capstonedesign.util.Constants
+import com.example.capstonedesign.util.Constants.LOGIN_STATUS
 import com.example.capstonedesign.util.GridSpaceItemDecoration
+import com.example.capstonedesign.viewmodel.BoardViewModel
 import kotlinx.android.synthetic.main.dialog_login.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class RequestBoardFragment: Fragment() {
     private var _binding: FragmentRequestBoardBinding? = null
     private val binding get() = _binding!!
     private lateinit var requestBoardPostAdapter: BoardPostAdapter
+    private lateinit var viewModel: BoardViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentRequestBoardBinding.inflate(inflater, container, false)
@@ -30,6 +42,7 @@ class RequestBoardFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = BoardViewModel()
 
         setRvPost()
     }
@@ -55,10 +68,17 @@ class RequestBoardFragment: Fragment() {
 
         requestBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-                setLoginDialog()
+                if (LOGIN_STATUS) {
+                    Log.d("tag", LOGIN_STATUS.toString())
+                    setLoginDialog()
+                } else {
+                    setLoginDialog()
+                }
+
             }
         })
     }
+
 
     private fun setLoginDialog() {
         val loginDialog = Dialog(requireContext())

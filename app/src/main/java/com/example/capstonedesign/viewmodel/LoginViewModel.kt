@@ -6,24 +6,44 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.capstonedesign.model.login.LoginPost
 import com.example.capstonedesign.model.login.SignupPost
-import com.example.capstonedesign.retrofit.RetrofitInstance.service
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.capstonedesign.repository.LoginRepository
+import com.example.capstonedesign.util.Constants.ACCESS_TOKEN
+import com.example.capstonedesign.util.Constants.LOGIN_STATUS
+import kotlinx.coroutines.*
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel(
+    private val repository: LoginRepository
+): ViewModel() {
     val signupResult = MutableLiveData<Int>()
     val loginResult = MutableLiveData<Int>()
 
     // 회원가입
     fun signup(signupPost: SignupPost) = CoroutineScope(Dispatchers.IO).launch {
-            val response = service.signup(signupPost)
-            signupResult.postValue(response.body()?.code)
+        val response = repository.signup(signupPost)
+        signupResult.postValue(response.body()?.code)
     }
 
     // 로그인
     fun login(loginPost: LoginPost) = viewModelScope.launch {
-        val response = service.login(loginPost)
+        val response = repository.login(loginPost)
+
+        if (response.body()?.code == 200) {
+            repository.setLoginKey(response.body()?.result?.accessToken!!)
+            ACCESS_TOKEN = response.body()?.result?.accessToken!!
+            LOGIN_STATUS = true
+        } else {
+            repository.setLoginKey("")
+            ACCESS_TOKEN = ""
+            LOGIN_STATUS = false
+        }
+
         loginResult.postValue(response.body()?.code)
     }
+
+    // DataStore 엑세스토큰 읽기
+    fun getAccessToken(): String {
+        return repository.getAccessToken()
+    }
+
+
 }

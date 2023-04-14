@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupJetpackNavigation()
-
     }
 
     private fun setupJetpackNavigation() {

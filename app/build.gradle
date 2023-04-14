@@ -37,6 +37,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    kotlinOptions {
+        freeCompilerArgs += ["-Xjvm-default=all",]
+    }
     buildFeatures {
         viewBinding true
         dataBinding true
@@ -85,6 +88,8 @@ dependencies {
     implementation 'com.tickaroo.tikxml:core:0.8.13'
     implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
     kapt 'com.tickaroo.tikxml:processor:0.8.13'
+    // DataStore
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
