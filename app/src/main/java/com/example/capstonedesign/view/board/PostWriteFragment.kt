@@ -19,11 +19,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPostWriteBinding
+import com.example.capstonedesign.repository.BoardRepository
+import com.example.capstonedesign.viewmodel.BoardViewModel
+import com.example.capstonedesign.viewmodel.BoardViewModelFactory
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -34,8 +43,9 @@ class PostWriteFragment: Fragment() {
     private val binding get() = _binding!!
     private val REQUEST_IMAGE_CAPTURE = 3
     private var imageFilePath: String? = null
-    private var selectBoardCategory = 0
+    private var selectBoardCategory = ""
     private var imgUri : Uri? = null
+    private lateinit var viewModel: BoardViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPostWriteBinding.inflate(inflater, container, false)
@@ -44,6 +54,11 @@ class PostWriteFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val repository = BoardRepository()
+        val factory = BoardViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+
+        setObserver()
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
@@ -55,16 +70,42 @@ class PostWriteFragment: Fragment() {
 
         binding.rgPostWrite.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
-                R.id.rb_post_write_1 -> selectBoardCategory = 1
-                R.id.rb_post_write_2 -> selectBoardCategory = 2
+                R.id.rb_post_write_1 -> selectBoardCategory = "QUESTION"
+                R.id.rb_post_write_2 -> selectBoardCategory = "KNOWHOW"
             }
         }
 
         binding.btnPostWrite.setOnClickListener {
             val title = binding.etPostWriteTitle.text.toString()
-            val contents = binding.etPostWriteContents.text.toString()
+            val content = binding.etPostWriteContents.text.toString()
+            val titleRequestBody = title.toPlainRequestBody()
+            val contentRequestBody = content.toPlainRequestBody()
+            val tagRequestBody = selectBoardCategory.toPlainRequestBody()
+            val textHashMap = hashMapOf<String, RequestBody>()
+            textHashMap["title"] = titleRequestBody
+            textHashMap["content"] = contentRequestBody
+            textHashMap["tag"] = tagRequestBody
+            val jsonObject = JSONObject("{\"title\":\"${title}\",\"content\":\"${content}\",\"tag\":\"${selectBoardCategory}\"}").toString()
+            val jsonBody = RequestBody.create("application/json".toMediaTypeOrNull(),jsonObject)
 
-            Toast.makeText(requireContext(), "게시글 작성이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            val file = RequestBody.create(MultipartBody.FORM, "")
+            val body: MultipartBody.Part? = MultipartBody.Part.createFormData("file","", file)
+
+            if (selectBoardCategory == "") {
+                Toast.makeText(requireContext(), "카테고리를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.writePost(jsonBody, body)
+            }
+
+        }
+    }
+    private fun String?.toPlainRequestBody() = requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
+
+    private fun setObserver() {
+        viewModel.writePostResultCode.observe(viewLifecycleOwner) {
+            if (it == 200) {
+                Toast.makeText(requireContext(), "게시글 작성이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

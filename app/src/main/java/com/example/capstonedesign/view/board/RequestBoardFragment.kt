@@ -42,7 +42,7 @@ class RequestBoardFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = BoardViewModel()
+//        viewModel = BoardViewModel()
 
         setRvPost()
     }
@@ -77,7 +77,6 @@ class RequestBoardFragment: Fragment() {
             }
         })
     }
-
 
     private fun setLoginDialog() {
         val loginDialog = Dialog(requireContext())

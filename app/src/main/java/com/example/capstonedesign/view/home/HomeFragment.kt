@@ -27,6 +27,7 @@ import com.example.capstonedesign.viewmodel.LoginViewModelFactory
 import com.example.capstonedesign.viewmodel.MainViewModel
 import com.example.capstonedesign.viewmodel.OpenApiViewModel
 import java.util.*
+import kotlin.math.log
 
 class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -128,6 +129,7 @@ class HomeFragment: Fragment() {
             LOGIN_STATUS = true
             ACCESS_TOKEN = loginViewModel.getAccessToken()
         }
+        Log.d("tag", loginViewModel.getAccessToken())
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)
