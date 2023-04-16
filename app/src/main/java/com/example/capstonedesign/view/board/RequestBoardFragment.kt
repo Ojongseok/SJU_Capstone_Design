@@ -46,16 +46,13 @@ class RequestBoardFragment: Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.allPost.observe(viewLifecycleOwner) { response ->
-            val requestBoardList = response.content.filter {
-                it.tag == "QUESTION"
-            }
-            setRvPost(requestBoardList)
+        viewModel.PostListResponse.observe(viewLifecycleOwner) {
+            setRvPost(it.content)
         }
     }
 
     private fun initDataSettings() {
-        viewModel.getAllPost()
+        viewModel.getAllPost("QUESTION")
     }
 
     private fun setRvPost(requestBoardList: List<ContentList>) {
@@ -71,7 +68,8 @@ class RequestBoardFragment: Fragment() {
         requestBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 if (LOGIN_STATUS) {
-                    Log.d("tag", LOGIN_STATUS.toString())
+                    val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail(requestBoardList[position].boardId)
+                    findNavController().navigate(action)
                 } else {
                     setLoginDialog()
                 }

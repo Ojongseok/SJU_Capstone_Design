@@ -2,6 +2,7 @@ package com.example.capstonedesign.retrofit
 
 import com.example.capstonedesign.model.BasicResponse
 import com.example.capstonedesign.model.board.AllPostResponse
+import com.example.capstonedesign.model.board.PostDetailInfoResponse
 import com.example.capstonedesign.model.login.LoginPost
 import com.example.capstonedesign.model.login.LoginResponse
 import com.example.capstonedesign.model.login.SignupPost
@@ -24,7 +25,6 @@ interface RetrofitService {
         @Body loginPost: LoginPost
     ): Response<LoginResponse>
 
-
     // 게시글 작성
     @Multipart
     @POST("boards")
@@ -36,5 +36,15 @@ interface RetrofitService {
 
     // 게시글 전체 조회
     @GET("boards")
-    suspend fun getAllPost(): Response<AllPostResponse>
+    suspend fun getAllPost(
+        @Query("tag") tag: String
+    ): Response<AllPostResponse>
+
+    // 게시글 상세 조회
+    @GET("boards/{board_id}")
+    suspend fun getPostDetailInfo(
+        @Path("board_id") boardId: Long
+    ): Response<PostDetailInfoResponse>
+
+
 }

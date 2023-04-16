@@ -40,16 +40,13 @@ class TipBoardFragment: Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.allPost.observe(viewLifecycleOwner) { response ->
-            val tipBoardList = response.content.filter {
-                it.tag == "KNOWHOW"
-            }
-            setRvPost(tipBoardList)
+        viewModel.PostListResponse.observe(viewLifecycleOwner) {
+            setRvPost(it.content)
         }
     }
 
     private fun initDataSettings() {
-        viewModel.getAllPost()
+        viewModel.getAllPost("KNOWHOW")
     }
 
     private fun setRvPost(tipBoardList: List<ContentList>) {
@@ -64,7 +61,7 @@ class TipBoardFragment: Fragment() {
 
         tipBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-                val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail()
+                val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail(tipBoardList[position].boardId)
                 findNavController().navigate(action)
             }
         })

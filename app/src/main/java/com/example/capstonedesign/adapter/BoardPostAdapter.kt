@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.ItemRequestPostBinding
 import com.example.capstonedesign.model.PostTest
 import com.example.capstonedesign.model.board.ContentList
@@ -15,7 +16,7 @@ class BoardPostAdapter(private val context: Context, private val list: List<Cont
     private lateinit var itemClickListener: OnItemClickListener
     inner class CustomViewHolder(private val binding: ItemRequestPostBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ContentList) {
-            Glide.with(context).load(item.image).into(binding.ivPostThumbnail)
+            Glide.with(context).load(item.image).fallback(R.drawable.plants).into(binding.ivPostThumbnail)
             binding.tvPostThumbnailUserName.text = "by. ${item.nickname}"
             binding.tvPostThumbnailTitle.text = item.title
             binding.tvPostThumbnailContents.text = item.content

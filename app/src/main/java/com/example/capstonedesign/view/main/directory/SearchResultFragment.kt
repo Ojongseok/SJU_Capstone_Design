@@ -61,6 +61,7 @@ class SearchResultFragment: Fragment() {
             if (it.list?.item != null) {
                 searchResultAdapter.setData(it.list.item)
             }
+            binding.pbSearchResult.visibility = View.GONE
         }
     }
 
