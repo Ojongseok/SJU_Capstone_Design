@@ -1,7 +1,6 @@
 package com.example.capstonedesign.view.board
 
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,23 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
-import com.example.capstonedesign.model.PostTest
-import com.example.capstonedesign.util.Constants
+import com.example.capstonedesign.model.board.ContentList
+import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.util.Constants.LOGIN_STATUS
 import com.example.capstonedesign.util.GridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.BoardViewModel
+import com.example.capstonedesign.viewmodel.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_login.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class RequestBoardFragment: Fragment() {
     private var _binding: FragmentRequestBoardBinding? = null
@@ -42,22 +37,29 @@ class RequestBoardFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel = BoardViewModel()
+        val repository = BoardRepository()
+        val factory = BoardViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
 
-        setRvPost()
+        initDataSettings()
+        setObserver()
     }
 
-    private fun setRvPost() {
-        val list = mutableListOf<PostTest>()
-        list.add(PostTest("null", "캡스톤디자인입니다.", "컴퓨터공학과 1분반 캡스톤디자인입니다."))
-        list.add(PostTest("null", "파릇파릇 팀입니다.", "안녕하세요."))
-        list.add(PostTest("null", "이럴 때는 어떤 농약을 사용하나요?", "알려주세요~"))
-        list.add(PostTest("null", "이번에 귀농한 xx살입니다.", "잘 부탁드립니다."))
-        list.add(PostTest("null", "제목", "내용"))
-        list.add(PostTest("null", "제가 기르고 있는 식물인데 이름이 뭔가요?", "이름을 모르겠습니다..ㅠㅠ"))
-        list.add(PostTest("null", "안녕", "하이"))
+    private fun setObserver() {
+        viewModel.allPost.observe(viewLifecycleOwner) { response ->
+            val requestBoardList = response.content.filter {
+                it.tag == "QUESTION"
+            }
+            setRvPost(requestBoardList)
+        }
+    }
 
-        requestBoardPostAdapter = BoardPostAdapter(requireContext(), list)
+    private fun initDataSettings() {
+        viewModel.getAllPost()
+    }
+
+    private fun setRvPost(requestBoardList: List<ContentList>) {
+        requestBoardPostAdapter = BoardPostAdapter(requireContext(), requestBoardList)
 
         binding.rvRequestPost.apply {
             setHasFixedSize(true)

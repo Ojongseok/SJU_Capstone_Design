@@ -2,15 +2,17 @@ package com.example.capstonedesign.view.board
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
@@ -28,10 +31,13 @@ import com.example.capstonedesign.viewmodel.BoardViewModel
 import com.example.capstonedesign.viewmodel.BoardViewModelFactory
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okio.BufferedSink
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
@@ -44,7 +50,7 @@ class PostWriteFragment: Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 3
     private var imageFilePath: String? = null
     private var selectBoardCategory = ""
-    private var imgUri : Uri? = null
+    private var selectedImage: Bitmap? = null
     private lateinit var viewModel: BoardViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -78,28 +84,40 @@ class PostWriteFragment: Fragment() {
         binding.btnPostWrite.setOnClickListener {
             val title = binding.etPostWriteTitle.text.toString()
             val content = binding.etPostWriteContents.text.toString()
-            val titleRequestBody = title.toPlainRequestBody()
-            val contentRequestBody = content.toPlainRequestBody()
-            val tagRequestBody = selectBoardCategory.toPlainRequestBody()
-            val textHashMap = hashMapOf<String, RequestBody>()
-            textHashMap["title"] = titleRequestBody
-            textHashMap["content"] = contentRequestBody
-            textHashMap["tag"] = tagRequestBody
             val jsonObject = JSONObject("{\"title\":\"${title}\",\"content\":\"${content}\",\"tag\":\"${selectBoardCategory}\"}").toString()
             val jsonBody = RequestBody.create("application/json".toMediaTypeOrNull(),jsonObject)
 
             val file = RequestBody.create(MultipartBody.FORM, "")
             val body: MultipartBody.Part? = MultipartBody.Part.createFormData("file","", file)
 
+            val bitmapRequestBody = selectedImage?.let { BitmapRequestBody(it) }
+            val bitmapMultipartBody: MultipartBody.Part? =
+                if (bitmapRequestBody == null) null
+                else MultipartBody.Part.createFormData("file", "file", bitmapRequestBody)
+
             if (selectBoardCategory == "") {
                 Toast.makeText(requireContext(), "카테고리를 선택해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.writePost(jsonBody, body)
+                if (title.isNotEmpty()) {
+                    if (content.isNotEmpty()) {
+                        viewModel.writePost(jsonBody, bitmapMultipartBody)
+                    } else {
+                        Toast.makeText(requireContext(), "게시글 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "게시글 제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                }
             }
-
         }
     }
     private fun String?.toPlainRequestBody() = requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
+
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
+        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
+        }
+    }
 
     private fun setObserver() {
         viewModel.writePostResultCode.observe(viewLifecycleOwner) {
@@ -213,14 +231,20 @@ class PostWriteFragment: Fragment() {
             }
             CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
                 val result = CropImage.getActivityResult(data)
+
                 if(resultCode == Activity.RESULT_OK){
+                    selectedImage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, result.uri))
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireContext().contentResolver, result.uri)
+                    }
                     result.uri?.let {
-                        imgUri = result.uri
-                        binding.ivPostWrite.setImageURI(result.uri)
+                        Log.d("tag", selectedImage.toString())
+                        binding.ivPostWrite.setImageBitmap(selectedImage)
                     }
                 } else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                     val error = result.error
-                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

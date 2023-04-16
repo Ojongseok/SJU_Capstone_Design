@@ -5,19 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.capstonedesign.databinding.ItemRequestPostBinding
 import com.example.capstonedesign.model.PostTest
+import com.example.capstonedesign.model.board.ContentList
 
-class BoardPostAdapter(private val context: Context, private val list: List<PostTest>)
+class BoardPostAdapter(private val context: Context, private val list: List<ContentList>)
     : RecyclerView.Adapter<BoardPostAdapter.CustomViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
     inner class CustomViewHolder(private val binding: ItemRequestPostBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: PostTest) {
-            binding.ivPostThumbnail
+        fun bind(item: ContentList) {
+            Glide.with(context).load(item.image).into(binding.ivPostThumbnail)
+            binding.tvPostThumbnailUserName.text = "by. ${item.nickname}"
             binding.tvPostThumbnailTitle.text = item.title
-            binding.tvPostThumbnailContents.text = item.contents
-            binding.tvPostThumbnailDate.text = "2023-03-22 13:27"
-            binding.tvPostThumbnailFavoriteCount.text = "3"
+            binding.tvPostThumbnailContents.text = item.content
+            binding.tvPostThumbnailDate.text = item.modifiedDate
+            binding.tvPostThumbnailFavoriteCount.text = item.liveNum.toString()
         }
     }
 

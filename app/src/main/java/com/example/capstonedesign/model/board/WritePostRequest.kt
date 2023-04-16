@@ -1,4 +1,4 @@
-package com.example.capstonedesign.model
+package com.example.capstonedesign.model.board
 
 import java.io.File
 

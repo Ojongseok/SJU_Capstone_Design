@@ -1,7 +1,7 @@
 package com.example.capstonedesign.repository
 
 import com.example.capstonedesign.model.BasicResponse
-import com.example.capstonedesign.model.WritePostRequest
+import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.retrofit.RetrofitInstance.service
 import com.example.capstonedesign.util.Constants
 import okhttp3.MultipartBody
@@ -19,7 +19,9 @@ class BoardRepository {
     }
 
     // 게시글 전체 조회
-//    suspend fun getAllPost() : Response
+    suspend fun getAllPost() : Response<AllPostResponse> {
+        return service.getAllPost()
+    }
 
     // 게시글 상세 조회
 //    suspend fun getPstDetailInfo() : Response
