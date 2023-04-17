@@ -10,8 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.databinding.FragmentTipBoardBinding
-import com.example.capstonedesign.model.PostTest
-import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.model.board.ContentList
 import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.util.GridSpaceItemDecoration

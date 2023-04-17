@@ -1,10 +1,7 @@
 package com.example.capstonedesign.retrofit
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.capstonedesign.model.CropDetailResponse
-import com.example.capstonedesign.model.DiseaseDetailResponse
-import retrofit2.Response
+import com.example.capstonedesign.model.openapi.CropDetailResponse
+import com.example.capstonedesign.model.openapi.DiseaseDetailResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

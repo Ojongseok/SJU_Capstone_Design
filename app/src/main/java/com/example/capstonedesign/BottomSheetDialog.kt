@@ -48,7 +48,8 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         binding.buttonMenu4.setOnClickListener {
-            Toast.makeText(requireContext(), "준비중입니다.", Toast.LENGTH_SHORT).show()
+            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPesticide()
+            findNavController().navigate(action)
         }
 
         binding.buttonMenu5.setOnClickListener {

@@ -1,4 +1,4 @@
-package com.example.capstonedesign.model
+package com.example.capstonedesign.model.openapi
 
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement

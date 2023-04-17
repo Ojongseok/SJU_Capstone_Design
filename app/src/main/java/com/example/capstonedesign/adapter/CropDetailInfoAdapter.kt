@@ -1,17 +1,13 @@
 package com.example.capstonedesign.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.capstonedesign.databinding.ItemCropBinding
 import com.example.capstonedesign.databinding.ItemCropDetailInfoBinding
-import com.example.capstonedesign.model.CropDetailResponse
-import com.example.capstonedesign.model.Item
-import org.jsoup.nodes.Element
+import com.example.capstonedesign.model.openapi.Item
 
 class CropDetailInfoAdapter(private val context: Context) : RecyclerView.Adapter<CropDetailInfoAdapter.CustomViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener

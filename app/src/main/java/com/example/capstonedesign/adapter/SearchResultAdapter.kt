@@ -1,22 +1,17 @@
 package com.example.capstonedesign.adapter
 
-import android.R
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.capstonedesign.databinding.ItemSearchResultBinding
-import com.example.capstonedesign.model.Item
+import com.example.capstonedesign.model.openapi.Item
 
 
 class SearchResultAdapter(private val context: Context, private val keyword: String)

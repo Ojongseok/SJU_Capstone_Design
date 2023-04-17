@@ -4,18 +4,19 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.capstonedesign.model.CropDetailResponse
-import com.example.capstonedesign.model.DiseaseDetailResponse
+import com.example.capstonedesign.BuildConfig
+import com.example.capstonedesign.BuildConfig.PESTICIDE_API_KEY
+import com.example.capstonedesign.model.openapi.CropDetailResponse
+import com.example.capstonedesign.model.openapi.DiseaseDetailResponse
 import com.example.capstonedesign.retrofit.OpenApiRetrofitInstance.API_KEY
 import com.example.capstonedesign.retrofit.OpenApiRetrofitInstance.OpenApiRetrofitService
+import com.example.capstonedesign.retrofit.PesticideRetrofitInstance.pesticideRetrofitService
 import com.example.capstonedesign.util.SingleLiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import kotlin.math.log
 
 class OpenApiViewModel: ViewModel() {
     val cropList = MutableLiveData<List<Element>>()    // 작물 목록
@@ -84,5 +85,12 @@ class OpenApiViewModel: ViewModel() {
         val response = OpenApiRetrofitService.searchDiseaseHome(API_KEY, "SVC01", "AA001", cropName, diseaseName)
 
         singleSickKey.value = response.list?.item?.get(0)?.sickKey.toString()
+    }
+
+    // 농약 정보
+    fun getPesticideInfo(cropName: String, diseaseName: String) = viewModelScope.launch {
+        val response = pesticideRetrofitService.getPesticideInfo(PESTICIDE_API_KEY,"SVC01", "AA001",cropName,diseaseName)
+
+        Log.d("tag", response.toString())
     }
 }

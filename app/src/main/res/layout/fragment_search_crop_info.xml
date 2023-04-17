@@ -61,7 +61,7 @@
             android:id="@+id/et_search_contents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="작물명, 병해충을 입력하세요."
+            android:hint="작물명, 병해명을 입력하세요."
             android:singleLine="true"
             android:textColor="@color/black"
             android:textCursorDrawable="@drawable/cursor_color" />

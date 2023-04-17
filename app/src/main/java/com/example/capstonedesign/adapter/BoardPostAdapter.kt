@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.ItemRequestPostBinding
-import com.example.capstonedesign.model.PostTest
 import com.example.capstonedesign.model.board.ContentList
 
 class BoardPostAdapter(private val context: Context, private val list: List<ContentList>)
