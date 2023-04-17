@@ -48,6 +48,7 @@ class DiseaseDetailFragment: Fragment() {
 
     private fun setObserver() {
         viewModel.diseaseDetailInfo.observe(viewLifecycleOwner) {
+            binding.pbDiseaseDetail.visibility = View.GONE
             setView()
         }
         viewModel.diseaseDetailInfoCompleted.observe(viewLifecycleOwner) {
