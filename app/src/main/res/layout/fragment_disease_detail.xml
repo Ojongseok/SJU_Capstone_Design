@@ -75,7 +75,7 @@
                     android:id="@+id/constraintLayout7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -374,12 +374,13 @@
 
                     <LinearLayout
                         android:id="@+id/linearLayout5"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         android:layout_marginTop="6dp"
+                        android:layout_marginEnd="12dp"
                         android:gravity="center"
                         android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
@@ -395,6 +396,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="6dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
                             android:text="병원체명"
                             android:textColor="@color/text_1"
                             android:textSize="15sp" />
@@ -402,11 +405,12 @@
 
                     <TextView
                         android:id="@+id/tv_disease_detail_virus_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="..."
                         android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
                         app:layout_constraintStart_toStartOf="@+id/linearLayout5"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
@@ -415,10 +419,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:layout_marginEnd="12dp"
                         android:text="..."
                         android:textColor="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
                         app:layout_constraintStart_toStartOf="@+id/linearLayout5"
                         app:layout_constraintTop_toBottomOf="@+id/tv_disease_detail_virus_name" />
 
@@ -428,7 +431,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_disease_detail_virus_description"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
                         app:layout_constraintStart_toStartOf="@+id/tv_disease_detail_virus_description"
                         app:layout_constraintTop_toBottomOf="@+id/tv_disease_detail_virus_description" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

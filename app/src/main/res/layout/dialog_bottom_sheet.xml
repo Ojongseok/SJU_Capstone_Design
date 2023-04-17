@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="병해 정보 검색"
+            android:text="병해/작물 검색"
             android:textColor="@color/text_1"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -114,6 +114,41 @@
 
     <LinearLayout
         android:id="@+id/button_menu_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/ic_pesticide"
+            app:tint="@color/main_green" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="농약 정보 검색"
+            android:textColor="@color/text_1"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/grey_divide">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/button_menu_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

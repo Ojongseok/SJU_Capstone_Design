@@ -1,5 +1,6 @@
 package com.example.capstonedesign.view.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -52,6 +53,10 @@ class HomeFragment: Fragment() {
         initDataSettings()
         setObserver()
         setRv()
+
+        binding.btnHomeWebview.setOnClickListener {
+            startActivity(Intent(requireContext(), HomeWebViewActivity::class.java))
+        }
     }
 
     private fun setRv() {

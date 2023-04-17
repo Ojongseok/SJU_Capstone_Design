@@ -21,6 +21,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/ic_search_image.xml" value="0.109" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/menu_selector_color.xml" value="0.109" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/rounded_dialog.xml" value="0.109" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/activity_home_web_view.xml" value="0.22237442922374429" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/activity_image.xml" value="0.22546296296296298" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/activity_init.xml" value="0.22546296296296298" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/activity_main.xml" value="0.2" />
@@ -33,8 +34,8 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_bottom_sheet_dialog.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_crop_detail.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_crop_detail_info.xml" value="0.264" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_disease_detail.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_disease_detail.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_home.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_inspect_result.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_instpect_result.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_login.xml" value="0.264" />

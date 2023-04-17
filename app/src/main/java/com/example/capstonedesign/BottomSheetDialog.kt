@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.databinding.DialogBottomSheetBinding
 import com.example.capstonedesign.util.Constants.LOGIN_STATUS
@@ -47,6 +48,10 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         binding.buttonMenu4.setOnClickListener {
+            Toast.makeText(requireContext(), "준비중입니다.", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.buttonMenu5.setOnClickListener {
             dismiss()
         }
     }
