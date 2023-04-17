@@ -8,6 +8,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_10dp_green_stroke.xml" value="0.109" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_10dp_grey.xml" value="0.109" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_18dp.xml" value="0.1145" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_4dp.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_4dp_green_stroke.xml" value="0.115" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_8dp.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_white_rec_10dp_green_stroke.xml" value="0.1145" />
@@ -44,6 +45,8 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_my_page.xml" value="0.152" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_mypage.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_pesticide.xml" value="0.22546296296296298" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_pesticide_dialog.xml" value="0.22237442922374429" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_pesticide_info.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_plants_inspect.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_post_detail.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_post_write.xml" value="0.27525252525252525" />
@@ -59,6 +62,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_home_alert_month.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_home_region_generated_disease.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_modal_bottom_sheet.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_pesticide_info.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_request_post.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_search_disease_list.xml" value="0.16909722222222223" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_search_result.xml" value="0.4" />

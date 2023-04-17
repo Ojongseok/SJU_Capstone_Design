@@ -5,24 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import com.example.capstonedesign.databinding.FragmentPesticideBinding
-import com.example.capstonedesign.viewmodel.OpenApiViewModel
+import androidx.fragment.app.DialogFragment
+import com.example.capstonedesign.R
+import com.example.capstonedesign.databinding.FragmentDiseaseDetailBinding
+import com.example.capstonedesign.databinding.FragmentPesticideDialogBinding
 
-class PesticideFragment: Fragment() {
-    private var _binding: FragmentPesticideBinding? = null
+class PesticideDialogFragment: DialogFragment() {
+    private var _binding: FragmentPesticideDialogBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: OpenApiViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentPesticideBinding.inflate(inflater, container, false)
+        _binding = FragmentPesticideDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getPesticideInfo("가지","갈색무늬병")
     }
 
     override fun onDestroy() {

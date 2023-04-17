@@ -39,9 +39,11 @@ class DiseaseDetailFragment: Fragment() {
         }
 
         binding.ltDiseaseDetailPesticide.setOnClickListener {
-            Toast.makeText(requireContext(),"농약정보",Toast.LENGTH_SHORT).show()
-
-
+            val action = DiseaseDetailFragmentDirections.actionFragmentDiseaseDetailToFragmentPesticideInfo(
+                viewModel.diseaseDetailInfo.value?.cropName.toString(),
+                viewModel.diseaseDetailInfo.value?.sickNameKor.toString()
+            )
+            findNavController().navigate(action)
         }
 
     }

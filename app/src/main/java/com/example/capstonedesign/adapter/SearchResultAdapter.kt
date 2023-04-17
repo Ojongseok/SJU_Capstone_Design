@@ -27,10 +27,8 @@ class SearchResultAdapter(private val context: Context, private val keyword: Str
 
             val content = item.sickNameKor!!
             val spannableString = SpannableString(content)
-
             val start = content.indexOf(keyword)
             val end = start + keyword.length
-
             spannableString.setSpan(ForegroundColorSpan(Color.parseColor("#37C64B")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
             binding.tvItemSearchResultName1.text = spannableString
