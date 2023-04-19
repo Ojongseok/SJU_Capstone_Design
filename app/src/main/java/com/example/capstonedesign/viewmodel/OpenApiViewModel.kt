@@ -8,6 +8,7 @@ import com.example.capstonedesign.BuildConfig
 import com.example.capstonedesign.BuildConfig.PESTICIDE_API_KEY
 import com.example.capstonedesign.model.openapi.CropDetailResponse
 import com.example.capstonedesign.model.openapi.DiseaseDetailResponse
+import com.example.capstonedesign.model.openapi.PesticideDetailResponse
 import com.example.capstonedesign.model.openapi.PesticideResponse
 import com.example.capstonedesign.retrofit.OpenApiRetrofitInstance.API_KEY
 import com.example.capstonedesign.retrofit.OpenApiRetrofitInstance.OpenApiRetrofitService
@@ -32,6 +33,7 @@ class OpenApiViewModel: ViewModel() {
     val diseaseDetailInfoCompleted = MutableLiveData<Boolean>()    // ProgressBar 병 상세정보
     val searchDiseaseListResult = MutableLiveData<CropDetailResponse>()    // 병해 검색결과
     val pesticideInfoResult = MutableLiveData<PesticideResponse>()    // 농약 정보
+    val pesticideDetailInfoResult = MutableLiveData<PesticideDetailResponse>()    // 농약 상세정보
 
     // [홈] - 월별 병해충 발생정보
     fun setDiseaseGeneratedMonthly() = CoroutineScope(Dispatchers.IO).launch {
@@ -94,5 +96,12 @@ class OpenApiViewModel: ViewModel() {
         val response = pesticideRetrofitService.getPesticideInfo(PESTICIDE_API_KEY,"SVC01", "AA001",cropName,diseaseName)
 
         pesticideInfoResult.postValue(response.body())
+    }
+
+    // 농약 상세정보
+    fun  getPesticideDetailInfo(pestiCode: String, diseaseUseSeq: String) = viewModelScope.launch {
+        val response = pesticideRetrofitService.getPesticideDetailInfo(PESTICIDE_API_KEY,"SVC02", pestiCode, diseaseUseSeq)
+
+        pesticideDetailInfoResult.postValue(response.body())
     }
 }

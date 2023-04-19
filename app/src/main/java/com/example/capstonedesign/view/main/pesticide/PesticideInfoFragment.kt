@@ -1,7 +1,6 @@
-package com.example.capstonedesign.view.main
+package com.example.capstonedesign.view.main.pesticide
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +50,10 @@ class PesticideInfoFragment: Fragment() {
 
         pesticideInfoAdapter.setItemClickListener(object : PesticideInfoAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-
+                val pestiCode = viewModel.pesticideInfoResult.value?.list?.item?.get(position)?.pestiCode!!
+                val diseaseUseSeq = viewModel.pesticideInfoResult.value?.list?.item?.get(position)?.diseaseUseSeq!!
+                val action = PesticideInfoFragmentDirections.actionFragmentPesticideInfoToFragmentPesticideDialog(pestiCode, diseaseUseSeq)
+                findNavController().navigate(action)
             }
         })
     }

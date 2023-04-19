@@ -4,16 +4,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.PesticideDialogFragment">
+    android:padding="12dp"
+    tools:context=".view.main.pesticide.PesticideDialogFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/tv_pesticide_dialog_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/background_rec_4dp"
+        android:backgroundTint="@color/main_green"
+        android:paddingLeft="4dp"
+        android:paddingTop="1dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="1dp"
+        android:text="살충제"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_pesti_dialog_name"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout12"
+        app:layout_constraintTop_toTopOf="@+id/tv_pesti_dialog_name" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="농약 상세정보"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btn_pesti_dalog_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:foreground="@drawable/ripple_rad_24dp"
+            android:src="@drawable/ic_close" />
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView6"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout12">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_pesticide"
+            android:tint="@android:color/holo_red_light" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_pesti_dialog_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:maxLines="2"
+        android:text="..."
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_pesticide_dialog_tag"
+        app:layout_constraintStart_toEndOf="@+id/cardView6"
+        app:layout_constraintTop_toTopOf="@+id/cardView6" />
+
+    <TextView
+        android:id="@+id/tv_pesti_dialog_pesti_kor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:maxLines="2"
+        android:text="..."
+        android:textColor="@color/text_1"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_pesticide_dialog_tag"
+        app:layout_constraintStart_toStartOf="@+id/tv_pesti_dialog_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pesti_dialog_name" />
+
+    <TextView
+        android:id="@+id/tv_pesti_dialog_pesti_eng"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:text="..."
+        android:textColor="@color/text_1"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_pesticide_dialog_tag"
+        app:layout_constraintStart_toStartOf="@+id/tv_pesti_dialog_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pesti_dialog_pesti_kor" />
+
+    <TextView
+        android:id="@+id/tv_pesti_dialog_info_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="..."
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_pesti_dialog_pesti_eng"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pesti_dialog_pesti_eng" />
+
+    <TextView
+        android:id="@+id/tv_pesti_dialog_info_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_pesti_dialog_pesti_eng"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pesti_dialog_info_1" />
+
+    <TextView
+        android:id="@+id/tv_pesti_dialog_info_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_pesti_dialog_pesti_eng"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pesti_dialog_info_2" />
+
+    <TextView
+        android:id="@+id/tv_pesti_dialog_info_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_pesti_dialog_pesti_eng"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pesti_dialog_info_3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

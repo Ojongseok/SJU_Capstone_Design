@@ -1,5 +1,6 @@
 package com.example.capstonedesign.retrofit
 
+import com.example.capstonedesign.model.openapi.PesticideDetailResponse
 import com.example.capstonedesign.model.openapi.PesticideResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,4 +17,12 @@ interface PesticideService {
         @Query("diseaseWeedName") diseaseWeedName: String,
         @Query("displayCount") displayCount: Int = 50
     ) : Response<PesticideResponse>
+
+    @GET("/openApi/service.do")
+    suspend fun getPesticideDetailInfo(
+        @Query("apiKey") apiKey: String,
+        @Query("serviceCode") serviceCode: String,
+        @Query("pestiCode") pestiCode: String,
+        @Query("diseaseUseSeq") diseaseUseSeq: String
+    ) : Response<PesticideDetailResponse>
 }

@@ -2,6 +2,7 @@ package com.example.capstonedesign.retrofit
 
 import com.example.capstonedesign.model.openapi.CropDetailResponse
 import com.example.capstonedesign.model.openapi.DiseaseDetailResponse
+import com.example.capstonedesign.model.openapi.PesticideDetailResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

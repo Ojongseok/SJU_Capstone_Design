@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_rec_10dp_green_stroke"
+        android:foreground="@drawable/ripple_rad_8dp"
         android:padding="8dp">
 
         <TextView

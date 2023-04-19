@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonedesign.databinding.ItemPesticideInfoBinding
 import com.example.capstonedesign.model.openapi.PesticideItem
+import kotlinx.android.synthetic.main.item_pesticide_info.view.*
 import org.jsoup.nodes.Element
 
 class PesticideInfoAdapter(private val context: Context) : RecyclerView.Adapter<PesticideInfoAdapter.CustomViewHolder>() {
@@ -17,7 +18,7 @@ class PesticideInfoAdapter(private val context: Context) : RecyclerView.Adapter<
         fun bind(item: PesticideItem) {
             binding.tvPesticideInfoNameKor.text = item.pestiBrandName
             binding.tvPesticideInfoPesti.text = item.pestiKorName
-            binding.tvPesticideInfoPestiUse.text = item.pestiUse
+            binding.tvPesticideInfoPestiUse.text = item.engName
             binding.tvPesticideInfoCompany.text = item.compName
             binding.tvPesticideInfoTag.text = item.useName
         }
@@ -26,7 +27,7 @@ class PesticideInfoAdapter(private val context: Context) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(pesticideList[position])
 
-        holder.itemView.setOnClickListener {
+        holder.itemView.btn_pesticide_info_detail.setOnClickListener {
             itemClickListener.onClick(it,position)
         }
     }
