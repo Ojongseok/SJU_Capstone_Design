@@ -21,6 +21,7 @@ import com.example.capstonedesign.databinding.FragmentHomeBinding
 import com.example.capstonedesign.repository.LoginRepository
 import com.example.capstonedesign.util.Constants.ACCESS_TOKEN
 import com.example.capstonedesign.util.Constants.LOGIN_STATUS
+import com.example.capstonedesign.util.Constants.MEMBER_ID
 import com.example.capstonedesign.util.GridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.LoginViewModel
 import com.example.capstonedesign.viewmodel.factory.LoginViewModelFactory
@@ -126,9 +127,11 @@ class HomeFragment: Fragment() {
         if (loginViewModel.getAccessToken().isEmpty()) {
             LOGIN_STATUS = false
             ACCESS_TOKEN = ""
+            MEMBER_ID = 0
         } else {
             LOGIN_STATUS = true
             ACCESS_TOKEN = loginViewModel.getAccessToken()
+            MEMBER_ID = loginViewModel.getMemberId()
         }
         Log.d("tag", loginViewModel.getAccessToken())
 

@@ -10,5 +10,6 @@ data class LoginResponse(
 data class Result(
     val accessToken: String,
     val grantType: String,
-    val refreshToken: String
+    val refreshToken: String,
+    val memberId: Long
 )

@@ -1,6 +1,7 @@
 package com.example.capstonedesign.repository
 
 import com.example.capstonedesign.model.BasicResponse
+import com.example.capstonedesign.model.board.AllCommentResponse
 import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.model.board.PostDetailInfoResponse
 import com.example.capstonedesign.model.board.WriteCommentRequest
@@ -31,13 +32,18 @@ class BoardRepository {
     }
 
     // 게시글 수정
-//    suspend fun updatePost(boardId: Long) : Response<BasicResponse> {
-//        return service.updatePost("Bearer $ACCESS_TOKEN", boardId)
-//    }
+    suspend fun updatePost(boardId: Long) : Response<AllCommentResponse> {
+        return service.getAllComments(boardId)
+    }
 
     // 게시글 삭제
     suspend fun deletePost(boardId: Long) : Response<BasicResponse> {
         return service.deletePost("Bearer $ACCESS_TOKEN", boardId)
+    }
+
+    // 게시글별 댓글 조회
+    suspend fun getAllComments(boardId: Long) : Response<AllCommentResponse> {
+        return service.getAllComments(boardId)
     }
 
     // 댓글 작성

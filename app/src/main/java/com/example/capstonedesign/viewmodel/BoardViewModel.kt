@@ -3,8 +3,10 @@ package com.example.capstonedesign.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.capstonedesign.model.board.AllCommentResponse
 import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.model.board.PostDetailInfoResponse
+import com.example.capstonedesign.model.login.MemberInfoResponse
 import com.example.capstonedesign.repository.BoardRepository
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -16,6 +18,7 @@ class BoardViewModel(private val repository: BoardRepository): ViewModel() {
     val writePostResultCode = MutableLiveData<Int>()    // 게시글 작성 결과
     val postUpdateResultCode = MutableLiveData<Int>()    // 게시글 수정 결과
     val postDeleteResultCode = MutableLiveData<Int>()    // 게시글 삭제 결과
+    val getAllCommentsResponse = MutableLiveData<AllCommentResponse>()    // 댓글 전체 조회
     val writeCommentsResultCode = MutableLiveData<Int>()    // 댓글 작성 결과
 
     // 게시글 작성
@@ -46,6 +49,12 @@ class BoardViewModel(private val repository: BoardRepository): ViewModel() {
     fun deletePost(boardId: Long) = viewModelScope.launch {
         val response = repository.deletePost(boardId)
         postDeleteResultCode.postValue(response.body()?.code)
+    }
+
+    // 게시글별 댓글 조회
+    fun getAllComments(boardId: Long) = viewModelScope.launch {
+        val response = repository.getAllComments(boardId)
+        getAllCommentsResponse.postValue(response.body())
     }
 
     // 댓글 작성

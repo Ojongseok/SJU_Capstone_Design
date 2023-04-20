@@ -1,13 +1,11 @@
 package com.example.capstonedesign.retrofit
 
 import com.example.capstonedesign.model.BasicResponse
+import com.example.capstonedesign.model.board.AllCommentResponse
 import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.model.board.PostDetailInfoResponse
 import com.example.capstonedesign.model.board.WriteCommentRequest
-import com.example.capstonedesign.model.login.LoginPost
-import com.example.capstonedesign.model.login.LoginResponse
-import com.example.capstonedesign.model.login.SignupPost
-import com.example.capstonedesign.model.login.SignupResponse
+import com.example.capstonedesign.model.login.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -25,6 +23,13 @@ interface RetrofitService {
     suspend fun login(
         @Body loginPost: LoginPost
     ): Response<LoginResponse>
+
+    // 회원정보 조회
+    @GET("members/{member_id}")
+    suspend fun getMemberInfo(
+        @Header ("Authorization") BearerToken: String,
+        @Path("member_id") memberId: Long
+    ): Response<MemberInfoResponse>
 
     // 게시글 작성
     @Multipart
@@ -63,9 +68,9 @@ interface RetrofitService {
 
     // 게시글별 모든 댓글 조회
     @GET("boards/{board_id}/comments")
-    suspend fun getComments(
-
-    )
+    suspend fun getAllComments(
+        @Path("board_id") boardId: Long
+    ): Response<AllCommentResponse>
 
     // 댓글 작성
     @POST("boards/{board_id}/comments")

@@ -2,13 +2,12 @@ package com.example.capstonedesign.repository
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.capstonedesign.model.login.LoginPost
-import com.example.capstonedesign.model.login.LoginResponse
-import com.example.capstonedesign.model.login.SignupPost
-import com.example.capstonedesign.model.login.SignupResponse
+import com.example.capstonedesign.model.login.*
 import com.example.capstonedesign.retrofit.RetrofitInstance.service
+import com.example.capstonedesign.util.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +20,7 @@ import retrofit2.Response
 private val Context.dataStore by preferencesDataStore(name = "dataStore")
 
 class LoginRepository(private val context: Context) {
+    val ACCESS_TOKEN = Constants.ACCESS_TOKEN
 
     // 회원가입
     suspend fun signup(signupPost: SignupPost) : Response<SignupResponse> {
@@ -32,10 +32,16 @@ class LoginRepository(private val context: Context) {
         return service.login(loginPost)
     }
 
+    // 회원정보 조회
+    suspend fun getMemberInfo(memberId: Long) : Response<MemberInfoResponse> {
+        return service.getMemberInfo("Bearer $ACCESS_TOKEN", memberId)
+    }
+
     // dataStore에 토큰 쓰기
-    suspend fun setLoginKey(accessToken: String) {
+    suspend fun setLoginKey(accessToken: String, memberId: Long) {
         context.dataStore.edit {
             it[loginKey] = accessToken
+            it[memberIdKey] = memberId
         }
     }
 
@@ -48,15 +54,31 @@ class LoginRepository(private val context: Context) {
         runBlocking {
             job.join()
         }
-
         return token
+    }
+
+    // DataStore MemberId 읽기
+    fun getMemberId(): Long {
+        var id: Long = 0
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            id = memberStatus.first()
+        }
+        runBlocking {
+            job.join()
+        }
+        return id
     }
 
     // DataStore
     private val loginKey = stringPreferencesKey("login_status")
+    private val memberIdKey = longPreferencesKey("member_id")
 
     private val loginStatus : Flow<String> = context.dataStore.data
         .map {preferences ->
             preferences[loginKey] ?: ""
+        }
+    private val memberStatus : Flow<Long> = context.dataStore.data
+        .map {preferences ->
+            (preferences[memberIdKey] ?: 0) as Long
         }
 }

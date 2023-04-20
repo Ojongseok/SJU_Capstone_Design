@@ -122,6 +122,7 @@ class PostWriteFragment: Fragment() {
         viewModel.writePostResultCode.observe(viewLifecycleOwner) {
             if (it == 200) {
                 Toast.makeText(requireContext(), "게시글 작성이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
             }
         }
     }
