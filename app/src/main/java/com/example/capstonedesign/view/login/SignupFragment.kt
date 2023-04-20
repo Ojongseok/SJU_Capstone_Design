@@ -1,14 +1,12 @@
 package com.example.capstonedesign.view.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
@@ -16,11 +14,7 @@ import com.example.capstonedesign.databinding.FragmentSignupBinding
 import com.example.capstonedesign.model.login.SignupPost
 import com.example.capstonedesign.repository.LoginRepository
 import com.example.capstonedesign.viewmodel.LoginViewModel
-import com.example.capstonedesign.viewmodel.LoginViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.example.capstonedesign.viewmodel.factory.LoginViewModelFactory
 
 class SignupFragment: Fragment() {
     private var _binding: FragmentSignupBinding? = null

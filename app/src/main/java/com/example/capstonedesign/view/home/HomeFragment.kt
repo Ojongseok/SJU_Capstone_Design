@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,11 +23,8 @@ import com.example.capstonedesign.util.Constants.ACCESS_TOKEN
 import com.example.capstonedesign.util.Constants.LOGIN_STATUS
 import com.example.capstonedesign.util.GridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.LoginViewModel
-import com.example.capstonedesign.viewmodel.LoginViewModelFactory
-import com.example.capstonedesign.viewmodel.MainViewModel
+import com.example.capstonedesign.viewmodel.factory.LoginViewModelFactory
 import com.example.capstonedesign.viewmodel.OpenApiViewModel
-import java.util.*
-import kotlin.math.log
 
 class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeBinding

@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,7 @@ import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.util.Constants.LOGIN_STATUS
 import com.example.capstonedesign.util.GridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.BoardViewModel
-import com.example.capstonedesign.viewmodel.BoardViewModelFactory
+import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_login.*
 
 class RequestBoardFragment: Fragment() {

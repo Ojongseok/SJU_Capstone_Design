@@ -7,23 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.databinding.FragmentLoginBinding
 import com.example.capstonedesign.model.login.LoginPost
 import com.example.capstonedesign.repository.LoginRepository
 import com.example.capstonedesign.viewmodel.LoginViewModel
-import com.example.capstonedesign.viewmodel.LoginViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import com.example.capstonedesign.viewmodel.factory.LoginViewModelFactory
 
 class LoginFragment: Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-//    private val viewModel: LoginViewModel by viewModels()
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

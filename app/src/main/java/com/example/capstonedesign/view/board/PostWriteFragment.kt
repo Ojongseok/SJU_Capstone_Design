@@ -2,7 +2,6 @@ package com.example.capstonedesign.view.board
 
 import android.Manifest
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -28,7 +27,7 @@ import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPostWriteBinding
 import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.viewmodel.BoardViewModel
-import com.example.capstonedesign.viewmodel.BoardViewModelFactory
+import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import okhttp3.MediaType

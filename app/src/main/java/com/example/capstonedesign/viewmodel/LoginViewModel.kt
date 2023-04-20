@@ -40,6 +40,13 @@ class LoginViewModel(
         loginResult.postValue(response.body()?.code)
     }
 
+    // 로그아웃
+    fun logout() = viewModelScope.launch {
+        repository.setLoginKey("")
+        ACCESS_TOKEN = ""
+        LOGIN_STATUS = false
+    }
+
     // DataStore 엑세스토큰 읽기
     fun getAccessToken(): String {
         return repository.getAccessToken()

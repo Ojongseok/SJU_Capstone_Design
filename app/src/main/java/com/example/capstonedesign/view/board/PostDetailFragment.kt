@@ -17,7 +17,7 @@ import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPostDetailBinding
 import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.viewmodel.BoardViewModel
-import com.example.capstonedesign.viewmodel.BoardViewModelFactory
+import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 
 class PostDetailFragment: Fragment() {
     private var _binding: FragmentPostDetailBinding? = null

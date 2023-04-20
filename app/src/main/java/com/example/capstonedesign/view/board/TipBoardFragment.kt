@@ -14,7 +14,7 @@ import com.example.capstonedesign.model.board.ContentList
 import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.util.GridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.BoardViewModel
-import com.example.capstonedesign.viewmodel.BoardViewModelFactory
+import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 
 class TipBoardFragment: Fragment() {
     private var _binding: FragmentTipBoardBinding? = null

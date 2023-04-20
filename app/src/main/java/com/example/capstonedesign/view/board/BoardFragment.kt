@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentBoardBinding
+import com.example.capstonedesign.util.Constants.LOGIN_STATUS
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.dialog_login.*
 
@@ -31,9 +32,12 @@ class BoardFragment: Fragment() {
         setTabLayout()
 
         binding.btnBoardMypage.setOnClickListener {
-//            val action = BoardFragmentDirections.actionFragmentBoardToFragmentMypage()
-//            findNavController().navigate(action)
-            setLoginDialog()
+            if (LOGIN_STATUS) {
+                val action = BoardFragmentDirections.actionFragmentBoardToFragmentMypage()
+                findNavController().navigate(action)
+            } else {
+                setLoginDialog()
+            }
         }
 
         binding.btnBoardSearch.setOnClickListener {
