@@ -37,6 +37,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/btn_post_detail_menu"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_three_dot"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -198,7 +209,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_pd_write_comments_complete"
             android:layout_width="62dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
@@ -211,7 +222,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/et_pd_write_comments"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -221,11 +232,11 @@
             android:background="@null"
             android:ems="10"
             android:hint="댓글을 입력하세요."
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:textColor="@color/text_1"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintEnd_toStartOf="@+id/btn_pd_write_comments_complete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.capstonedesign.repository
 import com.example.capstonedesign.model.BasicResponse
 import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.model.board.PostDetailInfoResponse
+import com.example.capstonedesign.model.board.WriteCommentRequest
 import com.example.capstonedesign.retrofit.RetrofitInstance.service
 import com.example.capstonedesign.util.Constants
 import okhttp3.MultipartBody
@@ -29,4 +30,18 @@ class BoardRepository {
         return service.getPostDetailInfo(boardId)
     }
 
+    // 게시글 수정
+//    suspend fun updatePost(boardId: Long) : Response<BasicResponse> {
+//        return service.updatePost("Bearer $ACCESS_TOKEN", boardId)
+//    }
+
+    // 게시글 삭제
+    suspend fun deletePost(boardId: Long) : Response<BasicResponse> {
+        return service.deletePost("Bearer $ACCESS_TOKEN", boardId)
+    }
+
+    // 댓글 작성
+    suspend fun writeComments(boardId: Long, content: String) : Response<BasicResponse> {
+        return service.writeComments("Bearer $ACCESS_TOKEN", boardId, WriteCommentRequest(content))
+    }
 }

@@ -63,10 +63,10 @@ class LoginFragment: Fragment() {
                     Toast.makeText(requireContext(), "로그인이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
                 } else {
-                    Log.d("tag","1")
+                    Log.d("tag","토큰이 비어있어요.")
                 }
             } else {
-                Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "$it 에러입니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }

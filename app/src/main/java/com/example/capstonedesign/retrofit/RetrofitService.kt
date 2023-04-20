@@ -3,6 +3,7 @@ package com.example.capstonedesign.retrofit
 import com.example.capstonedesign.model.BasicResponse
 import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.model.board.PostDetailInfoResponse
+import com.example.capstonedesign.model.board.WriteCommentRequest
 import com.example.capstonedesign.model.login.LoginPost
 import com.example.capstonedesign.model.login.LoginResponse
 import com.example.capstonedesign.model.login.SignupPost
@@ -46,5 +47,31 @@ interface RetrofitService {
         @Path("board_id") boardId: Long
     ): Response<PostDetailInfoResponse>
 
+    // 게시글 수정
+//    @PATCH("boards/{board_id}")
+//    suspend fun updatePost(
+//        @Header ("Authorization") BearerToken: String,
+//        @Path("board_id") boardId: Long
+//    ): Response<BasicResponse>
 
+    // 게시글 삭제
+    @DELETE("boards/{board_id}")
+    suspend fun deletePost(
+        @Header ("Authorization") BearerToken: String,
+        @Path("board_id") boardId: Long
+    ): Response<BasicResponse>
+
+    // 게시글별 모든 댓글 조회
+    @GET("boards/{board_id}/comments")
+    suspend fun getComments(
+
+    )
+
+    // 댓글 작성
+    @POST("boards/{board_id}/comments")
+    suspend fun writeComments(
+        @Header ("Authorization") BearerToken: String,
+        @Path("board_id") boardId: Long,
+        @Body writeCommentRequest: WriteCommentRequest
+    ): Response<BasicResponse>
 }
