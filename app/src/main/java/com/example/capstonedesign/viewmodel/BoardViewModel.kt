@@ -9,6 +9,7 @@ import com.example.capstonedesign.model.board.PostDetailInfoResponse
 import com.example.capstonedesign.model.login.MemberInfoResponse
 import com.example.capstonedesign.repository.BoardRepository
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

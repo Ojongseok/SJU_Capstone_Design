@@ -36,7 +36,7 @@ class PostDetailFragment: Fragment() {
     private lateinit var viewModel: BoardViewModel
     private val args by navArgs<PostDetailFragmentArgs>()
     private lateinit var commentAdapter: CommentAdapter
-    var boardId: Long = 0
+    private var boardId: Long = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPostDetailBinding.inflate(inflater, container, false)
@@ -102,7 +102,6 @@ class PostDetailFragment: Fragment() {
             override fun onClick(v: View, position: Int) {
                 setCommentDeleteDialog(viewModel.getAllCommentsResponse.value?.result!![position].commentId)
             }
-
         })
     }
 
@@ -122,12 +121,17 @@ class PostDetailFragment: Fragment() {
                 } else {
                     Glide.with(requireContext()).load(it.result.image).into(binding.ivPd)
                 }
+                if (it.result.tag == "QUESTION") {
+                    binding.tvPostDetailSolveTag.visibility = View.VISIBLE
+                }
             }
         }
 
         viewModel.getAllCommentsResponse.observe(viewLifecycleOwner) {
-            commentAdapter.setData(it.result)
-            binding.textView11.text = "댓글 ${it.result.size}개"
+            if (it.code == 200) {
+                commentAdapter.setData(it.result)
+                binding.textView11.text = "댓글 ${it.result.size}개"
+            }
         }
 
         viewModel.writeCommentsResultCode.observe(viewLifecycleOwner) {

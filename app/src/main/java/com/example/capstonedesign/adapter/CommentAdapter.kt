@@ -1,6 +1,7 @@
 package com.example.capstonedesign.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +23,11 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
             binding.tvItemCommentContents.text = item.content
             binding.tvItemCommentDate.text = item.modifiedDate.removeRange(16,19)
 
+            Log.d("tag", item.memberId.toString())
             if (item.memberId == MEMBER_ID) {
                 binding.btnItemCommentDelete.visibility = View.VISIBLE
+            } else {
+                binding.btnItemCommentDelete.visibility = View.GONE
             }
         }
     }

@@ -40,6 +40,7 @@ class TipBoardFragment: Fragment() {
     private fun setObserver() {
         viewModel.PostListResponse.observe(viewLifecycleOwner) {
             setRvPost(it.content)
+            binding.pbTipBoard.visibility = View.GONE
         }
     }
 

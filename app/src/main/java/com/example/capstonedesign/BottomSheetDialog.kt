@@ -48,7 +48,7 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         }
 
         binding.buttonMenu4.setOnClickListener {
-            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPesticide()
+            val action = BottomSheetDialogDirections.actionDialogBottomSheetToFragmentPesticideSearch()
             findNavController().navigate(action)
         }
 

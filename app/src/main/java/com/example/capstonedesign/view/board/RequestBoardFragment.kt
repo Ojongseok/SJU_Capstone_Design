@@ -47,6 +47,7 @@ class RequestBoardFragment: Fragment() {
     private fun setObserver() {
         viewModel.PostListResponse.observe(viewLifecycleOwner) {
             setRvPost(it.content)
+            binding.pbRequestBoard.visibility = View.GONE
         }
     }
 

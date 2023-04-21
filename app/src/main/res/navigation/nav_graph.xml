@@ -48,8 +48,8 @@
             android:id="@+id/action_dialog_bottom_sheet_to_fragment_login"
             app:destination="@id/fragment_login" />
         <action
-            android:id="@+id/action_dialog_bottom_sheet_to_fragment_pesticide"
-            app:destination="@id/fragment_pesticide"
+            android:id="@+id/action_dialog_bottom_sheet_to_fragment_pesticide_search"
+            app:destination="@id/fragment_pesticide_search"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -220,11 +220,6 @@
         android:name="com.example.capstonedesign.view.login.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" />
-    <fragment
-        android:id="@+id/fragment_pesticide"
-        android:name="com.example.capstonedesign.view.main.PesticideFragment"
-        android:label="fragment_pesticide"
-        tools:layout="@layout/fragment_pesticide" />
     <dialog
         android:id="@+id/fragment_pesticide_dialog"
         android:name="com.example.capstonedesign.view.main.pesticide.PesticideDialogFragment"
@@ -252,4 +247,9 @@
             android:id="@+id/action_fragment_pesticide_info_to_fragment_pesticide_dialog"
             app:destination="@id/fragment_pesticide_dialog" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_pesticide_search"
+        android:name="com.example.capstonedesign.view.main.pesticide.PesticideSearchFragment"
+        android:label="fragment_pesticide_search"
+        tools:layout="@layout/fragment_pesticide_search" />
 </navigation>

@@ -22,11 +22,16 @@ class BoardPostAdapter(private val context: Context, private val list: List<Cont
             binding.tvPostThumbnailDate.text = item.modifiedDate.removeRange(16,19)
             binding.tvPostThumbnailFavoriteCount.text = item.liveNum.toString()
 
-            if (item.isSolved) {
-                binding.tvItemPostSolveTag.text = "해결"
-                binding.tvItemPostSolveTag.setBackgroundColor(context.resources.getColor(R.color.main_green))
+            if (item.tag == "QUESTION") {
+                if (item.isSolved) {
+                    binding.tvItemPostSolveTag.text = "해결"
+                    binding.tvItemPostSolveTag.setBackgroundColor(context.resources.getColor(R.color.main_green))
+                } else {
+                    binding.tvItemPostSolveTag.text = "미해결"
+                }
+                binding.tvItemPostSolveTag.visibility = View.VISIBLE
             } else {
-                binding.tvItemPostSolveTag.text = "미해결"
+                binding.tvItemPostSolveTag.visibility = View.GONE
             }
         }
     }

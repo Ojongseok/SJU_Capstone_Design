@@ -78,12 +78,12 @@
                         android:id="@+id/btn_home_webview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="12dp"
                         android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                        app:layout_constraintStart_toEndOf="@+id/textView12"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView12">
 
                         <ImageView
