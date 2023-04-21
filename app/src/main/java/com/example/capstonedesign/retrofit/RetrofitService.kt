@@ -79,4 +79,13 @@ interface RetrofitService {
         @Path("board_id") boardId: Long,
         @Body writeCommentRequest: WriteCommentRequest
     ): Response<BasicResponse>
+
+    // 댓글 삭제
+    @DELETE("boards/{board_id}/comments/{comment_id}")
+    suspend fun deleteComment(
+        @Header ("Authorization") BearerToken: String,
+        @Path("board_id") boardId: Long,
+        @Path("comment_id") commentId: Long
+    ): Response<BasicResponse>
+
 }

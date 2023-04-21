@@ -7,13 +7,13 @@
     android:background="@drawable/background_rec_8dp">
 
     <TextView
-        android:id="@+id/tv_dialog_select"
+        android:id="@+id/tv_dialog_comment_delete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
-        android:text="로그아웃 하시겠습니까?"
+        android:text="댓글을 삭제하시겠습니까?"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -28,10 +28,10 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_select">
+        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_comment_delete">
 
         <TextView
-            android:id="@+id/dialog_logout_cancel"
+            android:id="@+id/dialog_comment_delete_cancel"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/background_rad_8dp_left_bottom"
@@ -50,15 +50,15 @@
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="@+id/dialog_logout_complete"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_comment_delete_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/dialog_logout_complete">
+            app:layout_constraintTop_toTopOf="@+id/dialog_comment_delete_complete">
 
         </FrameLayout>
 
         <TextView
-            android:id="@+id/dialog_logout_complete"
+            android:id="@+id/dialog_comment_delete_complete"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/background_rad_8dp_right_bottom"

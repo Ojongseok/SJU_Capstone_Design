@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,21 +14,19 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.CommentAdapter
 import com.example.capstonedesign.databinding.FragmentPostDetailBinding
 import com.example.capstonedesign.repository.BoardRepository
-import com.example.capstonedesign.util.Constants
 import com.example.capstonedesign.util.Constants.MEMBER_ID
-import com.example.capstonedesign.util.GridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.BoardViewModel
 import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
-import kotlinx.android.synthetic.main.dialog_logout.*
+import kotlinx.android.synthetic.main.dialog_comment_delete.*
 import kotlinx.android.synthetic.main.dialog_post_delete.*
 import kotlinx.android.synthetic.main.dialog_post_update.*
 
@@ -40,7 +37,6 @@ class PostDetailFragment: Fragment() {
     private val args by navArgs<PostDetailFragmentArgs>()
     private lateinit var commentAdapter: CommentAdapter
     var boardId: Long = 0
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPostDetailBinding.inflate(inflater, container, false)
@@ -56,6 +52,7 @@ class PostDetailFragment: Fragment() {
         initDataSettings()
         setObserver()
         setCommentRecyclerView()
+
 
         binding.btnPostDetailMenu.setOnClickListener {
             val popup = PopupMenu(requireContext(), it)
@@ -79,10 +76,13 @@ class PostDetailFragment: Fragment() {
             val commentsText = binding.etPdWriteComments.text.toString()
             if (commentsText.isNotEmpty()) {
                 viewModel.writeComments(boardId, commentsText)
-                clearFocusEditText()
             } else {
                 Toast.makeText(requireContext(), "댓글 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.btnPostDetailLike.setOnClickListener {
+            binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.grey_divide))
         }
 
         binding.btnBack.setOnClickListener {
@@ -91,12 +91,19 @@ class PostDetailFragment: Fragment() {
     }
 
     private fun setCommentRecyclerView() {
-
         binding.rvPdComments.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = commentAdapter
+            addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager(requireContext()).orientation))
         }
+
+        commentAdapter.setItemClickListener(object : CommentAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                setCommentDeleteDialog(viewModel.getAllCommentsResponse.value?.result!![position].commentId)
+            }
+
+        })
     }
 
     private fun setObserver() {
@@ -106,7 +113,7 @@ class PostDetailFragment: Fragment() {
                     binding.btnPostDetailMenu.visibility = View.VISIBLE
                 }
                 binding.tvPdNickname.text = it.result.nickname
-                binding.tvPdPostDate.text = it.result.modifiedDate
+                binding.tvPdPostDate.text = it.result.modifiedDate.removeRange(16,19)
                 binding.tvPdTitle.text = it.result.title
                 binding.tvPdContents.text = it.result.content
                 if (it.result.image == null) {
@@ -117,9 +124,21 @@ class PostDetailFragment: Fragment() {
                 }
             }
         }
+
         viewModel.getAllCommentsResponse.observe(viewLifecycleOwner) {
-            Log.d("tag", it.result.toString())
+            commentAdapter.setData(it.result)
+            binding.textView11.text = "댓글 ${it.result.size}개"
         }
+
+        viewModel.writeCommentsResultCode.observe(viewLifecycleOwner) {
+            if (it == 200) {
+                val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.etPdWriteComments.windowToken, 0)
+                binding.etPdWriteComments.text = null
+                binding.etPdWriteComments.clearFocus()
+            }
+        }
+
         viewModel.postDeleteResultCode.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
@@ -133,6 +152,25 @@ class PostDetailFragment: Fragment() {
 
         commentAdapter = CommentAdapter(requireContext())
 
+    }
+
+    private fun setCommentDeleteDialog(commentId: Long) {
+        val dialog = Dialog(requireContext())
+
+        dialog.setContentView(R.layout.dialog_comment_delete)
+        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+
+        dialog.dialog_comment_delete_complete.setOnClickListener {
+            viewModel.deleteComment(boardId, commentId)
+            dialog.dismiss()
+        }
+
+        dialog.dialog_comment_delete_cancel.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     private fun setUpdateDialog() {
@@ -171,13 +209,6 @@ class PostDetailFragment: Fragment() {
         dialog.dialog_post_delete_cancel.setOnClickListener {
             dialog.dismiss()
         }
-    }
-
-    private fun clearFocusEditText() {
-        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(binding.etPdWriteComments.windowToken, 0)
-        binding.etPdWriteComments.text = null
-        binding.etPdWriteComments.clearFocus()
     }
 
     override fun onDestroy() {

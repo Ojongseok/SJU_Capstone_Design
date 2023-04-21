@@ -19,6 +19,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginStart="20dp"
+            android:foreground="@drawable/ripple_rad_24dp"
             android:src="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,21 +95,60 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_pd_nickname" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="60dp"
+                    android:id="@+id/btn_post_detail_like"
+                    android:layout_width="64dp"
                     android:layout_height="40dp"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="-20dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="-18dp"
                     android:text="추천"
                     android:textColor="@color/white"
                     app:backgroundTint="@color/main_green"
                     app:icon="@drawable/ic_handup"
                     app:iconGravity="start"
-                    app:iconPadding="-24dp"
+                    app:iconPadding="-22dp"
                     app:iconSize="20dp"
                     app:iconTint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_post_detail_like_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/background_rec_8dp"
+                    android:backgroundTint="@color/main_green"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_post_detail_like"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_post_detail_like"
+                    app:layout_constraintTop_toTopOf="@+id/btn_post_detail_like" />
+
+                <TextView
+                    android:id="@+id/tv_post_detail_solve_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/background_rec_8dp"
+                    android:backgroundTint="#FDA82B"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="2dp"
+                    android:text="미해결"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_pd_nickname"
+                    app:layout_constraintStart_toEndOf="@+id/tv_pd_nickname"
+                    app:layout_constraintTop_toTopOf="@+id/tv_pd_nickname" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -198,7 +238,7 @@
                 android:layout_marginTop="20dp"
                 android:text="댓글"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
@@ -207,9 +247,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toBottomOf="@+id/textView11"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -251,7 +294,7 @@
             android:ems="10"
             android:hint="댓글을 입력하세요."
             android:inputType="text"
-            android:textColor="@color/text_1"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_pd_write_comments_complete"

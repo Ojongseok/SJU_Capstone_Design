@@ -50,4 +50,9 @@ class BoardRepository {
     suspend fun writeComments(boardId: Long, content: String) : Response<BasicResponse> {
         return service.writeComments("Bearer $ACCESS_TOKEN", boardId, WriteCommentRequest(content))
     }
+
+    // 댓글 삭제
+    suspend fun deleteComment(boardId: Long, commentId: Long) : Response<BasicResponse> {
+        return service.deleteComment("Bearer $ACCESS_TOKEN", boardId, commentId)
+    }
 }

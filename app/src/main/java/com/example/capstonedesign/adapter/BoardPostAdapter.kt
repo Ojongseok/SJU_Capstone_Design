@@ -19,8 +19,15 @@ class BoardPostAdapter(private val context: Context, private val list: List<Cont
             binding.tvPostThumbnailUserName.text = "by. ${item.nickname}"
             binding.tvPostThumbnailTitle.text = item.title
             binding.tvPostThumbnailContents.text = item.content
-            binding.tvPostThumbnailDate.text = item.modifiedDate
+            binding.tvPostThumbnailDate.text = item.modifiedDate.removeRange(16,19)
             binding.tvPostThumbnailFavoriteCount.text = item.liveNum.toString()
+
+            if (item.isSolved) {
+                binding.tvItemPostSolveTag.text = "해결"
+                binding.tvItemPostSolveTag.setBackgroundColor(context.resources.getColor(R.color.main_green))
+            } else {
+                binding.tvItemPostSolveTag.text = "미해결"
+            }
         }
     }
 

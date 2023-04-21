@@ -54,7 +54,9 @@ class MyPageFragment: Fragment() {
 
     private fun setObserver() {
         viewModel.memberInfo.observe(viewLifecycleOwner) {
-            Log.d("tag", it.result.toString())
+            binding.tvMypageNickname.text = it.result.nickname
+            binding.tvMypageEmail.text = it.result.email
+            binding.tvMypageRegion.text = it.result.region
         }
     }
 
