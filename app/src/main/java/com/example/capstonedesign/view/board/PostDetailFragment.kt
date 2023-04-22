@@ -125,8 +125,10 @@ class PostDetailFragment: Fragment() {
 
                 if (it.result.likeMemberIds.contains(MEMBER_ID)) {
                     binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.main_green))
+                    viewModel.postLikeResultCode.value = true
                 } else {
                     binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.sub_text))
+                    viewModel.postLikeResultCode.value = false
                 }
             }
         }
