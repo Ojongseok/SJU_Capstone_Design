@@ -46,6 +46,16 @@ class BoardRepository {
         return service.getAllComments(boardId)
     }
 
+    // 게시글 좋아요
+    suspend fun postLike(boardId: Long) : Response<BasicResponse> {
+        return service.postLike("Bearer $ACCESS_TOKEN", boardId)
+    }
+
+    // 게시글 좋아요 취소
+    suspend fun postLikeCancel(boardId: Long) : Response<BasicResponse> {
+        return service.postLikeCancel("Bearer $ACCESS_TOKEN", boardId)
+    }
+
     // 댓글 작성
     suspend fun writeComments(boardId: Long, content: String) : Response<BasicResponse> {
         return service.writeComments("Bearer $ACCESS_TOKEN", boardId, WriteCommentRequest(content))

@@ -20,7 +20,8 @@ class BoardPostAdapter(private val context: Context, private val list: List<Cont
             binding.tvPostThumbnailTitle.text = item.title
             binding.tvPostThumbnailContents.text = item.content
             binding.tvPostThumbnailDate.text = item.modifiedDate.removeRange(16,19)
-            binding.tvPostThumbnailFavoriteCount.text = item.liveNum.toString()
+            binding.tvPostThumbnailFavoriteCount.text = item.likeNum.toString()
+            binding.tvPostThumbnailCommentCnt.text = item.commentNum.toString()
 
             if (item.tag == "QUESTION") {
                 if (item.isSolved) {

@@ -16,6 +16,7 @@ data class Result(
     val isSolved: Boolean,
     val memberId: Long,
     val nickname: String,
+    val likeMemberIds: List<Long>,
     val likeNum: Int,
     val modifiedDate: String
 )

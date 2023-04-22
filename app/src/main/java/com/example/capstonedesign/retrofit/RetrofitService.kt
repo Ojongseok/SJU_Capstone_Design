@@ -72,6 +72,20 @@ interface RetrofitService {
         @Path("board_id") boardId: Long
     ): Response<AllCommentResponse>
 
+    // 게시글 좋아요
+    @POST("boards/{board_id}/like")
+    suspend fun postLike(
+        @Header ("Authorization") BearerToken: String,
+        @Path("board_id") boardId: Long
+    ): Response<BasicResponse>
+
+    // 게시글 좋아요 취소
+    @DELETE("boards/{board_id}/like")
+    suspend fun postLikeCancel(
+        @Header ("Authorization") BearerToken: String,
+        @Path("board_id") boardId: Long
+    ): Response<BasicResponse>
+
     // 댓글 작성
     @POST("boards/{board_id}/comments")
     suspend fun writeComments(

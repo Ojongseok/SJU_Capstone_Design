@@ -81,10 +81,6 @@ class PostDetailFragment: Fragment() {
             }
         }
 
-        binding.btnPostDetailLike.setOnClickListener {
-            binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.grey_divide))
-        }
-
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -115,14 +111,34 @@ class PostDetailFragment: Fragment() {
                 binding.tvPdPostDate.text = it.result.modifiedDate.removeRange(16,19)
                 binding.tvPdTitle.text = it.result.title
                 binding.tvPdContents.text = it.result.content
+
                 if (it.result.image == null) {
                     binding.frameLayout6.visibility = View.GONE
                     binding.ivPdCardview.visibility = View.GONE
                 } else {
                     Glide.with(requireContext()).load(it.result.image).into(binding.ivPd)
                 }
+
                 if (it.result.tag == "QUESTION") {
                     binding.tvPostDetailSolveTag.visibility = View.VISIBLE
+                }
+
+                if (it.result.likeMemberIds.contains(MEMBER_ID)) {
+                    binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.main_green))
+                } else {
+                    binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.sub_text))
+                }
+            }
+        }
+
+        viewModel.postLikeResultCode.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.btnPostDetailLike.setOnClickListener {
+                    viewModel.postLikeCancel(boardId)
+                }
+            } else {
+                binding.btnPostDetailLike.setOnClickListener {
+                    viewModel.postLike(boardId)
                 }
             }
         }

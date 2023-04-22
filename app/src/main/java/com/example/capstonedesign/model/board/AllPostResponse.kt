@@ -16,6 +16,7 @@ data class ContentList(
     val isSolved: Boolean,
     val memberId: Long,
     val nickname: String,
-    val liveNum: Int,
+    val likeNum: Int,
+    val commentNum: Int,
     val modifiedDate: String
 )

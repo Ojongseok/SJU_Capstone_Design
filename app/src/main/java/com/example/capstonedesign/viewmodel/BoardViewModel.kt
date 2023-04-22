@@ -22,6 +22,7 @@ class BoardViewModel(private val repository: BoardRepository): ViewModel() {
     val getAllCommentsResponse = MutableLiveData<AllCommentResponse>()    // 댓글 전체 조회
     val writeCommentsResultCode = MutableLiveData<Int>()    // 댓글 작성 결과
     val deleteCommentResultCode = MutableLiveData<Int>()    // 댓글 삭제 결과
+    val postLikeResultCode = MutableLiveData<Boolean>(false)    // 게시글 좋아요 여부
 
     // 게시글 작성
     fun writePost(jsonBody: RequestBody, file: MultipartBody.Part?) = viewModelScope.launch {
@@ -57,6 +58,19 @@ class BoardViewModel(private val repository: BoardRepository): ViewModel() {
     fun getAllComments(boardId: Long) = viewModelScope.launch {
         val response = repository.getAllComments(boardId)
         getAllCommentsResponse.postValue(response.body())
+    }
+
+    // 게시글 좋아요
+    fun postLike(boardId: Long) = viewModelScope.launch {
+        val response = repository.postLike(boardId)
+        postLikeResultCode.postValue(true)
+        getPostDetailInfo(boardId)
+    }
+    // 게시글 좋아요 취소
+    fun postLikeCancel(boardId: Long) = viewModelScope.launch {
+        val response = repository.postLikeCancel(boardId)
+        postLikeResultCode.postValue(false)
+        getPostDetailInfo(boardId)
     }
 
     // 댓글 작성

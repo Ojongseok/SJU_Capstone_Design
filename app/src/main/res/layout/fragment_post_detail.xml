@@ -103,7 +103,7 @@
                     android:paddingRight="-18dp"
                     android:text="추천"
                     android:textColor="@color/white"
-                    app:backgroundTint="@color/main_green"
+                    app:backgroundTint="@color/sub_text"
                     app:icon="@drawable/ic_handup"
                     app:iconGravity="start"
                     app:iconPadding="-22dp"
