@@ -18,5 +18,5 @@ data class Result(
     val nickname: String,
     val likeMemberIds: List<Long>,
     val likeNum: Int,
-    val modifiedDate: String
+    val createdDate: String
 )

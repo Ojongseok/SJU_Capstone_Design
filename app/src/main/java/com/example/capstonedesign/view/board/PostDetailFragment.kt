@@ -81,6 +81,10 @@ class PostDetailFragment: Fragment() {
             }
         }
 
+        binding.btnPostDetailLike.setOnClickListener {
+            viewModel.postLike(boardId)
+        }
+
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -108,7 +112,7 @@ class PostDetailFragment: Fragment() {
                     binding.btnPostDetailMenu.visibility = View.VISIBLE
                 }
                 binding.tvPdNickname.text = it.result.nickname
-                binding.tvPdPostDate.text = it.result.modifiedDate.removeRange(16,19)
+                binding.tvPdPostDate.text = it.result.createdDate.removeRange(16,19)
                 binding.tvPdTitle.text = it.result.title
                 binding.tvPdContents.text = it.result.content
 
@@ -125,22 +129,8 @@ class PostDetailFragment: Fragment() {
 
                 if (it.result.likeMemberIds.contains(MEMBER_ID)) {
                     binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.main_green))
-                    viewModel.postLikeResultCode.value = true
                 } else {
                     binding.btnPostDetailLike.setBackgroundColor(resources.getColor(R.color.sub_text))
-                    viewModel.postLikeResultCode.value = false
-                }
-            }
-        }
-
-        viewModel.postLikeResultCode.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.btnPostDetailLike.setOnClickListener {
-                    viewModel.postLikeCancel(boardId)
-                }
-            } else {
-                binding.btnPostDetailLike.setOnClickListener {
-                    viewModel.postLike(boardId)
                 }
             }
         }
@@ -169,6 +159,7 @@ class PostDetailFragment: Fragment() {
 
     private fun initDataSettings() {
         boardId = args.boardId
+
         viewModel.getPostDetailInfo(boardId)
         viewModel.getAllComments(boardId)
 

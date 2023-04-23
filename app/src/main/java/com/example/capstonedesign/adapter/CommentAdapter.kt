@@ -21,7 +21,7 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
         fun bind(item: AllCommentResult) {
             binding.tvItemCommentNickname.text = item.nickname
             binding.tvItemCommentContents.text = item.content
-            binding.tvItemCommentDate.text = item.modifiedDate.removeRange(16,19)
+            binding.tvItemCommentDate.text = item.createdDate.removeRange(16,19)
 
             Log.d("tag", item.memberId.toString())
             if (item.memberId == MEMBER_ID) {

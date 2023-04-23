@@ -18,5 +18,5 @@ data class ContentList(
     val nickname: String,
     val likeNum: Int,
     val commentNum: Int,
-    val modifiedDate: String
+    val createdDate: String
 )

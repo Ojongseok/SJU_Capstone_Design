@@ -19,7 +19,7 @@ class BoardPostAdapter(private val context: Context, private val list: List<Cont
             binding.tvPostThumbnailUserName.text = "by. ${item.nickname}"
             binding.tvPostThumbnailTitle.text = item.title
             binding.tvPostThumbnailContents.text = item.content
-            binding.tvPostThumbnailDate.text = item.modifiedDate.removeRange(16,19)
+            binding.tvPostThumbnailDate.text = item.createdDate.removeRange(16,19)
             binding.tvPostThumbnailFavoriteCount.text = item.likeNum.toString()
             binding.tvPostThumbnailCommentCnt.text = item.commentNum.toString()
 

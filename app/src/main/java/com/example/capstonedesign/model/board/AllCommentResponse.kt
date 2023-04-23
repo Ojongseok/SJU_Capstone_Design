@@ -12,5 +12,5 @@ data class AllCommentResult(
     val content: String,
     val memberId: Long,
     val nickname: String,
-    val modifiedDate: String
+    val createdDate: String
 )
