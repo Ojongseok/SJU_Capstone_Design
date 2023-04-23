@@ -85,6 +85,7 @@
             android:id="@+id/et_search_contents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawablePadding="-10dp"
             android:hint="검색어를 입력하세요."
             android:paddingTop="8dp"
             android:paddingBottom="8dp"

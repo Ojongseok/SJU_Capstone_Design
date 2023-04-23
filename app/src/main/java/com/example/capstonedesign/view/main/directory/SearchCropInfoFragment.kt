@@ -65,6 +65,12 @@ class SearchCropInfoFragment: Fragment() {
         setRv()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        setDropDownMenu()
+    }
+
     private fun setRv() {
         binding.rvSearchDisease.apply {
             setHasFixedSize(true)
@@ -97,8 +103,12 @@ class SearchCropInfoFragment: Fragment() {
     private fun initData() {
         setCropImageList()
         viewModel.setCropList()
-        cropAdapter = CropAdapter(requireContext(), cropImgList)
 
+        cropAdapter = CropAdapter(requireContext(), cropImgList)
+        setDropDownMenu()
+    }
+
+    private fun setDropDownMenu() {
         val searchArray = resources.getStringArray(R.array.search_crop_category)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, searchArray)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
