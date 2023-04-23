@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
+import retrofit2.Response
 
 class OpenApiViewModel: ViewModel() {
     val cropList = MutableLiveData<List<Element>>()    // 작물 목록
@@ -77,10 +78,14 @@ class OpenApiViewModel: ViewModel() {
     }
 
     // [병해 정보 검색] - 상단바 검색
-    fun searchDiseaseForKeyword(diseaseName: String) = viewModelScope.launch {
-        val response = OpenApiRetrofitService.searchDiseaseName(API_KEY, "SVC01", "AA001", diseaseName)
-
-        searchDiseaseListResult.postValue(response)
+    fun searchDiseaseForKeyword(searchType: String, diseaseName: String) = viewModelScope.launch {
+        if (searchType == "작물명") {
+            val response = OpenApiRetrofitService.searchDetailCropInfo(API_KEY, "SVC01", "AA001", diseaseName)
+            searchDiseaseListResult.postValue(response)
+        } else if (searchType == "병해명") {
+            val response = OpenApiRetrofitService.searchDiseaseName(API_KEY, "SVC01", "AA001", diseaseName)
+            searchDiseaseListResult.postValue(response)
+        }
     }
 
     // [홈] - 홈에서 병해 상세정보로 이동하기 위해

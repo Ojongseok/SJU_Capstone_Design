@@ -66,7 +66,8 @@ class SearchResultFragment: Fragment() {
     }
 
     private fun initData() {
-        viewModel.searchDiseaseForKeyword(args.diseaseName)
+        viewModel.searchDiseaseForKeyword(args.searchType, args.diseaseName)
+
         searchResultAdapter = SearchResultAdapter(requireContext(), args.diseaseName)
     }
 

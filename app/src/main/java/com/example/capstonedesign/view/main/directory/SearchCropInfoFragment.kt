@@ -9,10 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.CropAdapter
 import com.example.capstonedesign.databinding.FragmentSearchCropInfoBinding
 import com.example.capstonedesign.util.GridSpaceItemDecoration
@@ -40,10 +42,12 @@ class SearchCropInfoFragment: Fragment() {
         binding.etSearchContents.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
                 val keyword = binding.etSearchContents.text.toString()
+                val searchType = binding.autoCompleteTextView.text.toString()
+
                 if (keyword.isEmpty()) {
                     Toast.makeText(requireContext(), "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 } else {
-                    val action = SearchCropInfoFragmentDirections.actionFragmentSearchCropInfoToFragmentSearchResult(keyword)
+                    val action = SearchCropInfoFragmentDirections.actionFragmentSearchCropInfoToFragmentSearchResult(keyword, searchType)
                     findNavController().navigate(action)
                 }
                 binding.etSearchContents.clearFocus()
@@ -94,6 +98,10 @@ class SearchCropInfoFragment: Fragment() {
         setCropImageList()
         viewModel.setCropList()
         cropAdapter = CropAdapter(requireContext(), cropImgList)
+
+        val searchArray = resources.getStringArray(R.array.search_crop_category)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, searchArray)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
     }
 
     override fun onDestroy() {

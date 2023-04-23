@@ -53,7 +53,6 @@ class PostDetailFragment: Fragment() {
         setObserver()
         setCommentRecyclerView()
 
-
         binding.btnPostDetailMenu.setOnClickListener {
             val popup = PopupMenu(requireContext(), it)
             popup.menuInflater.inflate(R.menu.post_detail_menu, popup.menu)
