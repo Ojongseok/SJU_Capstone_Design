@@ -60,7 +60,22 @@ class SignupFragment: Fragment() {
             }
         })
 
-        val password = binding.etSignupPassword.text.toString()
+        binding.etSignupPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkPassword()
+            }
+        })
+
+        binding.etSignupPasswordConfirm.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkPasswordConfirm()
+            }
+        })
+
         val nickname = binding.etSignupNickname.text.toString()
         val region = binding.autoCompleteTextView.text.toString()
 
@@ -79,6 +94,36 @@ class SignupFragment: Fragment() {
         } else {
             binding.tilSignupEmail.helperText = "올바른 이메일 형식을 입력해주세요."
             binding.tilSignupEmail.boxStrokeColor = resources.getColor(R.color.main_red)
+            false
+        }
+    }
+
+    private fun checkPassword(): Boolean {
+        val passwordValidation = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{8,12}$"
+        val pattern = Pattern.matches(passwordValidation, binding.etSignupPassword.text.toString())
+
+        return if (pattern) {
+            binding.tilSignupPassword.helperText = null
+            binding.tilSignupPassword.boxStrokeColor = resources.getColor(R.color.main_green)
+            true
+        } else {
+            binding.tilSignupPassword.helperText = "비밀번호는 한글, 영문 포함 8~12자 이내입니다."
+            binding.tilSignupPassword.boxStrokeColor = resources.getColor(R.color.main_red)
+            false
+        }
+    }
+
+    private fun checkPasswordConfirm(): Boolean {
+        val password = binding.etSignupPassword.text.toString()
+        val passwordConfirm = binding.etSignupPasswordConfirm.text.toString()
+
+        return if (password == passwordConfirm) {
+            binding.tilSignupPasswordConfirm.helperText = null
+            binding.tilSignupPasswordConfirm.boxStrokeColor = resources.getColor(R.color.main_green)
+            true
+        } else {
+            binding.tilSignupPasswordConfirm.helperText = "비밀번호가 일치하지 않습니다."
+            binding.tilSignupPasswordConfirm.boxStrokeColor = resources.getColor(R.color.main_red)
             false
         }
     }

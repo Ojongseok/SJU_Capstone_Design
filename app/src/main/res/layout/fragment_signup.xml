@@ -72,7 +72,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout3"
+            android:id="@+id/til_signup_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,8 +80,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/main_green"
+            app:boxStrokeColor="@color/main_red"
+            app:counterEnabled="true"
+            app:counterMaxLength="12"
+            app:counterTextColor="@color/text_1"
             app:endIconMode="password_toggle"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/main_red"
             app:hintTextColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,13 +98,14 @@
                 android:layout_height="wrap_content"
                 android:hint="비밀번호를 입력하세요."
                 android:inputType="textPassword"
+                android:maxLength="12"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@drawable/cursor_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout4"
+            android:id="@+id/til_signup_password_confirm"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,12 +113,17 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/main_green"
+            app:boxStrokeColor="@color/main_red"
+            app:counterEnabled="true"
+            app:counterMaxLength="12"
+            app:counterTextColor="@color/text_1"
             app:endIconMode="password_toggle"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/main_red"
             app:hintTextColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/til_signup_password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_signup_password_confirm"
@@ -120,13 +131,14 @@
                 android:layout_height="wrap_content"
                 android:hint="비밀번호를 확인해주세요."
                 android:inputType="textPassword"
+                android:maxLength="12"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@drawable/cursor_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout5"
+            android:id="@+id/til_signup_nickname"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,11 +147,14 @@
             android:layout_marginEnd="20dp"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/main_green"
+            app:counterEnabled="true"
+            app:counterMaxLength="8"
+            app:counterTextColor="@color/text_1"
             app:endIconMode="clear_text"
             app:hintTextColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+            app:layout_constraintTop_toBottomOf="@+id/til_signup_password_confirm">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_signup_nickname"
@@ -147,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:hint="사용할 닉네임을 입력하세요."
                 android:inputType="text|textEmailAddress"
+                android:maxLength="8"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@drawable/cursor_color" />
@@ -161,11 +177,11 @@
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/main_green"
             app:endIconTint="@color/main_green"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+            app:layout_constraintEnd_toEndOf="@+id/til_signup_nickname"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+            app:layout_constraintStart_toStartOf="@+id/til_signup_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/til_signup_nickname">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView"
@@ -185,8 +201,8 @@
             android:text="회원가입 완료"
             android:textColor="@color/white"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
+            app:layout_constraintEnd_toEndOf="@+id/til_signup_password"
+            app:layout_constraintStart_toStartOf="@+id/til_signup_password"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

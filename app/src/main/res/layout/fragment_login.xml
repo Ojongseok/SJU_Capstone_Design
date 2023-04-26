@@ -67,7 +67,7 @@
             app:boxStrokeColor="@color/main_green"
             app:endIconMode="clear_text"
             app:hintTextColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
+            app:layout_constraintBottom_toTopOf="@+id/til_signup_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -83,7 +83,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout3"
+            android:id="@+id/til_signup_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,8 +119,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/btn_signup"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout3" />
+            app:layout_constraintEnd_toEndOf="@+id/til_signup_password"
+            app:layout_constraintStart_toStartOf="@+id/til_signup_password" />
 
         <Button
             android:id="@+id/btn_signup"
@@ -133,8 +133,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout3" />
+            app:layout_constraintEnd_toEndOf="@+id/til_signup_password"
+            app:layout_constraintStart_toStartOf="@+id/til_signup_password" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -159,8 +159,8 @@
             android:text="로그인 후 게시판 이용이 가능합니다."
             android:textColor="@color/text_1"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+            app:layout_constraintStart_toStartOf="@+id/til_signup_password"
+            app:layout_constraintTop_toBottomOf="@+id/til_signup_password" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
