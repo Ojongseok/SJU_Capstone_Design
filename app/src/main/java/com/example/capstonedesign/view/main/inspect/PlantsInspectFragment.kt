@@ -208,8 +208,8 @@ class PlantsInspectFragment: Fragment() {
                         binding.ltImgPreview.visibility = View.GONE
                     }
                 } else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                    val error = result.error
-                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+//                    val error = result.error
+//                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

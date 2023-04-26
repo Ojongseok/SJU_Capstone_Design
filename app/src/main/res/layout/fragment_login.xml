@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
@@ -21,8 +20,8 @@
             android:textColor="@color/main_green"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout2" />
+            app:layout_constraintBottom_toTopOf="@+id/til_signup_email"
+            app:layout_constraintStart_toStartOf="@+id/til_signup_email" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout1"
@@ -57,7 +56,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
+            android:id="@+id/til_signup_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +139,7 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_height="240dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="4dp"

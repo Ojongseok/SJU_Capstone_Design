@@ -21,6 +21,7 @@ class SearchResultAdapter(private val context: Context, private val keyword: Str
 
     inner class CustomViewHolder(private val binding: ItemSearchResultBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
+            Glide.with(context).load(item.oriImg.toString().replace("amp;", "")).into(binding.ivItemSearchResult)
             binding.tvItemSearchResultCropName.text = item.cropName
 
             binding.tvItemSearchResultName1.text = item.sickNameKor
@@ -32,9 +33,6 @@ class SearchResultAdapter(private val context: Context, private val keyword: Str
                 binding.tvItemSearchResultName2.text = "UNDEFINED"
             }
 
-            Glide.with(context).load(
-                item.oriImg.toString().replace("amp;", "")
-            ).into(binding.ivItemSearchResult)
         }
     }
 

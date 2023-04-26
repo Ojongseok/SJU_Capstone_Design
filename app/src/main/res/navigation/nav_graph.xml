@@ -133,7 +133,15 @@
         android:id="@+id/fragment_mypage"
         android:name="com.example.capstonedesign.view.board.MyPageFragment"
         android:label="fragment_my_page"
-        tools:layout="@layout/fragment_my_page" />
+        tools:layout="@layout/fragment_my_page" >
+        <action
+            android:id="@+id/action_fragment_mypage_to_fragment_terms"
+            app:destination="@id/fragment_terms"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_search_crop_info"
         android:name="com.example.capstonedesign.view.main.directory.SearchCropInfoFragment"
@@ -255,4 +263,9 @@
         android:name="com.example.capstonedesign.view.main.pesticide.PesticideSearchFragment"
         android:label="fragment_pesticide_search"
         tools:layout="@layout/fragment_pesticide_search" />
+    <fragment
+        android:id="@+id/fragment_terms"
+        android:name="com.example.capstonedesign.view.board.TermsFragment"
+        android:label="fragment_terms"
+        tools:layout="@layout/fragment_terms" />
 </navigation>

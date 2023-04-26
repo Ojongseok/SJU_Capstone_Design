@@ -114,6 +114,7 @@ class PostDetailFragment: Fragment() {
                 binding.tvPdPostDate.text = it.result.createdDate.removeRange(16,19)
                 binding.tvPdTitle.text = it.result.title
                 binding.tvPdContents.text = it.result.content
+                binding.tvPostDetailLikeCnt.text = "추천 ${it.result.likeNum}개"
 
                 if (it.result.image == null) {
                     binding.frameLayout6.visibility = View.GONE

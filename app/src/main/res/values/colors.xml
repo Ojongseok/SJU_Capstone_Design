@@ -16,6 +16,8 @@
     <color name="green_2">#FF66CC66</color>
     <color name="green_3">#FFCCFFCC</color>
 
+    <color name="main_red">#FF4444</color>
+
     <color name="grey_1">#FFEAEAEA</color>
     <color name="grey_divide">#FFDCDCDC</color>
     <color name="sub_text">#FFC1C1C1</color>  // 보조글자색

@@ -126,7 +126,7 @@
             <EditText
                 android:id="@+id/et_post_write_contents"
                 android:layout_width="0dp"
-                android:layout_height="500dp"
+                android:layout_height="480dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/background_rec_10dp_green_stroke"
                 android:ems="10"
@@ -145,12 +145,12 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toTopOf="@+id/btn_post_write"
                 app:layout_constraintStart_toStartOf="@+id/et_post_write_contents"
-                app:layout_constraintTop_toBottomOf="@+id/et_post_write_contents" />
+                app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
             <Button
                 android:id="@+id/btn_post_write"
@@ -177,6 +177,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/et_post_write_contents" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="첨부된 이미지"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/et_post_write_contents"
+                app:layout_constraintTop_toBottomOf="@+id/et_post_write_contents" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

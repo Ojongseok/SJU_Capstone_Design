@@ -47,6 +47,11 @@ class MyPageFragment: Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.btnMypageTerms.setOnClickListener {
+            val action = MyPageFragmentDirections.actionFragmentMypageToFragmentTerms()
+            findNavController().navigate(action)
+        }
+
         binding.btnMypageLogout.setOnClickListener {
             setLogoutDialog()
         }

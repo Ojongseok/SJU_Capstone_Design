@@ -1,6 +1,9 @@
 package com.example.capstonedesign.view.login
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +18,7 @@ import com.example.capstonedesign.model.login.SignupPost
 import com.example.capstonedesign.repository.LoginRepository
 import com.example.capstonedesign.viewmodel.LoginViewModel
 import com.example.capstonedesign.viewmodel.factory.LoginViewModelFactory
+import java.util.regex.Pattern
 
 class SignupFragment: Fragment() {
     private var _binding: FragmentSignupBinding? = null
@@ -37,17 +41,46 @@ class SignupFragment: Fragment() {
         }
 
         binding.btnSignupComplete.setOnClickListener {
-            val email = binding.etSignupEmail.text.toString()
-            val password = binding.etSignupPassword.text.toString()
-            val nickname = binding.etSignupNickname.text.toString()
-            val region = binding.autoCompleteTextView.text.toString()
 
-            viewModel.signup(SignupPost(email, password, nickname, region))
         }
+
+        checkValidation()
 
         setRegionMenu()
         setObserver()
 
+    }
+
+    private fun checkValidation() {
+        binding.etSignupEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkEmail()
+            }
+        })
+
+        val password = binding.etSignupPassword.text.toString()
+        val nickname = binding.etSignupNickname.text.toString()
+        val region = binding.autoCompleteTextView.text.toString()
+
+//        viewModel.signup(SignupPost(email, password, nickname, region))
+
+    }
+
+    private fun checkEmail(): Boolean {
+        val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        val pattern = Pattern.matches(emailValidation, binding.etSignupEmail.text.toString())
+
+        return if (pattern) {
+            binding.tilSignupEmail.helperText = null
+            binding.tilSignupEmail.boxStrokeColor = resources.getColor(R.color.main_green)
+            true
+        } else {
+            binding.tilSignupEmail.helperText = "올바른 이메일 형식을 입력해주세요."
+            binding.tilSignupEmail.boxStrokeColor = resources.getColor(R.color.main_red)
+            false
+        }
     }
 
     private fun setObserver() {
