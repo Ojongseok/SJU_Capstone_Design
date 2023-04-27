@@ -11,18 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="환영합니다 :)"
-            android:textColor="@color/main_green"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/til_signup_email"
-            app:layout_constraintStart_toStartOf="@+id/til_signup_email" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout1"
             android:layout_width="match_parent"
@@ -36,6 +24,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="20dp"
+                android:foreground="@drawable/ripple_rad_24dp"
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,13 +128,13 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="0dp"
-            android:layout_height="240dp"
+            android:layout_height="300dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/plants"
-            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintBottom_toTopOf="@+id/til_signup_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />

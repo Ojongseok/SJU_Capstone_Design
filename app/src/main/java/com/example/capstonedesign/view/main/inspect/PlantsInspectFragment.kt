@@ -2,17 +2,20 @@ package com.example.capstonedesign.view.main.inspect
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.Environment
+import android.os.*
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,8 +27,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.FragmentPlantsInspectBinding
+import com.example.capstonedesign.view.board.BoardFragmentDirections
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.android.synthetic.main.dialog_login.*
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -80,8 +86,7 @@ class PlantsInspectFragment: Fragment() {
 
         binding.btnInspect.setOnClickListener {
             if (imgUri != null && selectedPlants != 0) {
-                val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!)
-                findNavController().navigate(action)
+                setLoadingDialog()
             } else {
                 if (selectedPlants == 0) {
                     Toast.makeText(requireContext(), "작물 종류를 선택해주세요.", Toast.LENGTH_SHORT).show()
@@ -93,6 +98,23 @@ class PlantsInspectFragment: Fragment() {
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+    }
+
+    private fun setLoadingDialog() {
+        val dialog = Dialog(requireContext())
+
+        dialog.setContentView(R.layout.dialog_inspect_loading)
+        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(2000L)
+            dialog.dismiss()
+            val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!)
+            findNavController().navigate(action)
         }
     }
 

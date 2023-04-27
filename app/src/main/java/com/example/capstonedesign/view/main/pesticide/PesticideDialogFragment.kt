@@ -1,6 +1,7 @@
 package com.example.capstonedesign.view.main.pesticide
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,14 +31,15 @@ class PesticideDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        isCancelable = false
-
         initDataSettings()
         setRecyclerView()
         setObserver()
 
         binding.btnPestiDalogClose.setOnClickListener {
             findNavController().navigateUp()
+        }
+        binding.textView20.setOnClickListener {
+            startActivity(Intent(requireActivity(), MapActivity::class.java))
         }
     }
 
@@ -63,6 +65,7 @@ class PesticideDialogFragment: DialogFragment() {
     }
 
     private fun initDataSettings() {
+        isCancelable = false
         viewModel.getPesticideDetailInfo(args.pestiCode,args.diseaseUseSeq)
 
         val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager

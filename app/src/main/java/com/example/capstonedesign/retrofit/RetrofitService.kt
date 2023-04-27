@@ -43,7 +43,8 @@ interface RetrofitService {
     // 게시글 전체 조회
     @GET("boards")
     suspend fun getAllPost(
-        @Query("tag") tag: String
+        @Query("tag") tag: String,
+        @Query("size") size: String = "50"
     ): Response<AllPostResponse>
 
     // 게시글 상세 조회

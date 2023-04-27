@@ -41,14 +41,22 @@ class SignupFragment: Fragment() {
         }
 
         binding.btnSignupComplete.setOnClickListener {
+            if (checkEmail() && checkPassword() && checkPasswordConfirm() && checkNickname()
+                && resources.getStringArray(R.array.signup_select_region).contains(binding.autoCompleteTextView.text.toString())) {
+                viewModel.signup(SignupPost(
+                    binding.etSignupEmail.text.toString(),
+                    binding.etSignupPassword.text.toString(),
+                    binding.etSignupNickname.text.toString(),
+                    binding.autoCompleteTextView.text.toString()
+                ))
+            } else {
 
+            }
         }
-
-        checkValidation()
 
         setRegionMenu()
         setObserver()
-
+        checkValidation()
     }
 
     private fun checkValidation() {
@@ -76,10 +84,13 @@ class SignupFragment: Fragment() {
             }
         })
 
-        val nickname = binding.etSignupNickname.text.toString()
-        val region = binding.autoCompleteTextView.text.toString()
-
-//        viewModel.signup(SignupPost(email, password, nickname, region))
+        binding.etSignupNickname.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkNickname()
+            }
+        })
 
     }
 
@@ -128,11 +139,23 @@ class SignupFragment: Fragment() {
         }
     }
 
+    private fun checkNickname(): Boolean {
+        val nickname = binding.etSignupNickname.text.toString()
+
+        if (nickname.length in 4..12) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     private fun setObserver() {
         viewModel.signupResult.observe(viewLifecycleOwner) {
             if (it == 200) {
                 Toast.makeText(requireContext(), "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
+            } else {
+                Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
             }
         }
     }

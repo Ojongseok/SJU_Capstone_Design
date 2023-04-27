@@ -40,8 +40,7 @@
             android:layout_gravity="start|center_vertical"
             android:text="농약 상세정보"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/btn_pesti_dalog_close"
