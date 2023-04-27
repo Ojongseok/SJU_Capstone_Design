@@ -13,15 +13,12 @@ import com.example.capstonedesign.model.board.ContentList
 class BoardPostAdapter(private val context: Context, private val list: List<ContentList>)
     : RecyclerView.Adapter<BoardPostAdapter.CustomViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
+
     inner class CustomViewHolder(private val binding: ItemRequestPostBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ContentList) {
+            binding.model = item
             Glide.with(context).load(item.image).fallback(R.drawable.plants).into(binding.ivPostThumbnail)
-            binding.tvPostThumbnailUserName.text = "by. ${item.nickname}"
-            binding.tvPostThumbnailTitle.text = item.title
-            binding.tvPostThumbnailContents.text = item.content
             binding.tvPostThumbnailDate.text = item.createdDate.removeRange(16,19)
-            binding.tvPostThumbnailFavoriteCount.text = item.likeNum.toString()
-            binding.tvPostThumbnailCommentCnt.text = item.commentNum.toString()
 
             if (item.tag == "QUESTION") {
                 if (item.isSolved) {

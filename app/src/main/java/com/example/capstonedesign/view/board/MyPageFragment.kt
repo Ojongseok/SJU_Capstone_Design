@@ -36,37 +36,15 @@ class MyPageFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = LoginRepository(requireContext())
-        val factory = LoginViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         initDataSettings()
         setObserver()
-
-        binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
-        binding.btnMypageTerms.setOnClickListener {
-            val action = MyPageFragmentDirections.actionFragmentMypageToFragmentTerms()
-            findNavController().navigate(action)
-        }
-
-        binding.btnMypageLogout.setOnClickListener {
-            setLogoutDialog()
-        }
     }
 
     private fun setObserver() {
         viewModel.memberInfo.observe(viewLifecycleOwner) {
-            binding.tvMypageNickname.text = it.result.nickname
-            binding.tvMypageEmail.text = it.result.email
-            binding.tvMypageRegion.text = it.result.region
+            binding.model = it
         }
-    }
-
-    private fun initDataSettings() {
-        viewModel.getMemberInfo(MEMBER_ID)
     }
 
     private fun setLogoutDialog() {
@@ -93,6 +71,30 @@ class MyPageFragment: Fragment() {
         }
     }
 
+    private fun initDataSettings() {
+        val repository = LoginRepository(requireContext())
+        val factory = LoginViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+
+        binding.fragment = this@MyPageFragment
+
+        viewModel.getMemberInfo(MEMBER_ID)
+    }
+
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.btn_back -> {
+                findNavController().navigateUp()
+            }
+            R.id.btn_mypage_terms -> {
+                val action = MyPageFragmentDirections.actionFragmentMypageToFragmentTerms()
+                findNavController().navigate(action)
+            }
+            R.id.btn_mypage_logout -> {
+                setLogoutDialog()
+            }
+        }
+    }
 
     override fun onDestroy() {
         _binding = null

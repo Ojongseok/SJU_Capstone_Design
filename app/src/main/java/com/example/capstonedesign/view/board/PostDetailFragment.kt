@@ -27,8 +27,10 @@ import com.example.capstonedesign.util.Constants.MEMBER_ID
 import com.example.capstonedesign.viewmodel.BoardViewModel
 import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_comment_delete.*
+import kotlinx.android.synthetic.main.dialog_comment_modify.*
 import kotlinx.android.synthetic.main.dialog_post_delete.*
 import kotlinx.android.synthetic.main.dialog_post_update.*
+import kotlinx.android.synthetic.main.item_comment.*
 
 class PostDetailFragment: Fragment() {
     private var _binding: FragmentPostDetailBinding? = null
@@ -36,7 +38,6 @@ class PostDetailFragment: Fragment() {
     private lateinit var viewModel: BoardViewModel
     private val args by navArgs<PostDetailFragmentArgs>()
     private lateinit var commentAdapter: CommentAdapter
-    private var boardId: Long = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPostDetailBinding.inflate(inflater, container, false)
@@ -45,9 +46,7 @@ class PostDetailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = BoardRepository()
-        val factory = BoardViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+
 
         initDataSettings()
         setObserver()
@@ -74,14 +73,14 @@ class PostDetailFragment: Fragment() {
         binding.btnPdWriteCommentsComplete.setOnClickListener {
             val commentsText = binding.etPdWriteComments.text.toString()
             if (commentsText.isNotEmpty()) {
-                viewModel.writeComments(boardId, commentsText)
+                viewModel.writeComments(args.boardId, commentsText)
             } else {
                 Toast.makeText(requireContext(), "댓글 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.btnPostDetailLike.setOnClickListener {
-            viewModel.postLike(boardId)
+            viewModel.postLike(args.boardId)
         }
 
         binding.btnBack.setOnClickListener {
@@ -98,8 +97,11 @@ class PostDetailFragment: Fragment() {
         }
 
         commentAdapter.setItemClickListener(object : CommentAdapter.OnItemClickListener {
-            override fun onClick(v: View, position: Int) {
+            override fun onClickDelete(v: View, position: Int) {
                 setCommentDeleteDialog(viewModel.getAllCommentsResponse.value?.result!![position].commentId)
+            }
+            override fun onClickModify(v: View, position: Int) {
+                setCommentModifyDialog(viewModel.getAllCommentsResponse.value?.result!![position].commentId)
             }
         })
     }
@@ -157,14 +159,23 @@ class PostDetailFragment: Fragment() {
         }
     }
 
-    private fun initDataSettings() {
-        boardId = args.boardId
+    private fun setCommentModifyDialog(commentId: Long) {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_comment_modify)
+        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
 
-        viewModel.getPostDetailInfo(boardId)
-        viewModel.getAllComments(boardId)
+        dialog.btn_dialog_modify_complete.setOnClickListener {
+            viewModel.modifyComment(args.boardId, commentId, dialog.et_comment_modify.text.toString())
+            Toast.makeText(requireContext(), "댓글 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
 
-        commentAdapter = CommentAdapter(requireContext())
-
+        dialog.btn_dialog_modify_close.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     private fun setCommentDeleteDialog(commentId: Long) {
@@ -177,7 +188,7 @@ class PostDetailFragment: Fragment() {
         dialog.show()
 
         dialog.dialog_comment_delete_complete.setOnClickListener {
-            viewModel.deleteComment(boardId, commentId)
+            viewModel.deleteComment(args.boardId, commentId)
             dialog.dismiss()
         }
 
@@ -215,13 +226,25 @@ class PostDetailFragment: Fragment() {
         dialog.show()
 
         dialog.dialog_post_delete_complete.setOnClickListener {
-            viewModel.deletePost(boardId)
+            viewModel.deletePost(args.boardId)
             dialog.dismiss()
         }
 
         dialog.dialog_post_delete_cancel.setOnClickListener {
             dialog.dismiss()
         }
+    }
+
+    private fun initDataSettings() {
+        val repository = BoardRepository()
+        val factory = BoardViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+
+        viewModel.getPostDetailInfo(args.boardId)
+        viewModel.getAllComments(args.boardId)
+
+        commentAdapter = CommentAdapter(requireContext())
+
     }
 
     override fun onDestroy() {

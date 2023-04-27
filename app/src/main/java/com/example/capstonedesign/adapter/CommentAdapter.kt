@@ -23,11 +23,10 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
             binding.tvItemCommentContents.text = item.content
             binding.tvItemCommentDate.text = item.createdDate.removeRange(16,19)
 
-            Log.d("tag", item.memberId.toString())
             if (item.memberId == MEMBER_ID) {
-                binding.btnItemCommentDelete.visibility = View.VISIBLE
+                binding.ltItemCommentMenu.visibility = View.VISIBLE
             } else {
-                binding.btnItemCommentDelete.visibility = View.GONE
+                binding.ltItemCommentMenu.visibility = View.GONE
             }
         }
     }
@@ -35,8 +34,11 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(commentsList[position])
 
+        holder.itemView.btn_item_comment_modify.setOnClickListener {
+            itemClickListener.onClickModify(it, position)
+        }
         holder.itemView.btn_item_comment_delete.setOnClickListener {
-            itemClickListener.onClick(it, position)
+            itemClickListener.onClickDelete(it, position)
         }
     }
 
@@ -46,7 +48,8 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
     }
 
     interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
+        fun onClickDelete(v: View, position: Int)
+        fun onClickModify(v: View, position: Int)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
