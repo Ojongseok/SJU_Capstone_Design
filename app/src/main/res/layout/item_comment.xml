@@ -54,12 +54,12 @@
 
         <ImageView
             android:id="@+id/btn_item_comment_modify"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_pencil"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/text_1" />
+            app:tint="#FFDBA6" />
 
         <FrameLayout
             android:layout_width="1dp"
@@ -73,11 +73,11 @@
 
         <ImageView
             android:id="@+id/btn_item_comment_delete"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_delete"
-            app:tint="@color/text_1" />
+            app:tint="#FFDBA6" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

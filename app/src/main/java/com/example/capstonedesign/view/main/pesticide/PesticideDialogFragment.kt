@@ -60,8 +60,10 @@ class PesticideDialogFragment: DialogFragment() {
         binding.tvPestiDialogPestiEng.text = item.pestiEngName
         binding.tvPestiDialogInfo1.text = "회사명: ${item.compName}"
         binding.tvPestiDialogInfo2.text = "인축독성/어독성: ${item.toxicGubun}/${item.fishToxicGubun}"
-        binding.tvPestiDialogInfo3.text = "사용시기: ${item.pestiUse}"
-        binding.tvPestiDialogInfo4.text = "사용기한: ${item.useSuittime}"
+        binding.tvPestiDialogInfo3.text = "주성분함량: ${item.regCpntQnty}"
+        binding.tvPestiDialogInfo4.text = "사용시기: ${item.pestiUse}"
+        binding.tvPestiDialogInfo5.text = "사용기한: ${item.useSuittime}"
+        binding.tvPestiDialogInfo6.text = "사용횟수: ${item.useNum}"
     }
 
     private fun initDataSettings() {

@@ -101,7 +101,10 @@ class PostDetailFragment: Fragment() {
                 setCommentDeleteDialog(viewModel.getAllCommentsResponse.value?.result!![position].commentId)
             }
             override fun onClickModify(v: View, position: Int) {
-                setCommentModifyDialog(viewModel.getAllCommentsResponse.value?.result!![position].commentId)
+                setCommentModifyDialog(
+                    viewModel.getAllCommentsResponse.value?.result!![position].commentId,
+                    viewModel.getAllCommentsResponse.value?.result!![position].content
+                )
             }
         })
     }
@@ -159,7 +162,7 @@ class PostDetailFragment: Fragment() {
         }
     }
 
-    private fun setCommentModifyDialog(commentId: Long) {
+    private fun setCommentModifyDialog(commentId: Long, contents: String) {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_comment_modify)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
@@ -167,10 +170,16 @@ class PostDetailFragment: Fragment() {
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
+        dialog.et_comment_modify.setText(contents)
+
         dialog.btn_dialog_modify_complete.setOnClickListener {
-            viewModel.modifyComment(args.boardId, commentId, dialog.et_comment_modify.text.toString())
-            Toast.makeText(requireContext(), "댓글 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
+            if (dialog.et_comment_modify.text.isNotEmpty()) {
+                viewModel.modifyComment(args.boardId, commentId, dialog.et_comment_modify.text.toString())
+                Toast.makeText(requireContext(), "댓글 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            } else {
+                Toast.makeText(requireContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         dialog.btn_dialog_modify_close.setOnClickListener {
