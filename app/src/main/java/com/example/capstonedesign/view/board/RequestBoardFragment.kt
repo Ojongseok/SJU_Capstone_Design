@@ -12,6 +12,7 @@ import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.databinding.FragmentRequestBoardBinding
@@ -19,6 +20,7 @@ import com.example.capstonedesign.model.board.ContentList
 import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.util.Constants.LOGIN_STATUS
 import com.example.capstonedesign.util.GridSpaceItemDecoration
+import com.example.capstonedesign.util.StaggeredGridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.BoardViewModel
 import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_login.*
@@ -60,9 +62,10 @@ class RequestBoardFragment: Fragment() {
 
         binding.rvRequestPost.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(requireContext(), 2)
+//            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             adapter = requestBoardPostAdapter
-            addItemDecoration(GridSpaceItemDecoration(requireContext(), 2))
+            addItemDecoration(StaggeredGridSpaceItemDecoration(requireContext(), 2))
         }
 
         requestBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {

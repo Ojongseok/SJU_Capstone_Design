@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.board.RequestBoardFragment" >
+    android:background="#F4F4F4"
+    tools:context=".view.board.RequestBoardFragment">
 
     <ProgressBar
         android:id="@+id/pb_request_board"

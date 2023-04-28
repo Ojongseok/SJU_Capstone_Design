@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 
-class GridSpaceItemDecoration(
+class StaggeredGridSpaceItemDecoration(
     private val context: Context,
     private val spanCount: Int,
     private val a: Int = 10,
@@ -42,7 +42,7 @@ class GridSpaceItemDecoration(
 
         // spanIndex = 0 -> 왼쪽
         // spanIndex = 1 -> 오른쪽
-        val lp = view.layoutParams as GridLayoutManager.LayoutParams
+        val lp = view.layoutParams as StaggeredGridLayoutManager.LayoutParams
         val spanIndex = lp.spanIndex
 
         // Grid 두 줄
