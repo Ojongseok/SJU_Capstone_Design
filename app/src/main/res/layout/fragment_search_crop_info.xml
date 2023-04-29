@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.directory.SearchCropInfoFragment" >
+    android:background="#F9F9F9"
+    tools:context=".view.main.directory.SearchCropInfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,8 +24,7 @@
             android:src="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView1"
@@ -90,6 +91,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="-10dp"
             android:hint="검색어를 입력하세요."
+            android:imeOptions="actionSearch"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:singleLine="true"
@@ -101,9 +103,10 @@
         android:id="@+id/rv_search_disease"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

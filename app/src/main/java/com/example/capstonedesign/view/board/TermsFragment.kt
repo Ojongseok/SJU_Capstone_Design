@@ -1,6 +1,7 @@
 package com.example.capstonedesign.view.board
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,8 @@ class TermsFragment: Fragment() {
         binding.btnTermsComplete.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.textView4.movementMethod = ScrollingMovementMethod()
     }
 
     override fun onDestroy() {

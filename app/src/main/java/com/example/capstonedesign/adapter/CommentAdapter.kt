@@ -40,6 +40,9 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
         holder.itemView.btn_item_comment_delete.setOnClickListener {
             itemClickListener.onClickDelete(it, position)
         }
+        holder.itemView.btn_item_comment_re_comment.setOnClickListener {
+            itemClickListener.onClickCommentRe(it, position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -50,6 +53,7 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
     interface OnItemClickListener {
         fun onClickDelete(v: View, position: Int)
         fun onClickModify(v: View, position: Int)
+        fun onClickCommentRe(v: View, position: Int)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

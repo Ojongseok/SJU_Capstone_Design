@@ -24,7 +24,6 @@
         <activity
             android:name=".view.main.pesticide.MapActivity"
             android:exported="false"
-            android:label="@string/title_activity_map"
             android:theme="@style/Theme.CapstoneDesign.NoActionBar" />
         <activity
             android:name=".view.home.HomeWebViewActivity"

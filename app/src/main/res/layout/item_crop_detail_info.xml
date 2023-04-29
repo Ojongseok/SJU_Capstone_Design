@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:background="@drawable/background_rec_4dp_green_stroke"
+    android:background="@drawable/background_rec_4dp"
+    android:elevation="2dp"
     android:padding="8dp">
 
     <ImageView
@@ -25,7 +26,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="@color/black"
+        android:textColor="#11A542"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/iv_crop_detail_info_thumb"
         app:layout_constraintStart_toStartOf="@+id/iv_crop_detail_info_thumb"

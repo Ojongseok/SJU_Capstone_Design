@@ -18,9 +18,6 @@ class BoardPostAdapter(private val context: Context, private val list: List<Cont
         fun bind(item: ContentList) {
             binding.model = item
             Glide.with(context).load(item.image).fallback(R.drawable.plants).into(binding.ivPostThumbnail)
-            if (item.image.isNullOrEmpty()) {
-                binding.ivPostThumbnail.visibility = View.GONE
-            }
             binding.tvPostThumbnailDate.text = item.createdDate.removeRange(16,19)
 
             if (item.tag == "QUESTION") {

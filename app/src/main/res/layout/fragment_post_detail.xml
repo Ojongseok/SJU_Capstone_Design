@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F9F9F9"
     tools:context=".view.board.PostDetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -61,83 +63,18 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contlayout_5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tv_pd_nickname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="..."
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_pd_post_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="..."
-                    app:layout_constraintStart_toStartOf="@+id/tv_pd_nickname"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_pd_nickname" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_post_detail_like"
-                    android:layout_width="72dp"
-                    android:layout_height="46dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="-16dp"
-                    android:text="추천"
-                    android:textColor="@color/white"
-                    app:backgroundTint="@color/sub_text"
-                    app:icon="@drawable/ic_handup"
-                    app:iconGravity="start"
-                    app:iconPadding="-22dp"
-                    app:iconSize="20dp"
-                    app:iconTint="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_post_detail_solve_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:background="@drawable/background_rec_8dp"
-                    android:backgroundTint="#FDA82B"
-                    android:paddingLeft="6dp"
-                    android:paddingTop="2dp"
-                    android:paddingRight="6dp"
-                    android:paddingBottom="2dp"
-                    android:text="미해결"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_pd_nickname"
-                    app:layout_constraintStart_toEndOf="@+id/tv_pd_nickname"
-                    app:layout_constraintTop_toTopOf="@+id/tv_pd_nickname" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/background_rec_10dp_green_stroke"
+                android:background="@drawable/background_rec_10dp_green"
+                android:backgroundTint="@color/white"
+                android:elevation="2dp"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
@@ -211,46 +148,143 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/comment_left_image_custom"
-                android:drawablePadding="2dp"
-                android:text="댓글"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:drawableTint="#43C0F8"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_post_detail_like_cnt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/like_left_image_custom"
-                android:drawablePadding="2dp"
-                android:text="추천"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:drawableTint="@color/main_green"
-                app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+                <TextView
+                    android:id="@+id/tv_pd_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_pd_comments"
+                <TextView
+                    android:id="@+id/tv_pd_post_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="..."
+                    app:layout_constraintStart_toStartOf="@+id/tv_pd_nickname"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pd_nickname" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_post_detail_like"
+                    android:layout_width="72dp"
+                    android:layout_height="46dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="-16dp"
+                    android:text="추천"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/sub_text"
+                    app:icon="@drawable/ic_handup"
+                    app:iconGravity="start"
+                    app:iconPadding="-22dp"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_post_detail_solve_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/background_rec_8dp"
+                    android:backgroundTint="#FDA82B"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="2dp"
+                    android:text="미해결"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_pd_nickname"
+                    app:layout_constraintStart_toEndOf="@+id/tv_pd_nickname"
+                    app:layout_constraintTop_toTopOf="@+id/tv_pd_nickname" />
+
+                <ImageView
+                    android:id="@+id/btn_post_detail_solve"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="4dp"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_async"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_post_detail_solve_tag"
+                    app:layout_constraintStart_toEndOf="@+id/tv_post_detail_solve_tag"
+                    app:layout_constraintTop_toTopOf="@+id/tv_post_detail_solve_tag"
+                    app:tint="#FDA82B" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintlayout_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/background_rec_10dp_green"
+                android:backgroundTint="@color/white"
+                android:elevation="2dp"
+                android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/textView11"
-                android:overScrollMode="never"
-                android:nestedScrollingEnabled="false"/>
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_pd_comments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                <TextView
+                    android:id="@+id/tv_post_detail_like_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:drawableLeft="@drawable/like_left_image_custom"
+                    android:drawablePadding="2dp"
+                    android:text="추천"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:drawableTint="@color/main_green"
+                    app:layout_constraintStart_toEndOf="@+id/textView11"
+                    app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/comment_left_image_custom"
+                    android:drawablePadding="2dp"
+                    android:text="댓글"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:drawableTint="#43C0F8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

@@ -12,6 +12,8 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -30,7 +32,9 @@ import kotlinx.android.synthetic.main.dialog_comment_delete.*
 import kotlinx.android.synthetic.main.dialog_comment_modify.*
 import kotlinx.android.synthetic.main.dialog_post_delete.*
 import kotlinx.android.synthetic.main.dialog_post_update.*
+import kotlinx.android.synthetic.main.dialog_request_post_solve.*
 import kotlinx.android.synthetic.main.item_comment.*
+
 
 class PostDetailFragment: Fragment() {
     private var _binding: FragmentPostDetailBinding? = null
@@ -46,7 +50,6 @@ class PostDetailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         initDataSettings()
         setObserver()
@@ -70,6 +73,10 @@ class PostDetailFragment: Fragment() {
             popup.show() //showing popup menu
         }
 
+        binding.btnPostDetailSolve.setOnClickListener {
+            setRequestSolve()
+        }
+
         binding.btnPdWriteCommentsComplete.setOnClickListener {
             val commentsText = binding.etPdWriteComments.text.toString()
             if (commentsText.isNotEmpty()) {
@@ -85,6 +92,13 @@ class PostDetailFragment: Fragment() {
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.contlayout5.setOnClickListener {
+            if (activity != null && requireActivity().currentFocus != null) {
+                val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            }
         }
     }
 
@@ -106,6 +120,17 @@ class PostDetailFragment: Fragment() {
                     viewModel.getAllCommentsResponse.value?.result!![position].content
                 )
             }
+
+            override fun onClickCommentRe(v: View, position: Int) {
+                binding.etPdWriteComments.post {
+                    binding.etPdWriteComments.hint = "답글을 입력하세요."
+                    binding.etPdWriteComments.isFocusableInTouchMode = true
+                    binding.etPdWriteComments.requestFocus()
+                    val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.showSoftInput(binding.etPdWriteComments, 0)
+                }
+
+            }
         })
     }
 
@@ -114,6 +139,7 @@ class PostDetailFragment: Fragment() {
             if (it.code == 200) {
                 if (viewModel.postDetailResponse.value?.result?.memberId == MEMBER_ID) {
                     binding.btnPostDetailMenu.visibility = View.VISIBLE
+                    binding.btnPostDetailSolve.visibility = View.VISIBLE
                 }
                 binding.tvPdNickname.text = it.result.nickname
                 binding.tvPdPostDate.text = it.result.createdDate.removeRange(16,19)
@@ -162,6 +188,8 @@ class PostDetailFragment: Fragment() {
         }
     }
 
+
+
     private fun setCommentModifyDialog(commentId: Long, contents: String) {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_comment_modify)
@@ -190,12 +218,18 @@ class PostDetailFragment: Fragment() {
     private fun setCommentDeleteDialog(commentId: Long) {
         val dialog = Dialog(requireContext())
 
+//        val binding = DialogCommentDeleteBinding.inflate(LayoutInflater.from(context))
+//        dialog.setContentView(binding.root)  // 이렇게 뷰바인딩 가능
+
         dialog.setContentView(R.layout.dialog_comment_delete)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
+//        binding.dialogCommentDeleteCancel.setOnClickListener {
+//            dialog.dismiss()
+//        }
         dialog.dialog_comment_delete_complete.setOnClickListener {
             viewModel.deleteComment(args.boardId, commentId)
             dialog.dismiss()
@@ -240,6 +274,24 @@ class PostDetailFragment: Fragment() {
         }
 
         dialog.dialog_post_delete_cancel.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
+    private fun setRequestSolve() {
+        val dialog = Dialog(requireContext())
+
+        dialog.setContentView(R.layout.dialog_request_post_solve)
+        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+
+        dialog.dialog_post_solve_complete.setOnClickListener {
+            // 솔브 api준비되면 연결
+            dialog.dismiss()
+        }
+        dialog.dialog_post_solve_cancel.setOnClickListener {
             dialog.dismiss()
         }
     }

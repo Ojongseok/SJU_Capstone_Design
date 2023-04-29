@@ -59,7 +59,7 @@ class InspectResultFragment: Fragment() {
         }
 
         binding.btnInspectResultShare.setOnClickListener {
-
+            Toast.makeText(requireContext(), "준비중입니다.", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnInspectResultCheck.setOnClickListener {

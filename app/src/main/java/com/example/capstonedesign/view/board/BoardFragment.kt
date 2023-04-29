@@ -40,10 +40,6 @@ class BoardFragment: Fragment() {
             }
         }
 
-        binding.btnBoardSearch.setOnClickListener {
-            Toast.makeText(requireContext(), "준비중입니다.", Toast.LENGTH_SHORT).show()
-        }
-
     }
 
     private fun setLoginDialog() {

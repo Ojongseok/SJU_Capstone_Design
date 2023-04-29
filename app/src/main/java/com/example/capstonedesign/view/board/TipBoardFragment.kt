@@ -11,17 +11,14 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.BoardPostAdapter
 import com.example.capstonedesign.databinding.FragmentTipBoardBinding
 import com.example.capstonedesign.model.board.ContentList
 import com.example.capstonedesign.repository.BoardRepository
-import com.example.capstonedesign.util.Constants
 import com.example.capstonedesign.util.Constants.LOGIN_STATUS
-import com.example.capstonedesign.util.GridSpaceItemDecoration
-import com.example.capstonedesign.util.StaggeredGridSpaceItemDecoration
+import com.example.capstonedesign.util.SeggeredGridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.BoardViewModel
 import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_login.*
@@ -65,7 +62,7 @@ class TipBoardFragment: Fragment() {
             setHasFixedSize(true)
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = tipBoardPostAdapter
-            addItemDecoration(StaggeredGridSpaceItemDecoration(requireContext(), 2))
+            addItemDecoration(SeggeredGridSpaceItemDecoration(requireContext(),2))
         }
 
         tipBoardPostAdapter.setItemClickListener(object : BoardPostAdapter.OnItemClickListener {
