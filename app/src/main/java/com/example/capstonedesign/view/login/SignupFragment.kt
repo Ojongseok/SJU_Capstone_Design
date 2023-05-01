@@ -1,5 +1,6 @@
 package com.example.capstonedesign.view.login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -39,6 +40,10 @@ class SignupFragment: Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.ltSignupTerms.setOnClickListener {
+            val action = SignupFragmentDirections.actionFragmentSignupToFragmentTerms()
+            findNavController().navigate(action)
+        }
 
         binding.btnSignupComplete.setOnClickListener {
             if (checkEmail() && checkPassword() && checkPasswordConfirm() && checkNickname()
@@ -50,8 +55,14 @@ class SignupFragment: Fragment() {
                     binding.autoCompleteTextView.text.toString()
                 ))
             } else {
-
+                if (binding.autoCompleteTextView.text.toString() == "지역을 선택해주세요.") {
+                    Toast.makeText(requireContext(), "지역을 선택해주세요.", Toast.LENGTH_SHORT).show()
+                }
             }
+        }
+
+        binding.cbSignup.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkLoginEnable()
         }
 
         setRegionMenu()
@@ -65,6 +76,7 @@ class SignupFragment: Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkEmail()
+                checkLoginEnable()
             }
         })
 
@@ -73,6 +85,7 @@ class SignupFragment: Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkPassword()
+                checkLoginEnable()
             }
         })
 
@@ -81,6 +94,7 @@ class SignupFragment: Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkPasswordConfirm()
+                checkLoginEnable()
             }
         })
 
@@ -89,6 +103,7 @@ class SignupFragment: Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkNickname()
+                checkLoginEnable()
             }
         })
 
@@ -140,13 +155,24 @@ class SignupFragment: Fragment() {
     }
 
     private fun checkNickname(): Boolean {
-        val nickname = binding.etSignupNickname.text.toString()
+        val nicknamePattern = "^[a-zA-Z0-9가-힣]{4,12}$"
+        val pattern = Pattern.matches(nicknamePattern, binding.etSignupNickname.text.toString())
 
-        if (nickname.length in 4..12) {
-            return true
+        return if (pattern) {
+            binding.tilSignupNickname.helperText = null
+            binding.tilSignupNickname.boxStrokeColor = resources.getColor(R.color.main_green)
+            true
         } else {
-            return false
+            binding.tilSignupNickname.helperText = "닉네임은 한글, 영문, 숫자 포함 4~12자 이내입니다."
+            binding.tilSignupNickname.boxStrokeColor = resources.getColor(R.color.main_red)
+            false
         }
+    }
+
+    private fun checkLoginEnable() {
+        viewModel.loginEnableState.value = (checkEmail() && checkPassword() && checkPasswordConfirm() && checkNickname()
+                && resources.getStringArray(R.array.signup_select_region).contains(binding.autoCompleteTextView.text.toString())
+                && binding.cbSignup.isChecked)
     }
 
     private fun setObserver() {
@@ -158,6 +184,18 @@ class SignupFragment: Fragment() {
                 Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+        viewModel.loginEnableState.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.btnSignupComplete.setBackgroundColor(resources.getColor(R.color.main_green))
+            } else {
+                binding.btnSignupComplete.setBackgroundColor(resources.getColor(R.color.sub_text))
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setRegionMenu()
     }
 
     private fun setRegionMenu() {

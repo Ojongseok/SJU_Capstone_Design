@@ -19,6 +19,7 @@ class LoginViewModel(
     val signupResult = MutableLiveData<Int>()
     val loginResult = MutableLiveData<Int>()
     val memberInfo = MutableLiveData<MemberInfoResponse>()
+    val loginEnableState = MutableLiveData<Boolean>()
 
     // 회원가입
     fun signup(signupPost: SignupPost) = CoroutineScope(Dispatchers.IO).launch {

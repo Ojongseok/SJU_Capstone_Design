@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_checkbox_oval_green.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_green_stroke.xml" value="0.109" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rad_8dp_left_bottom.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rad_8dp_right_bottom.xml" value="0.117" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/drawable_left_image_custom.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/ic_camera.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/ic_check.xml" value="0.117" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/ic_check_white.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/ic_down.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/ic_flower.xml" value="0.109" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/ic_flower_30dp.xml" value="0.109" />

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Unchecked -->
+    <item android:state_checked="false">
+        <layer-list>
+            <!-- 배경 -->
+            <item>
+                <shape>
+                    <solid android:color="@color/sub_text"/>
+                    <corners android:radius="30dp" />
+                    <padding
+                        android:bottom="2dp"
+                        android:left="2dp"
+                        android:right="2dp"
+                        android:top="2dp"/>
+                </shape>
+            </item>
+            <!-- 이미지 영역 -->
+            <item android:drawable="@drawable/ic_check_white" />
+        </layer-list>
+    </item>
+    <!-- Checked -->
+    <item android:state_checked="true">
+        <layer-list>
+            <!-- 배경 -->
+            <item>
+                <shape>
+                    <solid android:color="@color/main_green"/>
+                    <corners android:radius="30dp" />
+                    <padding
+                        android:bottom="2dp"
+                        android:left="2dp"
+                        android:right="2dp"
+                        android:top="2dp"/>
+                </shape>
+            </item>
+            <!-- 이미지 영역 -->
+            <item android:drawable="@drawable/ic_check_white" />
+        </layer-list>
+    </item>
+</selector>
