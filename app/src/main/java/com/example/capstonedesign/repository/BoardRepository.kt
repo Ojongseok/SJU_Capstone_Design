@@ -57,13 +57,13 @@ class BoardRepository {
     }
 
     // 댓글 작성
-    suspend fun writeComments(boardId: Long, content: String) : Response<BasicResponse> {
-        return service.writeComments("Bearer $ACCESS_TOKEN", boardId, WriteCommentRequest(content))
+    suspend fun writeComments(boardId: Long, content: String, parentId: Long?) : Response<BasicResponse> {
+        return service.writeComments("Bearer $ACCESS_TOKEN", boardId, WriteCommentRequest(content, parentId))
     }
 
     // 댓글 수정
     suspend fun modifyComment(boardId: Long, commentId: Long, content: String) : Response<BasicResponse> {
-        return service.modifyComment("Bearer $ACCESS_TOKEN", boardId, commentId, WriteCommentRequest(content))
+        return service.modifyComment("Bearer $ACCESS_TOKEN", boardId, commentId, WriteCommentRequest(content, null))
     }
 
     // 댓글 삭제

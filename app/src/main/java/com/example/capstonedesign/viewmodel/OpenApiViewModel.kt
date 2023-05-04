@@ -39,7 +39,7 @@ class OpenApiViewModel: ViewModel() {
     // [홈] - 월별 병해충 발생정보
     fun setDiseaseGeneratedMonthly() = CoroutineScope(Dispatchers.IO).launch {
         // 매월 주소 갱신 필요
-        val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=207&ncpms.cmm.token.html.TOKEN=88e3f6f39dce1d92f15c0902185ef6cd&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
+        val url = "https://ncpms.rda.go.kr/npms/NewIndcUserR.np?indcMon=&indcSeq=208&ncpms.cmm.token.html.TOKEN=f93d2865e21ab30733cbd765a1c6e102&pageIndex=1&sRegistDatetm=&eRegistDatetm=&sCrtpsnNm=&sIndcSj="
         val doc = Jsoup.connect(url).get()
 
 //        val data1 = doc.select("li.watch").select("ul.afterClear").select("li").toMutableList()

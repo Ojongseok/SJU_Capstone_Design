@@ -22,6 +22,7 @@ import com.example.capstonedesign.util.SeggeredGridSpaceItemDecoration
 import com.example.capstonedesign.viewmodel.BoardViewModel
 import com.example.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_login.*
+import java.lang.Exception
 
 class RequestBoardFragment: Fragment() {
     private var _binding: FragmentRequestBoardBinding? = null
@@ -36,9 +37,6 @@ class RequestBoardFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = BoardRepository()
-        val factory = BoardViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
 
         initDataSettings()
         setObserver()
@@ -52,14 +50,21 @@ class RequestBoardFragment: Fragment() {
     }
 
     private fun initDataSettings() {
-        viewModel.getAllPost("QUESTION")
+        val repository = BoardRepository()
+        val factory = BoardViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+
+        try {
+            viewModel.getAllPost("QUESTION")
+        } catch (e: Exception) {
+            binding.tvBoardError.visibility = View.VISIBLE
+        }
     }
 
     private fun setRvPost(requestBoardList: List<ContentList>) {
         requestBoardPostAdapter = BoardPostAdapter(requireContext(), requestBoardList)
 
         binding.rvRequestPost.apply {
-            setHasFixedSize(true)
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = requestBoardPostAdapter
             addItemDecoration(SeggeredGridSpaceItemDecoration(requireContext(),2))

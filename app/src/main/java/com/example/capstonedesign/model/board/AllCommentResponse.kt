@@ -12,5 +12,15 @@ data class AllCommentResult(
     val content: String,
     val memberId: Long,
     val nickname: String,
+    val createdDate: String,
+    val childComments: List<ReCommentList>
+)
+
+data class ReCommentList(
+    val commentId: Long,
+    val parentId: Long,
+    val content: String,
+    val memberId: Long,
+    val nickname: String,
     val createdDate: String
 )

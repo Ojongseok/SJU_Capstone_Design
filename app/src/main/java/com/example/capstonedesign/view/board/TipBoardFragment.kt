@@ -59,7 +59,6 @@ class TipBoardFragment: Fragment() {
         tipBoardPostAdapter = BoardPostAdapter(requireContext(), tipBoardList)
 
         binding.rvTipPost.apply {
-            setHasFixedSize(true)
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = tipBoardPostAdapter
             addItemDecoration(SeggeredGridSpaceItemDecoration(requireContext(),2))

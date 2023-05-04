@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.directory.SearchResultFragment" >
+    android:background="#F9F9F9"
+    tools:context=".view.main.directory.SearchResultFragment">
 
     <ProgressBar
         android:id="@+id/pb_search_result"
@@ -21,6 +22,7 @@
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

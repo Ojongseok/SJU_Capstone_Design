@@ -70,8 +70,8 @@ class BoardViewModel(private val repository: BoardRepository): ViewModel() {
     }
 
     // 댓글 작성
-    fun writeComments(boardId: Long, content: String) = viewModelScope.launch {
-        val response = repository.writeComments(boardId, content)
+    fun writeComments(boardId: Long, content: String, parentId: Long? = null) = viewModelScope.launch {
+        val response = repository.writeComments(boardId, content, parentId)
         writeCommentsResultCode.postValue(response.body()?.code)
 
         getAllComments(boardId)

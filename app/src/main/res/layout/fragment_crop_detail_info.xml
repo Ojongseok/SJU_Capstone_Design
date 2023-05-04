@@ -21,6 +21,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginStart="20dp"
+            android:foreground="@drawable/ripple_rad_24dp"
             android:src="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

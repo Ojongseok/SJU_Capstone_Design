@@ -1,15 +1,16 @@
 package com.example.capstonedesign.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.ItemCommentBinding
-import com.example.capstonedesign.databinding.ItemRequestPostBinding
+import com.example.capstonedesign.model.BasicResponse
 import com.example.capstonedesign.model.board.AllCommentResult
-import com.example.capstonedesign.model.board.ContentList
 import com.example.capstonedesign.util.Constants.MEMBER_ID
 import kotlinx.android.synthetic.main.item_comment.view.*
 
@@ -27,6 +28,17 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
                 binding.ltItemCommentMenu.visibility = View.VISIBLE
             } else {
                 binding.ltItemCommentMenu.visibility = View.GONE
+            }
+
+            binding.rvItemCommentRe.apply {
+                var reCommentsList = commentsList[position].childComments
+                val commentReAdapter = CommentReAdapter(context)
+
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+                adapter = commentReAdapter
+
+                commentReAdapter.setData(reCommentsList)
             }
         }
     }

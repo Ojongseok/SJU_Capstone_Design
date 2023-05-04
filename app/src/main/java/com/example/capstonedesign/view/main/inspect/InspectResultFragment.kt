@@ -99,10 +99,10 @@ class InspectResultFragment: Fragment() {
 
         // data set
         val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(2f, "정상"))
-        entries.add(PieEntry(97f, "딸기잿빛곰팡이병"))
-        entries.add(PieEntry(1f, "딸기흰가루병"))
-        entries.add(PieEntry(0f, "진단 불가"))
+        entries.add(PieEntry(3f, "정상"))
+        entries.add(PieEntry(84f, "딸기잿빛곰팡이병"))
+        entries.add(PieEntry(6f, "딸기흰가루병"))
+        entries.add(PieEntry(7f, "진단 불가"))
 
         // add a lot of colors
         val colorsItems = ArrayList<Int>()

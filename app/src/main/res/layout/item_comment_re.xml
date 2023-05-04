@@ -9,15 +9,27 @@
     android:paddingTop="4dp"
     android:paddingBottom="4dp">
 
+    <FrameLayout
+        android:id="@+id/frameLayout13"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_divide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/tv_item_comment_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="TextView"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
     <TextView
         android:id="@+id/tv_item_comment_contents"
@@ -50,7 +62,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/tv_item_comment_nickname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/tv_item_comment_nickname">
 
         <ImageView
             android:id="@+id/btn_item_comment_modify"
@@ -79,34 +91,14 @@
             app:tint="@color/sub_text" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/btn_item_comment_re_comment"
+    <ImageView
+        android:id="@+id/imageView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:text="답글 쓰기"
-        android:textColor="@color/text_1"
-        android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="@+id/lt_item_comment_menu"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_comment_date" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout13"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginTop="4dp"
-        android:background="@color/grey_divide"
-        app:layout_constraintTop_toBottomOf="@+id/rv_item_comment_re">
-
-    </FrameLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_item_comment_re"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:tint="@color/main_green"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_comment_date" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout13"
+        app:srcCompat="@drawable/ic_right_re" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

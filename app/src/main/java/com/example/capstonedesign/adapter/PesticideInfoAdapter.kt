@@ -16,8 +16,8 @@ class PesticideInfoAdapter(private val context: Context) : RecyclerView.Adapter<
 
     inner class CustomViewHolder(private val binding: ItemPesticideInfoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PesticideItem) {
-            binding.tvPesticideInfoNameKor.text = item.pestiBrandName
-            binding.tvPesticideInfoPesti.text = item.pestiKorName
+            binding.tvPesticideInfoNameKor.text = item.pestiKorName
+            binding.tvPesticideInfoPesti.text = item.pestiBrandName
             binding.tvPesticideInfoPestiUse.text = item.engName
             binding.tvPesticideInfoCompany.text = item.compName
             binding.tvPesticideInfoTag.text = item.useName

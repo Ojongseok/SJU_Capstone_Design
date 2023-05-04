@@ -43,9 +43,6 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = LoginRepository(requireContext())
-        val factory = LoginViewModelFactory(repository)
-        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         initDataSettings()
         setObserver()
@@ -120,6 +117,10 @@ class HomeFragment: Fragment() {
     }
 
     private fun initDataSettings() {
+        val repository = LoginRepository(requireContext())
+        val factory = LoginViewModelFactory(repository)
+        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 

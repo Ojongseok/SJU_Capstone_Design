@@ -82,7 +82,7 @@ class PostDetailFragment: Fragment() {
             if (commentsText.isNotEmpty()) {
                 viewModel.writeComments(args.boardId, commentsText)
             } else {
-                Toast.makeText(requireContext(), "댓글 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -104,10 +104,8 @@ class PostDetailFragment: Fragment() {
 
     private fun setCommentRecyclerView() {
         binding.rvPdComments.apply {
-            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
             adapter = commentAdapter
-            addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager(requireContext()).orientation))
         }
 
         commentAdapter.setItemClickListener(object : CommentAdapter.OnItemClickListener {
@@ -128,6 +126,16 @@ class PostDetailFragment: Fragment() {
                     binding.etPdWriteComments.requestFocus()
                     val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.showSoftInput(binding.etPdWriteComments, 0)
+
+                    binding.btnPdWriteCommentsComplete.setOnClickListener {
+                        val parentId =  viewModel.getAllCommentsResponse.value?.result!![position].commentId
+                        val reCommentText = binding.etPdWriteComments.text.toString()
+                        if (reCommentText.isNotEmpty()) {
+                            viewModel.writeComments(args.boardId, reCommentText, parentId)
+                        } else {
+                            Toast.makeText(requireContext(), "답글을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
 
             }
