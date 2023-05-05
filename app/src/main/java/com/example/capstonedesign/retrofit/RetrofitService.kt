@@ -1,10 +1,7 @@
 package com.example.capstonedesign.retrofit
 
 import com.example.capstonedesign.model.BasicResponse
-import com.example.capstonedesign.model.board.AllCommentResponse
-import com.example.capstonedesign.model.board.AllPostResponse
-import com.example.capstonedesign.model.board.PostDetailInfoResponse
-import com.example.capstonedesign.model.board.WriteCommentRequest
+import com.example.capstonedesign.model.board.*
 import com.example.capstonedesign.model.login.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -110,6 +107,14 @@ interface RetrofitService {
         @Header ("Authorization") BearerToken: String,
         @Path("board_id") boardId: Long,
         @Path("comment_id") commentId: Long
+    ): Response<BasicResponse>
+
+    // 게시글 해결완료
+    @PATCH("boards/{board_id}/solved")
+    suspend fun postSolve(
+        @Header ("Authorization") BearerToken: String,
+        @Path("board_id") boardId: Long,
+        @Body solveRequest: SolveRequest
     ): Response<BasicResponse>
 
 }

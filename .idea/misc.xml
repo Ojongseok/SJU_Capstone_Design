@@ -15,6 +15,8 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_4dp_green_stroke.xml" value="0.115" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_4dp_grey_stroke.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_8dp.xml" value="0.117" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_8dp_green.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_rec_8dp_orange.xml" value="0.117" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/background_white_rec_10dp_green_stroke.xml" value="0.1145" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/cursor_color.xml" value="0.1145" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/drawable/dimen.xml" value="0.1135" />
@@ -70,7 +72,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_pesticide_info.xml" value="0.22546296296296298" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_pesticide_search.xml" value="0.22546296296296298" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_plants_inspect.xml" value="0.264" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_post_detail.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_post_detail.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_post_write.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_request_board.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_search_crop_info.xml" value="0.4011406844106464" />
@@ -79,8 +81,8 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_signup.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_terms.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/fragment_tip_board.xml" value="0.2390625" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_comment.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_comment_re.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_comment.xml" value="0.536" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_comment_re.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_crop.xml" value="0.536" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_crop_detail_info.xml" value="0.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CapstoneDesign/app/src/main/res/layout/item_dropdown_menu.xml" value="0.4" />

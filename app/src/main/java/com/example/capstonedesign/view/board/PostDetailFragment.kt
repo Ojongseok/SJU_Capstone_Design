@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.example.capstonedesign.R
 import com.example.capstonedesign.adapter.CommentAdapter
 import com.example.capstonedesign.databinding.FragmentPostDetailBinding
+import com.example.capstonedesign.model.board.SolveRequest
 import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.util.Constants.MEMBER_ID
 import com.example.capstonedesign.viewmodel.BoardViewModel
@@ -164,6 +165,10 @@ class PostDetailFragment: Fragment() {
 
                 if (it.result.tag == "QUESTION") {
                     binding.tvPostDetailSolveTag.visibility = View.VISIBLE
+                    if (it.result.isSolved) {
+                        binding.tvPostDetailSolveTag.text = "해결완료"
+                        binding.tvPostDetailSolveTag.setBackgroundResource(R.drawable.background_rec_8dp_green)
+                    }
                 }
 
                 if (it.result.likeMemberIds.contains(MEMBER_ID)) {
@@ -296,7 +301,7 @@ class PostDetailFragment: Fragment() {
         dialog.show()
 
         dialog.dialog_post_solve_complete.setOnClickListener {
-            // 솔브 api준비되면 연결
+            viewModel.postSolve(args.boardId, SolveRequest(true))
             dialog.dismiss()
         }
         dialog.dialog_post_solve_cancel.setOnClickListener {
@@ -312,7 +317,7 @@ class PostDetailFragment: Fragment() {
         viewModel.getPostDetailInfo(args.boardId)
         viewModel.getAllComments(args.boardId)
 
-        commentAdapter = CommentAdapter(requireContext())
+        commentAdapter = CommentAdapter(requireContext(), viewModel, args.boardId)
 
     }
 

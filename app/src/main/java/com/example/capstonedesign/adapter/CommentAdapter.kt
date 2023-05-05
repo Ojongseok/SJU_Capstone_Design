@@ -1,21 +1,29 @@
 package com.example.capstonedesign.adapter
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonedesign.R
 import com.example.capstonedesign.databinding.ItemCommentBinding
-import com.example.capstonedesign.model.BasicResponse
 import com.example.capstonedesign.model.board.AllCommentResult
 import com.example.capstonedesign.util.Constants.MEMBER_ID
+import com.example.capstonedesign.viewmodel.BoardViewModel
+import kotlinx.android.synthetic.main.dialog_comment_delete.*
 import kotlinx.android.synthetic.main.item_comment.view.*
 
-class CommentAdapter(private val context: Context) : RecyclerView.Adapter<CommentAdapter.CustomViewHolder>() {
+class CommentAdapter(
+    private val context: Context,
+    private val viewModel: BoardViewModel,
+    private val boardId: Long) : RecyclerView.Adapter<CommentAdapter.CustomViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
+    private lateinit var commentReAdapter: CommentReAdapter
     private var commentsList = listOf<AllCommentResult>()
 
     inner class CustomViewHolder(private val binding: ItemCommentBinding): RecyclerView.ViewHolder(binding.root) {
@@ -30,9 +38,9 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
                 binding.ltItemCommentMenu.visibility = View.GONE
             }
 
+            commentReAdapter = CommentReAdapter(context)
             binding.rvItemCommentRe.apply {
-                var reCommentsList = commentsList[position].childComments
-                val commentReAdapter = CommentReAdapter(context)
+                val reCommentsList = commentsList[position].childComments
 
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
@@ -40,6 +48,11 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
 
                 commentReAdapter.setData(reCommentsList)
             }
+            commentReAdapter.setItemClickListener(object : CommentReAdapter.OnItemClickListener {
+                override fun onClickDelete(v: View, position: Int) {
+                    setCommentDeleteDialog(item.childComments[position].commentId)
+                }
+            })
         }
     }
 
@@ -78,4 +91,23 @@ class CommentAdapter(private val context: Context) : RecyclerView.Adapter<Commen
     }
 
     override fun getItemCount()= commentsList.size
+
+    private fun setCommentDeleteDialog(commentId: Long) {
+        val dialog = Dialog(context)
+
+        dialog.setContentView(R.layout.dialog_comment_delete)
+        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+
+        dialog.dialog_comment_delete_complete.setOnClickListener {
+            viewModel.deleteComment(boardId, commentId)
+            dialog.dismiss()
+        }
+
+        dialog.dialog_comment_delete_cancel.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
 }

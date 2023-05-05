@@ -1,9 +1,11 @@
 package com.example.capstonedesign.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.capstonedesign.R
@@ -22,8 +24,8 @@ class BoardPostAdapter(private val context: Context, private val list: List<Cont
 
             if (item.tag == "QUESTION") {
                 if (item.isSolved) {
-                    binding.tvItemPostSolveTag.text = "해결"
-                    binding.tvItemPostSolveTag.setBackgroundColor(context.resources.getColor(R.color.main_green))
+                    binding.tvItemPostSolveTag.text = "해결완료"
+                    binding.tvItemPostSolveTag.setBackgroundResource(R.drawable.background_rec_8dp_green)
                 } else {
                     binding.tvItemPostSolveTag.text = "미해결"
                 }

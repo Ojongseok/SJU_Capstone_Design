@@ -65,24 +65,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_item_comment_nickname">
 
         <ImageView
-            android:id="@+id/btn_item_comment_modify"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_pencil"
-            app:tint="#DD53C5F8" />
-
-        <FrameLayout
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@color/text_1"></FrameLayout>
-
-        <ImageView
-            android:id="@+id/btn_item_comment_delete"
+            android:id="@+id/btn_item_comment_re_delete"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_weight="1"
@@ -96,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:tint="@color/main_green"
+        app:tint="@color/main_green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout13"
         app:srcCompat="@drawable/ic_right_re" />

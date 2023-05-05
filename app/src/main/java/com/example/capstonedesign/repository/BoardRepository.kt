@@ -1,10 +1,7 @@
 package com.example.capstonedesign.repository
 
 import com.example.capstonedesign.model.BasicResponse
-import com.example.capstonedesign.model.board.AllCommentResponse
-import com.example.capstonedesign.model.board.AllPostResponse
-import com.example.capstonedesign.model.board.PostDetailInfoResponse
-import com.example.capstonedesign.model.board.WriteCommentRequest
+import com.example.capstonedesign.model.board.*
 import com.example.capstonedesign.retrofit.RetrofitInstance.service
 import com.example.capstonedesign.util.Constants
 import okhttp3.MultipartBody
@@ -69,5 +66,10 @@ class BoardRepository {
     // 댓글 삭제
     suspend fun deleteComment(boardId: Long, commentId: Long) : Response<BasicResponse> {
         return service.deleteComment("Bearer $ACCESS_TOKEN", boardId, commentId)
+    }
+
+    // 게시글 해결완료
+    suspend fun postSolve(boardId: Long, solveRequest: SolveRequest) : Response<BasicResponse> {
+        return service.postSolve("Bearer $ACCESS_TOKEN", boardId, solveRequest)
     }
 }

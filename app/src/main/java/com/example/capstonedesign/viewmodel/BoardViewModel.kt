@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.capstonedesign.model.board.AllCommentResponse
 import com.example.capstonedesign.model.board.AllPostResponse
 import com.example.capstonedesign.model.board.PostDetailInfoResponse
+import com.example.capstonedesign.model.board.SolveRequest
 import com.example.capstonedesign.model.login.MemberInfoResponse
 import com.example.capstonedesign.repository.BoardRepository
 import com.example.capstonedesign.util.Constants.MEMBER_ID
@@ -89,5 +90,12 @@ class BoardViewModel(private val repository: BoardRepository): ViewModel() {
         repository.deleteComment(boardId, commentId)
 
         getAllComments(boardId)
+    }
+
+    // 게시글 해결완료
+    fun postSolve(boardId: Long, solveRequest: SolveRequest) = viewModelScope.launch {
+        repository.postSolve(boardId, solveRequest)
+
+        getPostDetailInfo(boardId)
     }
 }

@@ -15,6 +15,7 @@ import com.example.capstonedesign.model.board.ContentList
 import com.example.capstonedesign.model.board.ReCommentList
 import com.example.capstonedesign.util.Constants.MEMBER_ID
 import kotlinx.android.synthetic.main.item_comment.view.*
+import kotlinx.android.synthetic.main.item_comment_re.view.*
 
 class CommentReAdapter(private val context: Context) : RecyclerView.Adapter<CommentReAdapter.CustomViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
@@ -26,12 +27,21 @@ class CommentReAdapter(private val context: Context) : RecyclerView.Adapter<Comm
             binding.tvItemCommentContents.text = item.content
             binding.tvItemCommentDate.text = item.createdDate.removeRange(16,19)
 
+            if (item.memberId == MEMBER_ID) {
+                binding.ltItemCommentMenu.visibility = View.VISIBLE
+            } else {
+                binding.ltItemCommentMenu.visibility = View.GONE
+            }
 
         }
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(reCommentsList[position])
+
+        holder.itemView.btn_item_comment_re_delete.setOnClickListener {
+            itemClickListener.onClickDelete(it, position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -41,8 +51,6 @@ class CommentReAdapter(private val context: Context) : RecyclerView.Adapter<Comm
 
     interface OnItemClickListener {
         fun onClickDelete(v: View, position: Int)
-        fun onClickModify(v: View, position: Int)
-        fun onClickCommentRe(v: View, position: Int)
     }
 
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
