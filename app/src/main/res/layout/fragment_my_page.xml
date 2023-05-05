@@ -6,10 +6,10 @@
     <data>
         <variable
             name="fragment"
-            type="com.example.capstonedesign.view.board.MyPageFragment" />
+            type="sju.sejong.capstonedesign.view.board.MyPageFragment" />
         <variable
             name="model"
-            type="com.example.capstonedesign.model.login.MemberInfoResponse" />
+            type="sju.sejong.capstonedesign.model.login.MemberInfoResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

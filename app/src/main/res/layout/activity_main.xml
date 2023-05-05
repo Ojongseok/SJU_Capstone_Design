@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.example.capstonedesign.databinding.ActivityMainBindingImpl"/>
+        <import type="sju.sejong.capstonedesign.databinding.ActivityMainBindingImpl"/>
         <variable
             name="navState"
             type="Boolean" />
@@ -13,7 +13,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context="sju.sejong.capstonedesign.MainActivity">
 
         <FrameLayout
             android:id="@+id/frame_layout"

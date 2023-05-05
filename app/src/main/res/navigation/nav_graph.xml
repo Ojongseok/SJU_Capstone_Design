@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_plants_inspect"
-        android:name="com.example.capstonedesign.view.main.inspect.PlantsInspectFragment"
+        android:name="sju.sejong.capstonedesign.view.main.inspect.PlantsInspectFragment"
         android:label="fragment_plants_inspect"
         tools:layout="@layout/fragment_plants_inspect" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <dialog
         android:id="@+id/dialog_bottom_sheet"
-        android:name="com.example.capstonedesign.BottomSheetDialog"
+        android:name="sju.sejong.capstonedesign.BottomSheetDialog"
         android:label="dialog_bottom_sheet"
         tools:layout="@layout/dialog_bottom_sheet">
         <action
@@ -57,7 +57,7 @@
     </dialog>
     <fragment
         android:id="@+id/fragment_board"
-        android:name="com.example.capstonedesign.view.board.BoardFragment"
+        android:name="sju.sejong.capstonedesign.view.board.BoardFragment"
         android:label="fragment_board"
         tools:layout="@layout/fragment_board">
         <action
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_home"
-        android:name="com.example.capstonedesign.view.home.HomeFragment"
+        android:name="sju.sejong.capstonedesign.view.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -103,7 +103,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_inspect_result"
-        android:name="com.example.capstonedesign.view.main.inspect.InspectResultFragment"
+        android:name="sju.sejong.capstonedesign.view.main.inspect.InspectResultFragment"
         android:label="fragment_inspect_result"
         tools:layout="@layout/fragment_inspect_result">
         <argument
@@ -117,12 +117,12 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_post_write"
-        android:name="com.example.capstonedesign.view.board.PostWriteFragment"
+        android:name="sju.sejong.capstonedesign.view.board.PostWriteFragment"
         android:label="fragment_post_write"
         tools:layout="@layout/fragment_post_write" />
     <fragment
         android:id="@+id/fragment_post_detail"
-        android:name="com.example.capstonedesign.view.board.PostDetailFragment"
+        android:name="sju.sejong.capstonedesign.view.board.PostDetailFragment"
         android:label="fragment_post_detail"
         tools:layout="@layout/fragment_post_detail" >
         <argument
@@ -131,7 +131,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_mypage"
-        android:name="com.example.capstonedesign.view.board.MyPageFragment"
+        android:name="sju.sejong.capstonedesign.view.board.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" >
         <action
@@ -144,7 +144,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_search_crop_info"
-        android:name="com.example.capstonedesign.view.main.directory.SearchCropInfoFragment"
+        android:name="sju.sejong.capstonedesign.view.main.directory.SearchCropInfoFragment"
         android:label="fragment_search_disease"
         tools:layout="@layout/fragment_search_crop_info" >
         <action
@@ -164,7 +164,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_crop_detail_info"
-        android:name="com.example.capstonedesign.view.main.directory.CropDetailInfoFragment"
+        android:name="sju.sejong.capstonedesign.view.main.directory.CropDetailInfoFragment"
         android:label="fragment_crop_detail_info"
         tools:layout="@layout/fragment_crop_detail_info">
         <argument
@@ -180,7 +180,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_disease_detail"
-        android:name="com.example.capstonedesign.view.main.directory.DiseaseDetailFragment"
+        android:name="sju.sejong.capstonedesign.view.main.directory.DiseaseDetailFragment"
         android:label="fragment_disease_detail"
         tools:layout="@layout/fragment_disease_detail" >
         <argument
@@ -196,7 +196,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_search_result"
-        android:name="com.example.capstonedesign.view.main.directory.SearchResultFragment"
+        android:name="sju.sejong.capstonedesign.view.main.directory.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" >
         <argument
@@ -215,7 +215,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
-        android:name="com.example.capstonedesign.view.login.LoginFragment"
+        android:name="sju.sejong.capstonedesign.view.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -228,7 +228,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_signup"
-        android:name="com.example.capstonedesign.view.login.SignupFragment"
+        android:name="sju.sejong.capstonedesign.view.login.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" >
         <action
@@ -241,7 +241,7 @@
     </fragment>
     <dialog
         android:id="@+id/fragment_pesticide_dialog"
-        android:name="com.example.capstonedesign.view.main.pesticide.PesticideDialogFragment"
+        android:name="sju.sejong.capstonedesign.view.main.pesticide.PesticideDialogFragment"
         android:label="fragment_pesticide_dialog"
         tools:layout="@layout/fragment_pesticide_dialog" >
         <argument
@@ -253,7 +253,7 @@
     </dialog>
     <fragment
         android:id="@+id/fragment_pesticide_info"
-        android:name="com.example.capstonedesign.view.main.pesticide.PesticideInfoFragment"
+        android:name="sju.sejong.capstonedesign.view.main.pesticide.PesticideInfoFragment"
         android:label="fragment_pesticide_info"
         tools:layout="@layout/fragment_pesticide_info" >
         <argument
@@ -268,12 +268,12 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_pesticide_search"
-        android:name="com.example.capstonedesign.view.main.pesticide.PesticideSearchFragment"
+        android:name="sju.sejong.capstonedesign.view.main.pesticide.PesticideSearchFragment"
         android:label="fragment_pesticide_search"
         tools:layout="@layout/fragment_pesticide_search" />
     <fragment
         android:id="@+id/fragment_terms"
-        android:name="com.example.capstonedesign.view.board.TermsFragment"
+        android:name="sju.sejong.capstonedesign.view.board.TermsFragment"
         android:label="fragment_terms"
         tools:layout="@layout/fragment_terms" />
 </navigation>

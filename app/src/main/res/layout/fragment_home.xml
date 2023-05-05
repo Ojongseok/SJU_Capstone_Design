@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.capstonedesign.viewmodel.OpenApiViewModel" />
+            type="sju.sejong.capstonedesign.viewmodel.OpenApiViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

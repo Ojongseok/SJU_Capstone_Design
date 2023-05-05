@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.capstonedesign">
+    package="sju.sejong.capstonedesign">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -22,17 +22,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.main.pesticide.MapActivity"
+            android:name="sju.sejong.capstonedesign.view.main.pesticide.MapActivity"
             android:exported="false"
             android:theme="@style/Theme.CapstoneDesign.NoActionBar" />
         <activity
-            android:name=".view.home.HomeWebViewActivity"
+            android:name="sju.sejong.capstonedesign.view.home.HomeWebViewActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.directory.ImageActivity"
+            android:name="sju.sejong.capstonedesign.view.main.directory.ImageActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="sju.sejong.capstonedesign.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
