@@ -19,6 +19,15 @@
 
 ## ✅ Main Function
 ### 1️⃣ 인공지능 모델을 활용한 작물 병해 검출 기능
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/98886487/236542383-c0e765f9-810c-423d-94a3-6503b6addb6c.gif)
+
+### 2️⃣ 자유로운 소통을 위한 농업인 커뮤니티
+![Untitled](https://user-images.githubusercontent.com/98886487/236543336-46218851-7612-458d-80aa-df07a43d18a5.png)
+
+### 3️⃣ OpenAPI를 활용한 병해 상세정보 및 농약 정보 제공
+![ezgif com-video-to-gif (4)](https://user-images.githubusercontent.com/98886487/236543272-42b211c7-3b7f-4445-bcca-15855f29dd1a.gif)
+
+## 🤔 Learned
 
 
 ## 🔗 Playstore   
