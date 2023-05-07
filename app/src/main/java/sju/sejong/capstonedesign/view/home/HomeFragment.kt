@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
+import sju.sejong.capstonedesign.adapter.PopularPostAdapter
 import sju.sejong.capstonedesign.adapter.RegionGeneratedAdapter
 import sju.sejong.capstonedesign.databinding.FragmentHomeBinding
 import sju.sejong.capstonedesign.repository.LoginRepository
@@ -33,6 +34,7 @@ class HomeFragment: Fragment() {
     private lateinit var diseaseGeneratedMonthlyAdapter2: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedMonthlyAdapter3: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedRegionAdapter: RegionGeneratedAdapter
+    private lateinit var popularPostAdapter: PopularPostAdapter
     private val viewModel: OpenApiViewModel by viewModels()
     private lateinit var loginViewModel: LoginViewModel
 
@@ -47,9 +49,20 @@ class HomeFragment: Fragment() {
         initDataSettings()
         setObserver()
         setRv()
+        setPopularPostRv()
 
         binding.btnHomeWebview.setOnClickListener {
             startActivity(Intent(requireContext(), HomeWebViewActivity::class.java))
+        }
+    }
+
+    private fun setPopularPostRv() {
+
+        popularPostAdapter = PopularPostAdapter(requireContext())
+        binding.rvHomePopularPost.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = popularPostAdapter
         }
     }
 

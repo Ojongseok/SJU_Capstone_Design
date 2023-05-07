@@ -47,7 +47,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.capstonedesign"
+            android:authorities="sju.sejong.capstonedesign"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
