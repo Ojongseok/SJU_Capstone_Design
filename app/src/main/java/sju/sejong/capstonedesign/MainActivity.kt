@@ -7,10 +7,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 import sju.sejong.capstonedesign.databinding.ActivityMainBinding
 import sju.sejong.capstonedesign.view.board.BoardFragmentDirections
 import sju.sejong.capstonedesign.view.home.HomeFragmentDirections
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)

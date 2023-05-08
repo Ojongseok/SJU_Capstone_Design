@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import sju.sejong.capstonedesign.R
@@ -30,6 +31,7 @@ import sju.sejong.capstonedesign.viewmodel.BoardViewModel
 import sju.sejong.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -42,7 +44,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-
+@AndroidEntryPoint
 class PostWriteFragment: Fragment() {
     private var _binding: FragmentPostWriteBinding? = null
     private val binding get() = _binding!!
@@ -50,7 +52,7 @@ class PostWriteFragment: Fragment() {
     private var imageFilePath: String? = null
     private var selectBoardCategory = ""
     private var selectedImage: Bitmap? = null
-    private lateinit var viewModel: BoardViewModel
+    private val viewModel by viewModels<BoardViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPostWriteBinding.inflate(inflater, container, false)
@@ -59,9 +61,9 @@ class PostWriteFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = BoardRepository()
-        val factory = BoardViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+//        val repository = BoardRepository()
+//        val factory = BoardViewModelFactory(repository)
+//        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
 
         setObserver()
 

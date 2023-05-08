@@ -13,11 +13,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.adapter.CommentAdapter
 import sju.sejong.capstonedesign.databinding.FragmentPostDetailBinding
@@ -33,11 +35,11 @@ import kotlinx.android.synthetic.main.dialog_post_update.*
 import kotlinx.android.synthetic.main.dialog_request_post_solve.*
 import kotlinx.android.synthetic.main.item_comment.*
 
-
+@AndroidEntryPoint
 class PostDetailFragment: Fragment() {
     private var _binding: FragmentPostDetailBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: BoardViewModel
+    private val viewModel by viewModels<BoardViewModel>()
     private val args by navArgs<PostDetailFragmentArgs>()
     private lateinit var commentAdapter: CommentAdapter
 
@@ -307,9 +309,9 @@ class PostDetailFragment: Fragment() {
     }
 
     private fun initDataSettings() {
-        val repository = BoardRepository()
-        val factory = BoardViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+//        val repository = BoardRepository()
+//        val factory = BoardViewModelFactory(repository)
+//        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
 
         viewModel.getPostDetailInfo(args.boardId)
         viewModel.getAllComments(args.boardId)

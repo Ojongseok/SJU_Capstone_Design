@@ -3,6 +3,7 @@ package sju.sejong.capstonedesign.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import sju.sejong.capstonedesign.model.board.AllCommentResponse
 import sju.sejong.capstonedesign.model.board.AllPostResponse
 import sju.sejong.capstonedesign.model.board.PostDetailInfoResponse
@@ -12,8 +13,10 @@ import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import javax.inject.Inject
 
-class BoardViewModel(private val repository: BoardRepository): ViewModel() {
+@HiltViewModel
+class BoardViewModel @Inject constructor(private val repository: BoardRepository): ViewModel() {
     val PostListResponse = MutableLiveData<AllPostResponse>()    // 게시글 전체 조회
     val postDetailResponse = MutableLiveData<PostDetailInfoResponse>()    // 게시글 상세 조회
     val writePostResultCode = MutableLiveData<Int>()    // 게시글 작성 결과

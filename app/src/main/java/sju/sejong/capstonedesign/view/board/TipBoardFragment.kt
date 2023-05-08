@@ -9,9 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentTipBoardBinding
 import sju.sejong.capstonedesign.model.board.ContentList
@@ -23,11 +26,12 @@ import sju.sejong.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_login.*
 import sju.sejong.capstonedesign.adapter.BoardPostAdapter
 
+@AndroidEntryPoint
 class TipBoardFragment: Fragment() {
     private var _binding: FragmentTipBoardBinding? = null
     private val binding get() = _binding!!
     private lateinit var tipBoardPostAdapter: BoardPostAdapter
-    private lateinit var viewModel: BoardViewModel
+    private val viewModel by viewModels<BoardViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentTipBoardBinding.inflate(inflater, container, false)
@@ -36,9 +40,9 @@ class TipBoardFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = BoardRepository()
-        val factory = BoardViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+//        val repository = BoardRepository()
+//        val factory = BoardViewModelFactory(repository)
+//        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
 
         initDataSettings()
         setObserver()

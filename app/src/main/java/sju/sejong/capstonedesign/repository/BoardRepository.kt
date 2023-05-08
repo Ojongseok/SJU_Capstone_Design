@@ -7,8 +7,9 @@ import sju.sejong.capstonedesign.util.Constants
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import javax.inject.Inject
 
-class BoardRepository {
+class BoardRepository @Inject constructor() {
     val ACCESS_TOKEN = Constants.ACCESS_TOKEN
 
     // 게시글 작성

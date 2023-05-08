@@ -28,6 +28,9 @@ interface RetrofitService {
         @Path("member_id") memberId: Long
     ): Response<MemberInfoResponse>
 
+    // 병해 진단
+
+
     // 게시글 작성
     @Multipart
     @POST("boards")

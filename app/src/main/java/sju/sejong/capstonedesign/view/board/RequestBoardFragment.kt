@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentRequestBoardBinding
 import sju.sejong.capstonedesign.model.board.ContentList
@@ -24,11 +26,12 @@ import kotlinx.android.synthetic.main.dialog_login.*
 import sju.sejong.capstonedesign.adapter.BoardPostAdapter
 import java.lang.Exception
 
+@AndroidEntryPoint
 class RequestBoardFragment: Fragment() {
     private var _binding: FragmentRequestBoardBinding? = null
     private val binding get() = _binding!!
     private lateinit var requestBoardPostAdapter: BoardPostAdapter
-    private lateinit var viewModel: BoardViewModel
+    private val  viewModel by viewModels<BoardViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentRequestBoardBinding.inflate(inflater, container, false)
@@ -50,9 +53,9 @@ class RequestBoardFragment: Fragment() {
     }
 
     private fun initDataSettings() {
-        val repository = BoardRepository()
-        val factory = BoardViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
+//        val repository = BoardRepository()
+//        val factory = BoardViewModelFactory(repository)
+//        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
 
         try {
             viewModel.getAllPost("QUESTION")
