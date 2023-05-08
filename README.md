@@ -16,7 +16,7 @@
   * 병해 진단뿐만 아니라 병해와 직접적으로 **연관된 병해 상세 정보를 제공**하고, 효율적인 방제를 위해 병해에 따른 **농약 사용가이드 제공**   
    
 ## 🛠️ Tech Stack
-```Kotlin```, ```MVVM```, ```AAC```, ```SAA```, ```Repository```, ```ViewModel```, ```Coroutine```, ```JWT Token```, ```Retrofit2```, ```Multipart```, ```OkHttp```, ```Gson```, ```Glide```, ```Image-Cropper```, ```Navigation```, ```LiveData```, ```DataBinding```, ```DataStore```, ```Jsoup```, ```Tikxml```
+```Kotlin```, ```MVVM```, ```AAC```, ```SAA```, ```Repository```, ```ViewModel```, ```Coroutine```, ```JWT Token```, ```Retrofit2```, ```Multipart```, ```OkHttp```, ```Gson```, ```Glide```, ```Image-Cropper```, ```Navigation```, ```LiveData```, ```DataBinding```, ```DataStore```, ```Jsoup```, ```Tikxml```, ```Hilt```
 
 ## ✅ Main Function
 ### 1️⃣ 인공지능 모델을 활용한 작물 병해 검출 기능
