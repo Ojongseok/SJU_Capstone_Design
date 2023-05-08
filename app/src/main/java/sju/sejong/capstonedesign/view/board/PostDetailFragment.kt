@@ -14,7 +14,6 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,16 +23,13 @@ import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.adapter.CommentAdapter
 import sju.sejong.capstonedesign.databinding.FragmentPostDetailBinding
 import sju.sejong.capstonedesign.model.board.SolveRequest
-import sju.sejong.capstonedesign.repository.BoardRepository
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.viewmodel.BoardViewModel
-import sju.sejong.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_comment_delete.*
 import kotlinx.android.synthetic.main.dialog_comment_modify.*
 import kotlinx.android.synthetic.main.dialog_post_delete.*
 import kotlinx.android.synthetic.main.dialog_post_update.*
 import kotlinx.android.synthetic.main.dialog_request_post_solve.*
-import kotlinx.android.synthetic.main.item_comment.*
 
 @AndroidEntryPoint
 class PostDetailFragment: Fragment() {
@@ -309,10 +305,6 @@ class PostDetailFragment: Fragment() {
     }
 
     private fun initDataSettings() {
-//        val repository = BoardRepository()
-//        val factory = BoardViewModelFactory(repository)
-//        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
-
         viewModel.getPostDetailInfo(args.boardId)
         viewModel.getAllComments(args.boardId)
 

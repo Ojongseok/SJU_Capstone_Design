@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import sju.sejong.capstonedesign.model.login.*
 import sju.sejong.capstonedesign.retrofit.RetrofitInstance.service
 import sju.sejong.capstonedesign.util.Constants
@@ -16,10 +17,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.Response
+import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore(name = "dataStore")
 
-class LoginRepository(private val context: Context) {
+class LoginRepository @Inject constructor(@ApplicationContext private val context: Context) {
     val ACCESS_TOKEN = Constants.ACCESS_TOKEN
 
     // 회원가입

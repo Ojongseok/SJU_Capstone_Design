@@ -3,6 +3,7 @@ package sju.sejong.capstonedesign.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import sju.sejong.capstonedesign.model.login.LoginResponse
 import sju.sejong.capstonedesign.model.login.MemberInfoResponse
 import sju.sejong.capstonedesign.model.login.SignupPost
@@ -12,10 +13,10 @@ import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class LoginViewModel(
-    private val repository: LoginRepository
-): ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val repository: LoginRepository): ViewModel() {
     val signupResult = MutableLiveData<Int>()
     val loginResult = MutableLiveData<LoginResponse>()
     val memberInfo = MutableLiveData<MemberInfoResponse>()

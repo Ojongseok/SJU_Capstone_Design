@@ -10,22 +10,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentMyPageBinding
-import sju.sejong.capstonedesign.repository.LoginRepository
 import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
-import sju.sejong.capstonedesign.viewmodel.factory.LoginViewModelFactory
 import kotlinx.android.synthetic.main.dialog_logout.*
 
+@AndroidEntryPoint
 class MyPageFragment: Fragment() {
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel by viewModels<LoginViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
@@ -70,10 +70,6 @@ class MyPageFragment: Fragment() {
     }
 
     private fun initDataSettings() {
-        val repository = LoginRepository(requireContext())
-        val factory = LoginViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
-
         binding.fragment = this@MyPageFragment
 
         viewModel.getMemberInfo(MEMBER_ID)

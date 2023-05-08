@@ -9,20 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentSignupBinding
 import sju.sejong.capstonedesign.model.login.SignupPost
-import sju.sejong.capstonedesign.repository.LoginRepository
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
-import sju.sejong.capstonedesign.viewmodel.factory.LoginViewModelFactory
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class SignupFragment: Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel by viewModels<LoginViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
@@ -31,9 +31,6 @@ class SignupFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = LoginRepository(requireContext())
-        val factory = LoginViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()

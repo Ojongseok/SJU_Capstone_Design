@@ -10,24 +10,23 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
 import sju.sejong.capstonedesign.adapter.PopularPostAdapter
 import sju.sejong.capstonedesign.adapter.RegionGeneratedAdapter
 import sju.sejong.capstonedesign.databinding.FragmentHomeBinding
-import sju.sejong.capstonedesign.repository.LoginRepository
 import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.util.GridSpaceItemDecoration
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
-import sju.sejong.capstonedesign.viewmodel.factory.LoginViewModelFactory
 import sju.sejong.capstonedesign.viewmodel.OpenApiViewModel
 
+@AndroidEntryPoint
 class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var diseaseGeneratedMonthlyAdapter1: DiseaseGeneratedMonthlyAdapter
@@ -36,7 +35,7 @@ class HomeFragment: Fragment() {
     private lateinit var diseaseGeneratedRegionAdapter: RegionGeneratedAdapter
     private lateinit var popularPostAdapter: PopularPostAdapter
     private val viewModel: OpenApiViewModel by viewModels()
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel by viewModels<LoginViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
@@ -130,10 +129,6 @@ class HomeFragment: Fragment() {
     }
 
     private fun initDataSettings() {
-        val repository = LoginRepository(requireContext())
-        val factory = LoginViewModelFactory(repository)
-        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
-
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 

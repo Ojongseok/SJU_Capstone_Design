@@ -22,13 +22,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentPostWriteBinding
-import sju.sejong.capstonedesign.repository.BoardRepository
 import sju.sejong.capstonedesign.viewmodel.BoardViewModel
-import sju.sejong.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,9 +58,6 @@ class PostWriteFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val repository = BoardRepository()
-//        val factory = BoardViewModelFactory(repository)
-//        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
 
         setObserver()
 

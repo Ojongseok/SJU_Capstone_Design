@@ -10,18 +10,15 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentRequestBoardBinding
 import sju.sejong.capstonedesign.model.board.ContentList
-import sju.sejong.capstonedesign.repository.BoardRepository
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.SeggeredGridSpaceItemDecoration
 import sju.sejong.capstonedesign.viewmodel.BoardViewModel
-import sju.sejong.capstonedesign.viewmodel.factory.BoardViewModelFactory
 import kotlinx.android.synthetic.main.dialog_login.*
 import sju.sejong.capstonedesign.adapter.BoardPostAdapter
 import java.lang.Exception
@@ -53,10 +50,6 @@ class RequestBoardFragment: Fragment() {
     }
 
     private fun initDataSettings() {
-//        val repository = BoardRepository()
-//        val factory = BoardViewModelFactory(repository)
-//        viewModel = ViewModelProvider(this, factory)[BoardViewModel::class.java]
-
         try {
             viewModel.getAllPost("QUESTION")
         } catch (e: Exception) {
