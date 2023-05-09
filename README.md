@@ -32,7 +32,8 @@
 
 
 ## 🔗 Playstore   
-진행중
+https://play.google.com/store/apps/details?id=sju.sejong.capstonedesign
+
 
 ## 주차별 진행상황
 |주차|내용|
