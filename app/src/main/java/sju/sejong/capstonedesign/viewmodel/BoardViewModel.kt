@@ -4,15 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import sju.sejong.capstonedesign.model.board.AllCommentResponse
-import sju.sejong.capstonedesign.model.board.AllPostResponse
-import sju.sejong.capstonedesign.model.board.PostDetailInfoResponse
-import sju.sejong.capstonedesign.model.board.SolveRequest
 import sju.sejong.capstonedesign.repository.BoardRepository
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import sju.sejong.capstonedesign.model.board.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +21,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     val postDeleteResultCode = MutableLiveData<Int>()    // 게시글 삭제 결과
     val getAllCommentsResponse = MutableLiveData<AllCommentResponse>()    // 댓글 전체 조회
     val writeCommentsResultCode = MutableLiveData<Int>()    // 댓글 작성 결과
+    val popularPostResponse = MutableLiveData<PopularPostResponse>()
 
     // 게시글 작성
     fun writePost(jsonBody: RequestBody, file: MultipartBody.Part?) = viewModelScope.launch {
@@ -98,5 +96,10 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
         repository.postSolve(boardId, solveRequest)
 
         getPostDetailInfo(boardId)
+    }
+
+    // 인기 게시물 조회
+    fun getPopularPost() = viewModelScope.launch {
+        popularPostResponse.postValue(repository.getPopularPost().body())
     }
 }

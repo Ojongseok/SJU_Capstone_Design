@@ -23,6 +23,7 @@ import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.util.GridSpaceItemDecoration
+import sju.sejong.capstonedesign.viewmodel.BoardViewModel
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
 import sju.sejong.capstonedesign.viewmodel.OpenApiViewModel
 
@@ -34,8 +35,9 @@ class HomeFragment: Fragment() {
     private lateinit var diseaseGeneratedMonthlyAdapter3: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedRegionAdapter: RegionGeneratedAdapter
     private lateinit var popularPostAdapter: PopularPostAdapter
-    private val viewModel: OpenApiViewModel by viewModels()
+    private val viewModel  by viewModels<OpenApiViewModel>()
     private val loginViewModel by viewModels<LoginViewModel>()
+    private val boardViewModel by viewModels<BoardViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
@@ -48,20 +50,9 @@ class HomeFragment: Fragment() {
         initDataSettings()
         setObserver()
         setRv()
-        setPopularPostRv()
 
         binding.btnHomeWebview.setOnClickListener {
             startActivity(Intent(requireContext(), HomeWebViewActivity::class.java))
-        }
-    }
-
-    private fun setPopularPostRv() {
-
-        popularPostAdapter = PopularPostAdapter(requireContext())
-        binding.rvHomePopularPost.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = popularPostAdapter
         }
     }
 
@@ -101,6 +92,12 @@ class HomeFragment: Fragment() {
                 Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT).show()
             }
         })
+
+        binding.rvHomePopularPost.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = popularPostAdapter
+        }
     }
 
     private fun setObserver() {
@@ -126,12 +123,16 @@ class HomeFragment: Fragment() {
                 binding.pbHomeAlertMonth.visibility = View.GONE
             }
         }
+        boardViewModel.popularPostResponse.observe(viewLifecycleOwner) {
+            popularPostAdapter.setData(it.result)
+        }
     }
 
     private fun initDataSettings() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
+        boardViewModel.getPopularPost()
         viewModel.setDiseaseGeneratedMonthly()
         if (loginViewModel.getAccessToken().isEmpty()) {
             LOGIN_STATUS = false
@@ -147,5 +148,6 @@ class HomeFragment: Fragment() {
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)
         diseaseGeneratedRegionAdapter = RegionGeneratedAdapter(requireContext())
+        popularPostAdapter = PopularPostAdapter(requireContext())
     }
 }

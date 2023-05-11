@@ -24,7 +24,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/tv_item_popular_post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -36,10 +36,10 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/cardView7"
-        app:layout_constraintTop_toTopOf="@+id/cardView7" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_popular_post_nickname" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/tv_item_popular_post_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -51,10 +51,10 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_popular_post_title" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/tv_item_popular_post_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
@@ -64,16 +64,16 @@
         android:textColor="@color/text_1"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView7"
-        app:layout_constraintStart_toStartOf="@+id/textView30" />
+        app:layout_constraintStart_toStartOf="@+id/tv_item_popular_post_content" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/textView31"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_popular_post_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView31">
+        app:layout_constraintTop_toTopOf="@+id/tv_item_popular_post_date">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -123,5 +123,16 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView7">
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_item_popular_post_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="..."
+        android:textColor="@color/main_green"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_item_popular_post_title"
+        app:layout_constraintTop_toTopOf="@+id/cardView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

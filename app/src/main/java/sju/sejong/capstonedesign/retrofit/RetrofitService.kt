@@ -7,6 +7,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
+import sju.sejong.capstonedesign.model.InspectResponse
 
 interface RetrofitService {
     // 회원가입
@@ -29,7 +30,12 @@ interface RetrofitService {
     ): Response<MemberInfoResponse>
 
     // 병해 진단
-
+    @Multipart
+    @POST("diagnosis")
+    suspend fun startDiagnosis(
+        @Part ("request") writePostRequest: RequestBody,
+        @Part file: MultipartBody.Part?
+    ) : Response<InspectResponse>
 
     // 게시글 작성
     @Multipart
@@ -119,5 +125,9 @@ interface RetrofitService {
         @Path("board_id") boardId: Long,
         @Body solveRequest: SolveRequest
     ): Response<BasicResponse>
+
+    // 인기 게시물 조회
+    @GET("boards/best")
+    suspend fun getPopularPost() : Response<PopularPostResponse>
 
 }

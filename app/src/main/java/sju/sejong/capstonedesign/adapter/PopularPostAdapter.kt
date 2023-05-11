@@ -13,13 +13,21 @@ import sju.sejong.capstonedesign.databinding.ItemPopularPostBinding
 import sju.sejong.capstonedesign.model.BasicResponse
 import sju.sejong.capstonedesign.model.board.AllPostResponse
 import sju.sejong.capstonedesign.model.board.ContentList
+import sju.sejong.capstonedesign.model.board.PopularPostList
+import sju.sejong.capstonedesign.model.board.PopularPostResponse
 
 class PopularPostAdapter(private val context: Context) : RecyclerView.Adapter<PopularPostAdapter.CustomViewHolder>() {
-    private val list = List<BasicResponse>(3) { BasicResponse(1,true,"") }
+    private var list = listOf<PopularPostList>()
 
     inner class CustomViewHolder(private val binding: ItemPopularPostBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: BasicResponse) {
+        fun bind(item: PopularPostList) {
             Glide.with(context).load(R.drawable.plants).into(binding.ivItemPopularPost)
+            binding.tvItemPopularPostNickname.text = item.nickname
+            binding.tvItemPopularPostTitle.text = item.title
+            binding.tvItemPopularPostContent.text = item.content
+            binding.tvItemPopularPostDate.text =item.createdDate.removeRange(16,19)
+
+
         }
     }
 
@@ -33,5 +41,10 @@ class PopularPostAdapter(private val context: Context) : RecyclerView.Adapter<Po
         return CustomViewHolder(view)
     }
 
-    override fun getItemCount()= 3
+    fun setData(newData: List<PopularPostList>) {
+        list = newData
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount()= list.size
 }

@@ -1,4 +1,4 @@
-package sju.sejong.capstonedesign
+package sju.sejong.capstonedesign.view
 
 import android.app.Dialog
 import android.graphics.Color
@@ -13,6 +13,7 @@ import sju.sejong.capstonedesign.databinding.DialogBottomSheetBinding
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_login.*
+import sju.sejong.capstonedesign.R
 
 class BottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: DialogBottomSheetBinding? = null
@@ -58,7 +59,7 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
     private fun setLoginDialog() {
         val loginDialog = Dialog(requireContext())
 
-        loginDialog.setContentView(sju.sejong.capstonedesign.R.layout.dialog_login)
+        loginDialog.setContentView(R.layout.dialog_login)
         loginDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         loginDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loginDialog.setCanceledOnTouchOutside(false)

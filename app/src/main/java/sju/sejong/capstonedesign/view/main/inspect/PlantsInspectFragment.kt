@@ -5,7 +5,9 @@ import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.ImageDecoder
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.*
@@ -23,18 +25,29 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentPlantsInspectBinding
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.dialog_login.*
 import kotlinx.coroutines.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okio.BufferedSink
+import org.json.JSONObject
+import sju.sejong.capstonedesign.viewmodel.MainViewModel
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class PlantsInspectFragment: Fragment() {
     private var _binding: FragmentPlantsInspectBinding? = null
     private val binding get() = _binding!!
@@ -44,6 +57,9 @@ class PlantsInspectFragment: Fragment() {
     private var permissionedCnt = 0
     private lateinit var cropActivityResultLauncher : ActivityResultLauncher<Any?>
     private var imgUri : Uri? = null
+    private val viewModel by viewModels<MainViewModel>()
+    private var selectedImage: Bitmap? = null
+
 
     private val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
     private val checkPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
@@ -84,6 +100,28 @@ class PlantsInspectFragment: Fragment() {
 
         binding.btnInspect.setOnClickListener {
             if (imgUri != null && selectedPlants != 0) {
+                val crop = if (selectedPlants == 1) {
+                    "상추"
+                } else if (selectedPlants == 2) {
+                    "고추"
+                } else if (selectedPlants == 3) {
+                    "딸기"
+                } else if (selectedPlants == 4) {
+                    "토마토"
+                } else { "" }
+
+                val jsonObject = JSONObject("{\"crop_sort\":\"${crop}\"}").toString()
+                val jsonBody = RequestBody.create("application/json".toMediaTypeOrNull(),jsonObject)
+
+                val file = RequestBody.create(MultipartBody.FORM, "")
+                val body: MultipartBody.Part? = MultipartBody.Part.createFormData("file","", file)
+
+                val bitmapRequestBody = selectedImage?.let { BitmapRequestBody(it) }
+                val bitmapMultipartBody: MultipartBody.Part? =
+                    if (bitmapRequestBody == null) null
+                    else MultipartBody.Part.createFormData("file", "file", bitmapRequestBody)
+
+                viewModel.startInspect(jsonBody, bitmapMultipartBody)
                 setLoadingDialog()
             } else {
                 if (selectedPlants == 0) {
@@ -96,6 +134,13 @@ class PlantsInspectFragment: Fragment() {
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+    }
+
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
+        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
         }
     }
 
@@ -222,6 +267,11 @@ class PlantsInspectFragment: Fragment() {
             CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
                 val result = CropImage.getActivityResult(data)
                 if(resultCode == RESULT_OK){
+                    selectedImage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, result.uri))
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireContext().contentResolver, result.uri)
+                    }
                     result.uri?.let {
                         imgUri = it
                         binding.ivPlantsInspect.setImageURI(result.uri)
@@ -277,7 +327,6 @@ class PlantsInspectFragment: Fragment() {
 
     private fun buttonColorSet(position: Int) {
         buttonClearSet()
-
         when(position) {
             1 -> {
                 binding.btnInspectCategory1.setBackgroundResource(R.drawable.background_rec_10dp_green)

@@ -73,4 +73,9 @@ class BoardRepository @Inject constructor() {
     suspend fun postSolve(boardId: Long, solveRequest: SolveRequest) : Response<BasicResponse> {
         return service.postSolve("Bearer $ACCESS_TOKEN", boardId, solveRequest)
     }
+
+    // 인기 게시물 조회
+    suspend fun getPopularPost() : Response<PopularPostResponse> {
+        return service.getPopularPost()
+    }
 }

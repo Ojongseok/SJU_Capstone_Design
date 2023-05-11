@@ -20,7 +20,7 @@
     </fragment>
     <dialog
         android:id="@+id/dialog_bottom_sheet"
-        android:name="sju.sejong.capstonedesign.BottomSheetDialog"
+        android:name="sju.sejong.capstonedesign.view.BottomSheetDialog"
         android:label="dialog_bottom_sheet"
         tools:layout="@layout/dialog_bottom_sheet">
         <action
