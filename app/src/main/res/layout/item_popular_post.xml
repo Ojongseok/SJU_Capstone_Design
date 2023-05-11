@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="8dp"
-    android:paddingTop="4dp"
+    android:paddingLeft="4dp"
     android:paddingRight="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView7"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         app:cardCornerRadius="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,14 +28,14 @@
         android:id="@+id/tv_item_popular_post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"
         android:text="..."
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@+id/cardView7"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_popular_post_nickname" />
 
@@ -42,13 +43,12 @@
         android:id="@+id/tv_item_popular_post_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="..."
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView7"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_popular_post_title" />
@@ -85,7 +85,7 @@
             app:tint="#43C0F8" />
 
         <TextView
-            android:id="@+id/tv_post_thumbnail_comment_cnt"
+            android:id="@+id/tv_item_popular_comment_cnt"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="4dp"
@@ -103,7 +103,7 @@
             app:tint="@color/main_green" />
 
         <TextView
-            android:id="@+id/tv_post_thumbnail_favorite_count"
+            android:id="@+id/tv_item_popular_favorite_count"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -131,7 +131,7 @@
         android:layout_marginTop="2dp"
         android:text="..."
         android:textColor="@color/main_green"
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/tv_item_popular_post_title"
         app:layout_constraintTop_toTopOf="@+id/cardView7" />
 

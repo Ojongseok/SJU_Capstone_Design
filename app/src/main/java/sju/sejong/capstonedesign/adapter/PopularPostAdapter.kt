@@ -21,12 +21,13 @@ class PopularPostAdapter(private val context: Context) : RecyclerView.Adapter<Po
 
     inner class CustomViewHolder(private val binding: ItemPopularPostBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PopularPostList) {
-            Glide.with(context).load(R.drawable.plants).into(binding.ivItemPopularPost)
-            binding.tvItemPopularPostNickname.text = item.nickname
+            Glide.with(context).load(item.image).fallback(R.drawable.plants).into(binding.ivItemPopularPost)
+            binding.tvItemPopularPostNickname.text = "by. " + item.nickname
             binding.tvItemPopularPostTitle.text = item.title
             binding.tvItemPopularPostContent.text = item.content
             binding.tvItemPopularPostDate.text =item.createdDate.removeRange(16,19)
-
+            binding.tvItemPopularCommentCnt.text = item.commentNum.toString()
+            binding.tvItemPopularFavoriteCount.text = item.likeNum.toString()
 
         }
     }
