@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,16 +40,14 @@ class InspectResultFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setBarChart()
-        setImg()
+        setPieChart()
+        setInitData()
 
-        binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+
 
         binding.btnInspectResultCapture.setOnClickListener {
             val container = requireActivity().window.decorView
-            val screenShot = ScreenShot(container)
+            val screenShot = screenShot(container)
 
             if (screenShot != null) {
                 requireContext().sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)))
@@ -66,35 +65,19 @@ class InspectResultFragment: Fragment() {
             val action = InspectResultFragmentDirections.actionFragmentInspectResultToFragmentHome()
             findNavController().navigate(action)
         }
-    }
-
-    fun ScreenShot(view: View): File? {
-        view.isDrawingCacheEnabled = true //화면에 뿌릴때 캐시를 사용하게 한다
-        val screenBitmap = view.drawingCache //캐시를 비트맵으로 변환
-        val filename = System.currentTimeMillis().toString() + "screenshot.png"
-        val file = File(
-            Environment.getExternalStorageDirectory().toString() + "/Pictures",
-            filename
-        ) //Pictures폴더 screenshot.png 파일
-        var os: FileOutputStream? = null
-        try {
-            os = FileOutputStream(file)
-            screenBitmap.compress(Bitmap.CompressFormat.PNG, 90, os) //비트맵을 PNG파일로 변환
-            os.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-            return null
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
         }
-        view.isDrawingCacheEnabled = false
-        return file
     }
 
-    private fun setImg() {
-        val img = args.img
-        binding.ivInspectResult.setImageURI(img)
+    private fun setInitData() {
+        binding.ivInspectResult.setImageURI(args.img)
+
+        val result = args.result
+        Log.d("태그", result.toString())
     }
 
-    private fun setBarChart() {
+    private fun setPieChart() {
         binding.pieChart.setUsePercentValues(true)
 
         // data set
@@ -149,6 +132,28 @@ class InspectResultFragment: Fragment() {
             formToTextSpace = 6f
         }
     }
+
+    private fun screenShot(view: View): File? {
+        view.isDrawingCacheEnabled = true //화면에 뿌릴때 캐시를 사용하게 한다
+        val screenBitmap = view.drawingCache //캐시를 비트맵으로 변환
+        val filename = System.currentTimeMillis().toString() + "screenshot.png"
+        val file = File(
+            Environment.getExternalStorageDirectory().toString() + "/Pictures",
+            filename
+        ) //Pictures폴더 screenshot.png 파일
+        var os: FileOutputStream? = null
+        try {
+            os = FileOutputStream(file)
+            screenBitmap.compress(Bitmap.CompressFormat.PNG, 90, os) //비트맵을 PNG파일로 변환
+            os.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return null
+        }
+        view.isDrawingCacheEnabled = false
+        return file
+    }
+
 
     override fun onDestroy() {
         _binding = null

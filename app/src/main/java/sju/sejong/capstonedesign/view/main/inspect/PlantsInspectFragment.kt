@@ -130,12 +130,18 @@ class PlantsInspectFragment: Fragment() {
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(1000L)
-            dialog.dismiss()
-            val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!)
-            findNavController().navigate(action)
+        viewModel.inspectResponse.observe(viewLifecycleOwner) {
+            if (it.code == 200) {
+                dialog.dismiss()
+                val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!, it.result)
+                findNavController().navigate(action)
+            }
         }
+
+//        CoroutineScope(Dispatchers.Main).launch {
+//            delay(1000L)
+//
+//        }
     }
 
     fun openImagePickOption() {

@@ -109,6 +109,9 @@
         <argument
             android:name="img"
             app:argType="android.net.Uri" />
+        <argument
+            android:name="result"
+            app:argType="sju.sejong.capstonedesign.model.InspectResult" />
         <action
             android:id="@+id/action_fragment_inspect_result_to_fragment_home"
             app:destination="@id/fragment_home"
