@@ -20,13 +20,28 @@
 
 ## ✅ Main Function
 ### 1️⃣ 인공지능 모델을 활용한 작물 병해 검출 기능
-<img src="https://user-images.githubusercontent.com/98886487/236542383-c0e765f9-810c-423d-94a3-6503b6addb6c.gif" width="200" height="400" />
+<img src="https://user-images.githubusercontent.com/98886487/236542383-c0e765f9-810c-423d-94a3-6503b6addb6c.gif" width="200" height="400" /> <br>
+* 진단 가능한 작물은 샘플 중 데이터셋이 가장 많은 **딸기, 상추, 고추, 토마토**를 선택했습니다.   
+* 진단결과를 **PieChart와 한 줄 요약**으로 제공하며 해당 진단결과는 사용자가 **스크린샷으로 기기에 저장**하거나 커뮤니티에서 **다른 사용자들과 공유**가 가능합니다.   
+* 이미지 촬영/선택 시 **Crop(자르기)** 기능을 지원하며 구현에는 `Image-Cropper` 라이브러리를 이용했습니다.   
+* 서버와 이미지를 전달하는 방식으로 Retrofit2 - `Multipart` 를 통해 File을 전달합니다.   
+
 
 ### 2️⃣ 자유로운 소통을 위한 농업인 커뮤니티
-<img src="https://user-images.githubusercontent.com/98886487/236543336-46218851-7612-458d-80aa-df07a43d18a5.png" width="200" height="400" />
+<img src="https://user-images.githubusercontent.com/98886487/236543336-46218851-7612-458d-80aa-df07a43d18a5.png" width="200" height="400" /> <br>
+* 농업인들이 본인만의 **경험이나 노하우를 공유**하고, 자유롭게 **질의응답**이 이루어질 수 있도록 **자체적인 커뮤니티**를 구성했습니다.   
+* ‘AI 병해충 진단하기’ 기능에서 해결되지 않은 궁금증, 그 외 추가적인 내용은 **로그인** 후 게시판을 통해 해결할 수 있습니다.   
+* **ViewModel**과 **LiveData, Observer** 패턴을 통해 **사용자 경험(UX)**에 친숙할 수 있도록 집중했습니다.    
+→ 댓글/답글 작성 및 게시글 추천 시 데이터 변경에 따른 화면 갱신, 직관적인 UI   
+* **일반적인 커뮤니티의 요소, 기능 구현** → 게시판 항목 구분, 게시글 및 댓글, 답글(작성/수정/삭제), 답글, 추천   
 
 ### 3️⃣ OpenAPI를 활용한 병해 상세정보 및 농약 정보 제공
-<img src="https://user-images.githubusercontent.com/98886487/236543272-42b211c7-3b7f-4445-bcca-15855f29dd1a.gif" width="200" height="400" />
+<img src="https://user-images.githubusercontent.com/98886487/236543272-42b211c7-3b7f-4445-bcca-15855f29dd1a.gif" width="200" height="400" /> <br>
+* 국가농작물병해충관리시스템(NCPMS)의 **병해충 관련 OpenAPI**와 농약안전정보시스템의 **농약 등록정보 OpenAPI**를 이용해 병해/방제 정보를 제공합니다.   
+  * 국가농작물병해충관리시스템(NCPMS) : https://ncpms.rda.go.kr/npms/Main.np   
+  * 농약안전정보시스템 : https://psis.rda.go.kr/psis/index.ps   
+* API의 데이터 반환 타입이 **XML**이기 때문에 `Tikxml` 라이브러리를 이용해 데이터를 파싱했습니다.   
+ 
 
 ## 🤔 Learned
 
