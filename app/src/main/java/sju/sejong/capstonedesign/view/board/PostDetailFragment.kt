@@ -150,6 +150,7 @@ class PostDetailFragment: Fragment() {
                 binding.tvPdTitle.text = it.result.title
                 binding.tvPdContents.text = it.result.content
                 binding.tvPostDetailLikeCnt.text = "추천 ${it.result.likeNum}개"
+                binding.textView11.text = "댓글 ${it.result.commentNum}개"
 
                 if (it.result.image == null) {
                     binding.frameLayout6.visibility = View.GONE
@@ -177,7 +178,6 @@ class PostDetailFragment: Fragment() {
         viewModel.getAllCommentsResponse.observe(viewLifecycleOwner) {
             if (it.code == 200) {
                 commentAdapter.setData(it.result)
-                binding.textView11.text = "댓글 ${it.result.size}개"
             }
         }
 

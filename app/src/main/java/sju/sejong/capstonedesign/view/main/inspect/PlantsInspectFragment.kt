@@ -60,29 +60,6 @@ class PlantsInspectFragment: Fragment() {
     private val viewModel by viewModels<MainViewModel>()
     private var selectedImage: Bitmap? = null
 
-
-    private val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-    private val checkPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-        result.forEach {
-            if(!it.value) {
-                Toast.makeText(requireContext(), "접근 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
-            } else {
-                cropActivityResultLauncher.launch(null)
-            }
-        }
-    }
-//    private val permissionList2 = arrayOf(Manifest.permission.CAMERA)
-//    private val checkPermission2 = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-//        result.forEach {
-//            if(!it.value) {
-//                Toast.makeText(requireContext(), "접근 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
-//            } else {
-////                sendTakePhotoIntent()
-//                dispatchTakePictureIntent()
-//            }
-//        }
-//    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPlantsInspectBinding.inflate(inflater, container, false)
         return binding.root
@@ -101,13 +78,13 @@ class PlantsInspectFragment: Fragment() {
         binding.btnInspect.setOnClickListener {
             if (imgUri != null && selectedPlants != 0) {
                 val crop = if (selectedPlants == 1) {
-                    "상추"
+                    "lettuce"
                 } else if (selectedPlants == 2) {
-                    "고추"
+                    "pepper"
                 } else if (selectedPlants == 3) {
-                    "딸기"
+                    "strawberry"
                 } else if (selectedPlants == 4) {
-                    "토마토"
+                    "tomato"
                 } else { "" }
 
                 val jsonObject = JSONObject("{\"crop_sort\":\"${crop}\"}").toString()
@@ -154,7 +131,7 @@ class PlantsInspectFragment: Fragment() {
         dialog.show()
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(2000L)
+            delay(1000L)
             dialog.dismiss()
             val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!)
             findNavController().navigate(action)
@@ -167,7 +144,6 @@ class PlantsInspectFragment: Fragment() {
         builder.setTitle("업로드 방법 선택")
         builder.setItems(items) { dialog, position ->
             if (items[position] == "카메라 촬영 / 앨범 선택") {
-//                checkPermission2.launch(permissionList2)
                 checkPermission()
             } else if (items[position] == "취소") {
                 dialog.dismiss()

@@ -33,7 +33,7 @@ interface RetrofitService {
     @Multipart
     @POST("diagnosis")
     suspend fun startDiagnosis(
-        @Part ("request") writePostRequest: RequestBody,
+        @Part ("request") diagnosisRequest: RequestBody,
         @Part file: MultipartBody.Part?
     ) : Response<InspectResponse>
 
