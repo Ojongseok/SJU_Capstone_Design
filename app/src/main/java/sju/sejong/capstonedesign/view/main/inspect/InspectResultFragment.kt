@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.ColorTemplate.COLORFUL_COLORS
+import sju.sejong.capstonedesign.model.InspectResult
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -31,6 +32,7 @@ class InspectResultFragment: Fragment() {
     private var _binding: FragmentInspectResultBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<InspectResultFragmentArgs>()
+    private lateinit var result : InspectResult
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentInspectResultBinding.inflate(inflater, container, false)
@@ -40,10 +42,8 @@ class InspectResultFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setPieChart()
         setInitData()
-
-
+        setPieChart()
 
         binding.btnInspectResultCapture.setOnClickListener {
             val container = requireActivity().window.decorView
@@ -65,16 +65,20 @@ class InspectResultFragment: Fragment() {
             val action = InspectResultFragmentDirections.actionFragmentInspectResultToFragmentHome()
             findNavController().navigate(action)
         }
+
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+
     }
 
     private fun setInitData() {
+        result = args.result
         binding.ivInspectResult.setImageURI(args.img)
 
-        val result = args.result
         Log.d("태그", result.toString())
+
+        binding.tvInspectResultSummary.text = "${result.diseaseName}이(가) 의심됩니다."
     }
 
     private fun setPieChart() {
@@ -82,10 +86,26 @@ class InspectResultFragment: Fragment() {
 
         // data set
         val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(3f, "정상"))
-        entries.add(PieEntry(84f, "딸기잿빛곰팡이병"))
-        entries.add(PieEntry(6f, "딸기흰가루병"))
-        entries.add(PieEntry(7f, "진단 불가"))
+
+        entries.add(PieEntry(7f, "정상"))
+        when (result.outCropInfo) {
+            "strawberry" -> {
+                entries.add(PieEntry(87f, "딸기잿빛곰팡이병"))
+                entries.add(PieEntry(6f, "딸기흰가루병"))
+            }
+            "lettuce" -> {
+                entries.add(PieEntry(87f, "상추균핵병"))
+                entries.add(PieEntry(6f, "상추노균병"))
+            }
+            "tomato" -> {
+                entries.add(PieEntry(87f, "토마토잎공팡이병"))
+                entries.add(PieEntry(6f, "토마토황화잎말이바이러스병"))
+            }
+            "pepper " -> {
+                entries.add(PieEntry(87f, "고추마일드모틀바이러스병"))
+                entries.add(PieEntry(6f, "고추점무늬병"))
+            }
+        }
 
         // add a lot of colors
         val colorsItems = ArrayList<Int>()
