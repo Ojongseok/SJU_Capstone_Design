@@ -44,6 +44,7 @@ import org.json.JSONObject
 import sju.sejong.capstonedesign.viewmodel.MainViewModel
 import java.io.File
 import java.io.IOException
+import java.lang.NullPointerException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -131,10 +132,15 @@ class PlantsInspectFragment: Fragment() {
         dialog.show()
 
         viewModel.inspectResponse.observe(viewLifecycleOwner) {
-            if (it.code == 200) {
+            if (it == null) {
                 dialog.dismiss()
-                val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!, it.result)
-                findNavController().navigate(action)
+                Toast.makeText(requireContext(), "서버 오류입니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                if (it.code == 200) {
+                    dialog.dismiss()
+                    val action = PlantsInspectFragmentDirections.actionFragmentPlantsInspectToInspectResultFragment(imgUri!!, it.result)
+                    findNavController().navigate(action)
+                }
             }
         }
 

@@ -41,6 +41,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 @AndroidEntryPoint
 class PostWriteFragment: Fragment() {
     private var _binding: FragmentPostWriteBinding? = null
