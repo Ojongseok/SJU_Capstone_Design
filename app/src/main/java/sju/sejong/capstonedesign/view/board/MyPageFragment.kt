@@ -20,6 +20,9 @@ import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.dialog_logout.*
+import kotlinx.android.synthetic.main.dialog_nickname_modify.*
+import sju.sejong.capstonedesign.model.login.ModifyUserInfo
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class MyPageFragment: Fragment() {
@@ -37,6 +40,38 @@ class MyPageFragment: Fragment() {
 
         initDataSettings()
         setObserver()
+
+        binding.btnMypageModifyNickname.setOnClickListener {
+            setModifyNicknameDialog()
+        }
+    }
+
+    private fun setModifyNicknameDialog() {
+        val dialog = Dialog(requireContext())
+
+        dialog.setContentView(R.layout.dialog_nickname_modify)
+        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+
+        dialog.btn_dialog_modify_complete.setOnClickListener {
+            val newNickname = dialog.et_nickname_modify.text.toString()
+
+            val nicknamePattern = "^[a-zA-Z0-9가-힣]{4,12}$"
+            val pattern = Pattern.matches(nicknamePattern, newNickname)
+
+            if (pattern) {
+                viewModel.modifyNickname(ModifyUserInfo(newNickname), MEMBER_ID)
+                dialog.dismiss()
+            } else {
+                Toast.makeText(requireContext(), "닉네임을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialog.btn_dialog_modify_close.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     private fun setObserver() {

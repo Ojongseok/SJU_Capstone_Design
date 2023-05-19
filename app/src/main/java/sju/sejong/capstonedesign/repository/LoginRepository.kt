@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.Response
+import sju.sejong.capstonedesign.model.BasicResponse
 import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore(name = "dataStore")
@@ -37,6 +38,11 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
     // 회원정보 조회
     suspend fun getMemberInfo(memberId: Long) : Response<MemberInfoResponse> {
         return service.getMemberInfo("Bearer $ACCESS_TOKEN", memberId)
+    }
+
+    // 닉네임 변경
+    suspend fun modifyNickname(modifyUserInfo: ModifyUserInfo, memberId: Long) : Response<BasicResponse> {
+        return service.modifyNickname("Bearer $ACCESS_TOKEN", modifyUserInfo, memberId)
     }
 
     // dataStore에 토큰 쓰기

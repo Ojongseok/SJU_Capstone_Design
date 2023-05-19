@@ -4,15 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import sju.sejong.capstonedesign.model.login.LoginResponse
-import sju.sejong.capstonedesign.model.login.MemberInfoResponse
-import sju.sejong.capstonedesign.model.login.SignupPost
 import sju.sejong.capstonedesign.repository.LoginRepository
-import sju.sejong.capstonedesign.model.login.LoginPost
 import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import kotlinx.coroutines.*
+import sju.sejong.capstonedesign.model.login.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +18,7 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
     val loginResult = MutableLiveData<LoginResponse>()
     val memberInfo = MutableLiveData<MemberInfoResponse>()
     val loginEnableState = MutableLiveData<Boolean>()
+    val modifyNicknameState = MutableLiveData<Int>()
 
     // 회원가입
     fun signup(signupPost: SignupPost) = CoroutineScope(Dispatchers.IO).launch {
@@ -59,6 +57,14 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
     fun getMemberInfo(memberId: Long) = viewModelScope.launch {
         val response = repository.getMemberInfo(memberId)
         memberInfo.postValue(response.body())
+    }
+
+    // 닉네임 변경
+    fun modifyNickname(modifyUserInfo: ModifyUserInfo, memberId: Long) = viewModelScope.launch {
+        val response = repository.modifyNickname(modifyUserInfo, memberId)
+        modifyNicknameState.postValue(response.body()?.code)
+
+        getMemberInfo(memberId)
     }
 
     // DataStore 엑세스토큰 읽기

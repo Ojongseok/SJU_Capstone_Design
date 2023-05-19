@@ -29,6 +29,14 @@ interface RetrofitService {
         @Path("member_id") memberId: Long
     ): Response<MemberInfoResponse>
 
+    // 닉네임 변경
+    @PATCH("members/{member_id}")
+    suspend fun modifyNickname(
+        @Header ("Authorization") BearerToken: String,
+        @Body modifyUserInfo: ModifyUserInfo,
+        @Path("member_id") memberId: Long
+    ) : Response<BasicResponse>
+
     // 병해 진단
     @Multipart
     @POST("diagnosis")
