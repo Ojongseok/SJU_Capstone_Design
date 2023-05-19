@@ -164,6 +164,7 @@ class PostDetailFragment: Fragment() {
                     if (it.result.isSolved) {
                         binding.tvPostDetailSolveTag.text = "해결완료"
                         binding.tvPostDetailSolveTag.setBackgroundResource(R.drawable.background_rec_8dp_green)
+                        binding.btnPostDetailSolve.visibility = View.GONE
                     }
                 }
 
@@ -258,7 +259,7 @@ class PostDetailFragment: Fragment() {
         dialog.show()
 
         dialog.dialog_post_update_complete.setOnClickListener {
-            // 수정 뷰모텔 코드 추가
+            Toast.makeText(requireContext(), "준비중입니다.", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
 

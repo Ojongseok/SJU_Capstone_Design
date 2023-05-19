@@ -17,6 +17,7 @@ import sju.sejong.capstonedesign.model.board.PopularPostList
 import sju.sejong.capstonedesign.model.board.PopularPostResponse
 
 class PopularPostAdapter(private val context: Context) : RecyclerView.Adapter<PopularPostAdapter.CustomViewHolder>() {
+    private lateinit var itemClickListener: OnItemClickListener
     private var list = listOf<PopularPostList>()
 
     inner class CustomViewHolder(private val binding: ItemPopularPostBinding): RecyclerView.ViewHolder(binding.root) {
@@ -35,11 +36,22 @@ class PopularPostAdapter(private val context: Context) : RecyclerView.Adapter<Po
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(list[position])
 
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it,position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = ItemPopularPostBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return CustomViewHolder(view)
+    }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
     }
 
     fun setData(newData: List<PopularPostList>) {

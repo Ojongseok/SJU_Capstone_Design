@@ -98,6 +98,14 @@ class HomeFragment: Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = popularPostAdapter
         }
+
+        popularPostAdapter.setItemClickListener(object : PopularPostAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                val boardId = boardViewModel.popularPostResponse.value?.result!![position].boardId
+                val action = HomeFragmentDirections.actionFragmentHomeToFragmentPostDetail(boardId)
+                findNavController().navigate(action)
+            }
+        })
     }
 
     private fun setObserver() {
