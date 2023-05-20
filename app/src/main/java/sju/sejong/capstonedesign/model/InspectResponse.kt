@@ -13,6 +13,7 @@ data class InspectResponse(
 @Parcelize
 data class InspectResult(
     val isCorrect: Boolean,
+    val errnum : Int,
     val diseaseName: String,
     val inCropInfo: String,
     val outCropInfo: String,

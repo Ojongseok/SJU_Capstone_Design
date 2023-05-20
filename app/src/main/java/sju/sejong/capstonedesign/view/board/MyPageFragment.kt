@@ -78,6 +78,13 @@ class MyPageFragment: Fragment() {
         viewModel.memberInfo.observe(viewLifecycleOwner) {
             binding.model = it
         }
+        viewModel.modifyNicknameState.observe(viewLifecycleOwner) {
+            if (it == 200) {
+                Toast.makeText(requireContext(), "닉네임 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            } else if (it == 706) {
+                Toast.makeText(requireContext(), "이미 사용중인 닉네임입니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setLogoutDialog() {

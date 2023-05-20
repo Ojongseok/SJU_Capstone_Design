@@ -27,6 +27,8 @@ import sju.sejong.capstonedesign.model.InspectResult
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class InspectResultFragment: Fragment() {
     private var _binding: FragmentInspectResultBinding? = null
@@ -77,8 +79,6 @@ class InspectResultFragment: Fragment() {
         binding.ivInspectResult.setImageURI(args.img)
 
         Log.d("태그", result.toString())
-
-        binding.tvInspectResultSummary.text = "${result.diseaseName}이(가) 의심됩니다."
     }
 
     private fun setPieChart() {
@@ -87,25 +87,171 @@ class InspectResultFragment: Fragment() {
         // data set
         val entries = ArrayList<PieEntry>()
 
-        entries.add(PieEntry(7f, "정상"))
-        when (result.outCropInfo) {
-            "strawberry" -> {
-                entries.add(PieEntry(87f, "딸기잿빛곰팡이병"))
-                entries.add(PieEntry(6f, "딸기흰가루병"))
+        when (result.errnum) {
+            1 -> {
+                when (result.outCropInfo) {
+                    "pepper " -> {
+                        entries.add(PieEntry(result.classProbabilityList[0], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[1], "고추마일드모틀바이러스병"))
+                        entries.add(PieEntry(result.classProbabilityList[2], "고추점무늬병"))
+
+                        val triple = arrayOf(result.classProbabilityList[0],result.classProbabilityList[1],result.classProbabilityList[2])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상입니다."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "고추마일드모틀바이러스병에 감염되었을 가능성이 높습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "고추점무늬병에 감염되었을 가능성이 높습니다."
+                            }
+                        }
+                    }
+                    "strawberry" -> {
+                        entries.add(PieEntry(result.classProbabilityList[3], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[4], "딸기잿빛곰팡이병"))
+                        entries.add(PieEntry(result.classProbabilityList[5], "딸기흰가루병"))
+
+                        val triple = arrayOf(result.classProbabilityList[3],result.classProbabilityList[4],result.classProbabilityList[5])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상입니다."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "딸기잿빛곰팡이병에 감염되었을 가능성이 높습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "딸기흰가루에 감염되었을 가능성이 높습니다."
+                            }
+                        }
+                    }
+                    "lettuce" -> {
+                        entries.add(PieEntry(result.classProbabilityList[6], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[7], "상추균핵병"))
+                        entries.add(PieEntry(result.classProbabilityList[8], "상추노균병"))
+
+                        val triple = arrayOf(result.classProbabilityList[6],result.classProbabilityList[7],result.classProbabilityList[8])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상입니다."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "상추균핵병에 감염되었을 가능성이 높습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "상추노균병에 감염되었을 가능성이 높습니다."
+                            }
+                        }
+                    }
+                    "tomato" -> {
+                        entries.add(PieEntry(result.classProbabilityList[9], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[10], "토마토잎공팡이병"))
+                        entries.add(PieEntry(result.classProbabilityList[11], "토마토황화잎말이바이러스병"))
+
+                        val triple = arrayOf(result.classProbabilityList[9],result.classProbabilityList[10],result.classProbabilityList[11])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상입니다."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "토마토잎공팡이병에 감염되었을 가능성이 높습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "토마토황화잎말이바이러스병에 감염되었을 가능성이 높습니다."
+                            }
+                        }
+                    }
+
+                }
             }
-            "lettuce" -> {
-                entries.add(PieEntry(87f, "상추균핵병"))
-                entries.add(PieEntry(6f, "상추노균병"))
+            2 -> {
+                when (result.outCropInfo) {
+                    "pepper " -> {
+                        entries.add(PieEntry(result.classProbabilityList[0], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[1], "고추마일드모틀바이러스병"))
+                        entries.add(PieEntry(result.classProbabilityList[2], "고추점무늬병"))
+
+                        val triple = arrayOf(result.classProbabilityList[0],result.classProbabilityList[1],result.classProbabilityList[2])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상인 것으로 확인되지만 감염이 의심됩니다. 다른 각도에서 촬영 후 다시 검사해주세요."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "고추마일드모틀바이러스병에 감염되었을 가능성이 있습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "고추점무늬병에 감염되었을 가능성이 있습니다."
+                            }
+                        }
+                    }
+                    "strawberry" -> {
+                        entries.add(PieEntry(result.classProbabilityList[3], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[4], "딸기잿빛곰팡이병"))
+                        entries.add(PieEntry(result.classProbabilityList[5], "딸기흰가루병"))
+
+                        val triple = arrayOf(result.classProbabilityList[3],result.classProbabilityList[4],result.classProbabilityList[5])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상인 것으로 확인되지만 감염이 의심됩니다. 다른 각도에서 촬영 후 다시 검사해주세요."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "딸기잿빛곰팡이병에 감염되었을 가능성이 있습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "딸기흰가루에 감염되었을 가능성이 있습니다."
+                            }
+                        }
+                    }
+                    "lettuce" -> {
+                        entries.add(PieEntry(result.classProbabilityList[6], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[7], "상추균핵병"))
+                        entries.add(PieEntry(result.classProbabilityList[8], "상추노균병"))
+
+                        val triple = arrayOf(result.classProbabilityList[6],result.classProbabilityList[7],result.classProbabilityList[8])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상인 것으로 확인되지만 감염이 의심됩니다. 다른 각도에서 촬영 후 다시 검사해주세요."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "상추균핵병에 감염되었을 가능성이 있습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "상추노균병에 감염되었을 가능성이 있습니다."
+                            }
+                        }
+                    }
+                    "tomato" -> {
+                        entries.add(PieEntry(result.classProbabilityList[9], "정상"))
+                        entries.add(PieEntry(result.classProbabilityList[10], "토마토잎공팡이병"))
+                        entries.add(PieEntry(result.classProbabilityList[11], "토마토황화잎말이바이러스병"))
+
+                        val triple = arrayOf(result.classProbabilityList[9],result.classProbabilityList[10],result.classProbabilityList[11])
+                        when (triple.indices.maxByOrNull { triple[it] } ?: -1) {
+                            0 -> {
+                                binding.tvInspectResultSummary.text = "정상인 것으로 확인되지만 감염이 의심됩니다. 다른 각도에서 촬영 후 다시 검사해주세요."
+                            }
+                            1 -> {
+                                binding.tvInspectResultSummary.text = "토마토잎공팡이병에 감염되었을 가능성이 있습니다."
+                            }
+                            2 -> {
+                                binding.tvInspectResultSummary.text = "토마토황화잎말이바이러스병에 감염되었을 가능성이 있습니다."
+                            }
+                        }
+                    }
+
+                }
             }
-            "tomato" -> {
-                entries.add(PieEntry(87f, "토마토잎공팡이병"))
-                entries.add(PieEntry(6f, "토마토황화잎말이바이러스병"))
+            3 -> {
+                entries.add(PieEntry(100f, "진단 불가"))
+                binding.tvInspectResultSummary.text = "작물 선택이 잘못되었을 가능성이 높습니다. 작물 종류와 첨부된 이미지를 확인 후 다시 검사해 주세요."
             }
-            "pepper " -> {
-                entries.add(PieEntry(87f, "고추마일드모틀바이러스병"))
-                entries.add(PieEntry(6f, "고추점무늬병"))
+            4 -> {
+                entries.add(PieEntry(100f, "진단 불가"))
+                binding.tvInspectResultSummary.text = "지원하지 않는 작물입니다."
             }
         }
+
 
         // add a lot of colors
         val colorsItems = ArrayList<Int>()
@@ -147,8 +293,8 @@ class InspectResultFragment: Fragment() {
             horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
             orientation = Legend.LegendOrientation.VERTICAL
             form = Legend.LegendForm.CIRCLE
-            textSize = 14f
-            formSize = 14f
+            textSize = 13f
+            formSize = 13f
             formToTextSpace = 6f
         }
     }
