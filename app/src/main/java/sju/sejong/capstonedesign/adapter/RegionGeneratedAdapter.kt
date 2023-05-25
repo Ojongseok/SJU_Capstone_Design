@@ -1,17 +1,21 @@
 package sju.sejong.capstonedesign.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.preferences.core.preferencesOf
 import androidx.recyclerview.widget.RecyclerView
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.ItemHomeRegionGeneratedDiseaseBinding
+import sju.sejong.capstonedesign.viewmodel.LoginViewModel
 
-class RegionGeneratedAdapter(private val context: Context) : RecyclerView.Adapter<RegionGeneratedAdapter.CustomViewHolder>() {
+class RegionGeneratedAdapter(
+    private val context: Context,
+    private val viewModel: LoginViewModel) : RecyclerView.Adapter<RegionGeneratedAdapter.CustomViewHolder>() {
     private lateinit var itemClickListener: OnItemClickListener
 
-    val list = List<String>(17) { "" }
     val regionArray = context.resources.getStringArray(R.array.signup_select_region)
 
     inner class CustomViewHolder(private val binding: ItemHomeRegionGeneratedDiseaseBinding): RecyclerView.ViewHolder(binding.root) {
@@ -22,7 +26,7 @@ class RegionGeneratedAdapter(private val context: Context) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(regionArray[position])
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it,position)

@@ -19,6 +19,7 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
     val memberInfo = MutableLiveData<MemberInfoResponse>()
     val loginEnableState = MutableLiveData<Boolean>()
     val modifyNicknameState = MutableLiveData<Int>()
+    val regionDisease = MutableLiveData<RegionDiseaseResponse>()
 
     // 회원가입
     fun signup(signupPost: SignupPost) = CoroutineScope(Dispatchers.IO).launch {
@@ -65,6 +66,12 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
         modifyNicknameState.postValue(response.body()?.code)
 
         getMemberInfo(memberId)
+    }
+
+    // 지역별 병해 발생 빈도
+    fun getRegionDisease(region: String) = viewModelScope.launch {
+        val response = repository.getRegionDisease(region)
+        regionDisease.postValue(response.body())
     }
 
     // DataStore 엑세스토큰 읽기

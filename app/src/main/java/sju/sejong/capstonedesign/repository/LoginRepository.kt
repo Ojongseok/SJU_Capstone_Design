@@ -45,6 +45,11 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
         return service.modifyNickname("Bearer $ACCESS_TOKEN", modifyUserInfo, memberId)
     }
 
+    // 지역별 병해 발생 빈도
+    suspend fun getRegionDisease(region: String) : Response<RegionDiseaseResponse> {
+        return service.getRegionDisease(region)
+    }
+
     // dataStore에 토큰 쓰기
     suspend fun setLoginKey(accessToken: String, memberId: Long) {
         context.dataStore.edit {

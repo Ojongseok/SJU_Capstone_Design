@@ -320,7 +320,6 @@ class InspectResultFragment: Fragment() {
         return file
     }
 
-
     override fun onDestroy() {
         _binding = null
         super.onDestroy()

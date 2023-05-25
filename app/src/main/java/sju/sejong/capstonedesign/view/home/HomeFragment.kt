@@ -151,11 +151,10 @@ class HomeFragment: Fragment() {
             ACCESS_TOKEN = loginViewModel.getAccessToken()
             MEMBER_ID = loginViewModel.getMemberId()
         }
-        Log.d("tag", loginViewModel.getAccessToken())
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)
-        diseaseGeneratedRegionAdapter = RegionGeneratedAdapter(requireContext())
+        diseaseGeneratedRegionAdapter = RegionGeneratedAdapter(requireContext(), loginViewModel)
         popularPostAdapter = PopularPostAdapter(requireContext())
     }
 }

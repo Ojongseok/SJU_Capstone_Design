@@ -37,6 +37,12 @@ interface RetrofitService {
         @Path("member_id") memberId: Long
     ) : Response<BasicResponse>
 
+    // 지역별 병해 빈도
+    @GET("diagnosis-result")
+    suspend fun getRegionDisease(
+        @Query("region") region: String
+    ): Response<RegionDiseaseResponse>
+
     // 병해 진단
     @Multipart
     @POST("diagnosis")
