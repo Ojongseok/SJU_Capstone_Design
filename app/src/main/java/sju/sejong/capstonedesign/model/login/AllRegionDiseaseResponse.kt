@@ -1,6 +1,6 @@
 package sju.sejong.capstonedesign.model.login
 
-data class RegionDiseaseResponse(
+data class AllRegionDiseaseResponse(
     val code: Int,
     val isSuccess: Boolean,
     val message: String,
@@ -8,6 +8,6 @@ data class RegionDiseaseResponse(
 )
 
 data class RegionDiseaseResult(
-    val diseaseNames: String,
-    val diseaseNum: Long
+    val region: String,
+    val diseaseCount: Long
 )

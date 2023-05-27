@@ -46,8 +46,8 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
     }
 
     // 지역별 병해 발생 빈도
-    suspend fun getRegionDisease(region: String) : Response<RegionDiseaseResponse> {
-        return service.getRegionDisease(region)
+    suspend fun getAllRegionDisease() : Response<AllRegionDiseaseResponse> {
+        return service.getAllRegionDisease()
     }
 
     // dataStore에 토큰 쓰기

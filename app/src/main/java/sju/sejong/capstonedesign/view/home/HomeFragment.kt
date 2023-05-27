@@ -2,7 +2,6 @@ package sju.sejong.capstonedesign.view.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
 import sju.sejong.capstonedesign.adapter.PopularPostAdapter
-import sju.sejong.capstonedesign.adapter.RegionGeneratedAdapter
+import sju.sejong.capstonedesign.adapter.AllRegionGeneratedAdapter
 import sju.sejong.capstonedesign.databinding.FragmentHomeBinding
 import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
@@ -33,7 +32,7 @@ class HomeFragment: Fragment() {
     private lateinit var diseaseGeneratedMonthlyAdapter1: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedMonthlyAdapter2: DiseaseGeneratedMonthlyAdapter
     private lateinit var diseaseGeneratedMonthlyAdapter3: DiseaseGeneratedMonthlyAdapter
-    private lateinit var diseaseGeneratedRegionAdapter: RegionGeneratedAdapter
+    private lateinit var diseaseGeneratedRegionAdapter: AllRegionGeneratedAdapter
     private lateinit var popularPostAdapter: PopularPostAdapter
     private val viewModel  by viewModels<OpenApiViewModel>()
     private val loginViewModel by viewModels<LoginViewModel>()
@@ -87,7 +86,7 @@ class HomeFragment: Fragment() {
             adapter = diseaseGeneratedRegionAdapter
             addItemDecoration(GridSpaceItemDecoration(requireContext(), 2))
         }
-        diseaseGeneratedRegionAdapter.setItemClickListener(object : RegionGeneratedAdapter.OnItemClickListener {
+        diseaseGeneratedRegionAdapter.setItemClickListener(object : AllRegionGeneratedAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -134,6 +133,10 @@ class HomeFragment: Fragment() {
         boardViewModel.popularPostResponse.observe(viewLifecycleOwner) {
             popularPostAdapter.setData(it.result)
         }
+
+        loginViewModel.allRegionDisease.observe(viewLifecycleOwner) {
+            diseaseGeneratedRegionAdapter.setData(it.result)
+        }
     }
 
     private fun initDataSettings() {
@@ -142,6 +145,8 @@ class HomeFragment: Fragment() {
 
         boardViewModel.getPopularPost()
         viewModel.setDiseaseGeneratedMonthly()
+        loginViewModel.getAllRegionDisease()
+
         if (loginViewModel.getAccessToken().isEmpty()) {
             LOGIN_STATUS = false
             ACCESS_TOKEN = ""
@@ -154,7 +159,7 @@ class HomeFragment: Fragment() {
 
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)
-        diseaseGeneratedRegionAdapter = RegionGeneratedAdapter(requireContext(), loginViewModel)
+        diseaseGeneratedRegionAdapter = AllRegionGeneratedAdapter(requireContext())
         popularPostAdapter = PopularPostAdapter(requireContext())
     }
 }

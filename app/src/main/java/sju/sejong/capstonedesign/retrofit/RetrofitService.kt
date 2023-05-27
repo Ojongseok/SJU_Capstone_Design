@@ -38,10 +38,8 @@ interface RetrofitService {
     ) : Response<BasicResponse>
 
     // 지역별 병해 빈도
-    @GET("diagnosis-result")
-    suspend fun getRegionDisease(
-        @Query("region") region: String
-    ): Response<RegionDiseaseResponse>
+    @GET("diagnosis-result/monthly")
+    suspend fun getAllRegionDisease(): Response<AllRegionDiseaseResponse>
 
     // 병해 진단
     @Multipart
