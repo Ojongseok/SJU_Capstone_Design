@@ -58,5 +58,6 @@ https://play.google.com/store/apps/details?id=sju.sejong.capstonedesign
 |5-7|https://develop-oj.tistory.com/59|
 |8|중간고사|
 |9-10|https://develop-oj.tistory.com/63|
-|11-12|진행중|
+|11-12|https://develop-oj.tistory.com/65|
+|13-14|진행 중|
 
