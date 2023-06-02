@@ -13,14 +13,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentRequestBoardBinding
 import sju.sejong.capstonedesign.model.board.ContentList
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.SeggeredGridSpaceItemDecoration
 import sju.sejong.capstonedesign.viewmodel.BoardViewModel
-import kotlinx.android.synthetic.main.dialog_login.*
 import sju.sejong.capstonedesign.adapter.BoardPostAdapter
+import sju.sejong.capstonedesign.databinding.DialogLoginBinding
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -85,21 +84,22 @@ class RequestBoardFragment: Fragment() {
 
     private fun setLoginDialog() {
         val loginDialog = Dialog(requireContext())
+        val binding = DialogLoginBinding.inflate(LayoutInflater.from(requireContext()))
 
-        loginDialog.setContentView(R.layout.dialog_login)
+        loginDialog.setContentView(binding.root)
         loginDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         loginDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loginDialog.setCanceledOnTouchOutside(false)
         loginDialog.show()
 
-        loginDialog.btn_dialog_login.setOnClickListener {
+        binding.btnDialogLogin.setOnClickListener {
             loginDialog.dismiss()
 
             val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
             findNavController().navigate(action)
         }
 
-        loginDialog.btn_dialog_login_close.setOnClickListener {
+        binding.btnDialogLoginClose.setOnClickListener {
             loginDialog.dismiss()
         }
     }

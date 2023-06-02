@@ -14,13 +14,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import sju.sejong.capstonedesign.R
+import sju.sejong.capstonedesign.databinding.DialogLogoutBinding
 import sju.sejong.capstonedesign.databinding.FragmentMyPageBinding
 import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.dialog_logout.*
-import kotlinx.android.synthetic.main.dialog_nickname_modify.*
+import sju.sejong.capstonedesign.databinding.DialogNicknameModifyBinding
 import sju.sejong.capstonedesign.model.login.ModifyUserInfo
 import java.util.regex.Pattern
 
@@ -48,15 +48,16 @@ class MyPageFragment: Fragment() {
 
     private fun setModifyNicknameDialog() {
         val dialog = Dialog(requireContext())
+        val binding = DialogNicknameModifyBinding.inflate(LayoutInflater.from(requireContext()))
 
-        dialog.setContentView(R.layout.dialog_nickname_modify)
+        dialog.setContentView(binding.root)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-        dialog.btn_dialog_modify_complete.setOnClickListener {
-            val newNickname = dialog.et_nickname_modify.text.toString()
+        binding.btnDialogModifyComplete.setOnClickListener {
+            val newNickname = binding.etNicknameModify.text.toString()
 
             val nicknamePattern = "^[a-zA-Z0-9가-힣]{4,12}$"
             val pattern = Pattern.matches(nicknamePattern, newNickname)
@@ -69,7 +70,7 @@ class MyPageFragment: Fragment() {
             }
         }
 
-        dialog.btn_dialog_modify_close.setOnClickListener {
+        binding.btnDialogModifyClose.setOnClickListener {
             dialog.dismiss()
         }
     }
@@ -89,14 +90,15 @@ class MyPageFragment: Fragment() {
 
     private fun setLogoutDialog() {
         val logoutDialog = Dialog(requireContext())
+        val binding = DialogLogoutBinding.inflate(LayoutInflater.from(requireContext()))
 
-        logoutDialog.setContentView(R.layout.dialog_logout)
+        logoutDialog.setContentView(binding.root)
         logoutDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         logoutDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         logoutDialog.setCanceledOnTouchOutside(false)
         logoutDialog.show()
 
-        logoutDialog.dialog_logout_complete.setOnClickListener {
+        binding.dialogLogoutComplete.setOnClickListener {
             viewModel.logout()
             logoutDialog.dismiss()
             Toast.makeText(requireContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
@@ -106,7 +108,7 @@ class MyPageFragment: Fragment() {
             findNavController().navigateUp()
         }
 
-        logoutDialog.dialog_logout_cancel.setOnClickListener {
+        binding.dialogLogoutCancel.setOnClickListener {
             logoutDialog.dismiss()
         }
     }

@@ -1,11 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-
+    id 'kotlin-parcelize'
 }
 
 Properties properties = new Properties()
@@ -47,6 +46,10 @@ android {
         viewBinding true
         dataBinding true
     }
+    namespace 'sju.sejong.capstonedesign'
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -65,8 +68,8 @@ dependencies {
     // Recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'

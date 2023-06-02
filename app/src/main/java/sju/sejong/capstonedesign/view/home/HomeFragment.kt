@@ -88,7 +88,7 @@ class HomeFragment: Fragment() {
         }
         diseaseGeneratedRegionAdapter.setItemClickListener(object : AllRegionGeneratedAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
-                Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), loginViewModel.allRegionDisease.value?.result?.get(position)?.diseaseCount.toString(), Toast.LENGTH_SHORT).show()
             }
         })
 

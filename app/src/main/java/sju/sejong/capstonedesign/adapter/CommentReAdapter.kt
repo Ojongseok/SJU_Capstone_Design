@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_comment_re.view.*
 import sju.sejong.capstonedesign.databinding.ItemCommentReBinding
 import sju.sejong.capstonedesign.model.board.ReCommentList
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
@@ -26,15 +25,14 @@ class CommentReAdapter(private val context: Context) : RecyclerView.Adapter<Comm
                 binding.ltItemCommentMenu.visibility = View.GONE
             }
 
+            binding.btnItemCommentReDelete.setOnClickListener {
+                itemClickListener.onClickDelete(it, position)
+            }
         }
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(reCommentsList[position])
-
-        holder.itemView.btn_item_comment_re_delete.setOnClickListener {
-            itemClickListener.onClickDelete(it, position)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {

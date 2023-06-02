@@ -14,7 +14,7 @@ import sju.sejong.capstonedesign.R
 import sju.sejong.capstonedesign.databinding.FragmentBoardBinding
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.dialog_login.*
+import sju.sejong.capstonedesign.databinding.DialogLoginBinding
 
 class BoardFragment: Fragment() {
     private var _binding: FragmentBoardBinding? = null
@@ -43,21 +43,22 @@ class BoardFragment: Fragment() {
 
     private fun setLoginDialog() {
         val loginDialog = Dialog(requireContext())
+        val binding = DialogLoginBinding.inflate(LayoutInflater.from(requireContext()))
 
-        loginDialog.setContentView(R.layout.dialog_login)
+        loginDialog.setContentView(binding.root)
         loginDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         loginDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loginDialog.setCanceledOnTouchOutside(false)
         loginDialog.show()
 
-        loginDialog.btn_dialog_login.setOnClickListener {
+        binding.btnDialogLogin.setOnClickListener {
             loginDialog.dismiss()
 
             val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
             findNavController().navigate(action)
         }
 
-        loginDialog.btn_dialog_login_close.setOnClickListener {
+        binding.btnDialogLoginClose.setOnClickListener {
             loginDialog.dismiss()
         }
     }

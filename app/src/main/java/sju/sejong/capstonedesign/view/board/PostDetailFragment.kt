@@ -25,11 +25,11 @@ import sju.sejong.capstonedesign.databinding.FragmentPostDetailBinding
 import sju.sejong.capstonedesign.model.board.SolveRequest
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.viewmodel.BoardViewModel
-import kotlinx.android.synthetic.main.dialog_comment_delete.*
-import kotlinx.android.synthetic.main.dialog_comment_modify.*
-import kotlinx.android.synthetic.main.dialog_post_delete.*
-import kotlinx.android.synthetic.main.dialog_post_update.*
-import kotlinx.android.synthetic.main.dialog_request_post_solve.*
+import sju.sejong.capstonedesign.databinding.DialogCommentDeleteBinding
+import sju.sejong.capstonedesign.databinding.DialogCommentModifyBinding
+import sju.sejong.capstonedesign.databinding.DialogPostDeleteBinding
+import sju.sejong.capstonedesign.databinding.DialogPostUpdateBinding
+import sju.sejong.capstonedesign.databinding.DialogRequestPostSolveBinding
 
 @AndroidEntryPoint
 class PostDetailFragment: Fragment() {
@@ -201,17 +201,19 @@ class PostDetailFragment: Fragment() {
 
     private fun setCommentModifyDialog(commentId: Long, contents: String) {
         val dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.dialog_comment_modify)
+        val binding = DialogCommentModifyBinding.inflate(LayoutInflater.from(context))
+
+        dialog.setContentView(binding.root)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-        dialog.et_comment_modify.setText(contents)
+        binding.etCommentModify.setText(contents)
 
-        dialog.btn_dialog_modify_complete.setOnClickListener {
-            if (dialog.et_comment_modify.text.isNotEmpty()) {
-                viewModel.modifyComment(args.boardId, commentId, dialog.et_comment_modify.text.toString())
+        binding.btnDialogModifyComplete.setOnClickListener {
+            if (binding.etCommentModify.text.isNotEmpty()) {
+                viewModel.modifyComment(args.boardId, commentId, binding.etCommentModify.text.toString())
                 Toast.makeText(requireContext(), "댓글 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             } else {
@@ -219,88 +221,86 @@ class PostDetailFragment: Fragment() {
             }
         }
 
-        dialog.btn_dialog_modify_close.setOnClickListener {
+       binding.btnDialogModifyClose.setOnClickListener {
             dialog.dismiss()
         }
     }
 
     private fun setCommentDeleteDialog(commentId: Long) {
         val dialog = Dialog(requireContext())
+        val binding = DialogCommentDeleteBinding.inflate(LayoutInflater.from(context))
 
-//        val binding = DialogCommentDeleteBinding.inflate(LayoutInflater.from(context))
-//        dialog.setContentView(binding.root)  // 이렇게 뷰바인딩 가능
-
-        dialog.setContentView(R.layout.dialog_comment_delete)
+        dialog.setContentView(binding.root)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-//        binding.dialogCommentDeleteCancel.setOnClickListener {
-//            dialog.dismiss()
-//        }
-        dialog.dialog_comment_delete_complete.setOnClickListener {
+        binding.dialogCommentDeleteComplete.setOnClickListener {
             viewModel.deleteComment(args.boardId, commentId)
             dialog.dismiss()
         }
 
-        dialog.dialog_comment_delete_cancel.setOnClickListener {
+        binding.dialogCommentDeleteCancel.setOnClickListener {
             dialog.dismiss()
         }
     }
 
     private fun setUpdateDialog() {
         val dialog = Dialog(requireContext())
+        val binding = DialogPostUpdateBinding.inflate(LayoutInflater.from(context))
 
-        dialog.setContentView(R.layout.dialog_post_update)
+        dialog.setContentView(binding.root)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-        dialog.dialog_post_update_complete.setOnClickListener {
+        binding.dialogPostUpdateComplete.setOnClickListener {
             Toast.makeText(requireContext(), "준비중입니다.", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
 
-        dialog.dialog_post_update_cancel.setOnClickListener {
+        binding.dialogPostUpdateCancel.setOnClickListener {
             dialog.dismiss()
         }
     }
 
     private fun setDeleteDialog() {
         val dialog = Dialog(requireContext())
+        val binding = DialogPostDeleteBinding.inflate(LayoutInflater.from(context))
 
-        dialog.setContentView(R.layout.dialog_post_delete)
+        dialog.setContentView(binding.root)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-        dialog.dialog_post_delete_complete.setOnClickListener {
+        binding.dialogPostDeleteComplete.setOnClickListener {
             viewModel.deletePost(args.boardId)
             dialog.dismiss()
         }
 
-        dialog.dialog_post_delete_cancel.setOnClickListener {
+        binding.dialogPostDeleteCancel.setOnClickListener {
             dialog.dismiss()
         }
     }
 
     private fun setRequestSolve() {
         val dialog = Dialog(requireContext())
+        val binding = DialogRequestPostSolveBinding.inflate(LayoutInflater.from(context))
 
-        dialog.setContentView(R.layout.dialog_request_post_solve)
+        dialog.setContentView(binding.root)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCanceledOnTouchOutside(false)
         dialog.show()
 
-        dialog.dialog_post_solve_complete.setOnClickListener {
+        binding.dialogPostSolveComplete.setOnClickListener {
             viewModel.postSolve(args.boardId, SolveRequest(true))
             dialog.dismiss()
         }
-        dialog.dialog_post_solve_cancel.setOnClickListener {
+        binding.dialogPostSolveCancel.setOnClickListener {
             dialog.dismiss()
         }
     }
