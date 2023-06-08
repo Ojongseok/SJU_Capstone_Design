@@ -21,7 +21,10 @@ import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
 import sju.sejong.capstonedesign.databinding.DialogNicknameModifyBinding
+import sju.sejong.capstonedesign.dialog.LoginDialog
+import sju.sejong.capstonedesign.dialog.LogoutDialog
 import sju.sejong.capstonedesign.model.login.ModifyUserInfo
+import sju.sejong.capstonedesign.view.home.HomeFragmentDirections
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
@@ -88,31 +91,6 @@ class MyPageFragment: Fragment() {
         }
     }
 
-    private fun setLogoutDialog() {
-        val logoutDialog = Dialog(requireContext())
-        val binding = DialogLogoutBinding.inflate(LayoutInflater.from(requireContext()))
-
-        logoutDialog.setContentView(binding.root)
-        logoutDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
-        logoutDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        logoutDialog.setCanceledOnTouchOutside(false)
-        logoutDialog.show()
-
-        binding.dialogLogoutComplete.setOnClickListener {
-            viewModel.logout()
-            logoutDialog.dismiss()
-            Toast.makeText(requireContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
-            ACCESS_TOKEN = ""
-            LOGIN_STATUS = false
-
-            findNavController().navigateUp()
-        }
-
-        binding.dialogLogoutCancel.setOnClickListener {
-            logoutDialog.dismiss()
-        }
-    }
-
     private fun initDataSettings() {
         binding.fragment = this@MyPageFragment
 
@@ -129,7 +107,20 @@ class MyPageFragment: Fragment() {
                 findNavController().navigate(action)
             }
             R.id.btn_mypage_logout -> {
-                setLogoutDialog()
+                val logoutDialog = LogoutDialog(requireContext())
+                logoutDialog.showLogoutDialog()
+
+                logoutDialog.setItemClickListener(object : LogoutDialog.OnItemClickListener {
+                    override fun onCompleteClick(v: View) {
+                        viewModel.logout()
+                        findNavController().navigateUp()
+
+                        ACCESS_TOKEN = ""
+                        LOGIN_STATUS = false
+
+                        Toast.makeText(requireContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
         }
     }

@@ -15,6 +15,8 @@ import sju.sejong.capstonedesign.databinding.FragmentBoardBinding
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import com.google.android.material.tabs.TabLayout
 import sju.sejong.capstonedesign.databinding.DialogLoginBinding
+import sju.sejong.capstonedesign.dialog.LoginDialog
+import sju.sejong.capstonedesign.view.home.HomeFragmentDirections
 
 class BoardFragment: Fragment() {
     private var _binding: FragmentBoardBinding? = null
@@ -31,36 +33,23 @@ class BoardFragment: Fragment() {
         setTabLayout()
 
         binding.btnBoardMypage.setOnClickListener {
+            val loginDialog = LoginDialog(requireContext())
+
             if (LOGIN_STATUS) {
                 val action = BoardFragmentDirections.actionFragmentBoardToFragmentMypage()
                 findNavController().navigate(action)
             } else {
-                setLoginDialog()
+                loginDialog.showLoginDialog()
+
+                loginDialog.setItemClickListener(object : LoginDialog.OnItemClickListener {
+                    override fun onCompleteClick(v: View) {
+                        val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
+                        findNavController().navigate(action)
+                    }
+                })
             }
         }
 
-    }
-
-    private fun setLoginDialog() {
-        val loginDialog = Dialog(requireContext())
-        val binding = DialogLoginBinding.inflate(LayoutInflater.from(requireContext()))
-
-        loginDialog.setContentView(binding.root)
-        loginDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
-        loginDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        loginDialog.setCanceledOnTouchOutside(false)
-        loginDialog.show()
-
-        binding.btnDialogLogin.setOnClickListener {
-            loginDialog.dismiss()
-
-            val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
-            findNavController().navigate(action)
-        }
-
-        binding.btnDialogLoginClose.setOnClickListener {
-            loginDialog.dismiss()
-        }
     }
 
     private fun setTabLayout() {
