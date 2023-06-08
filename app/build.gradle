@@ -12,6 +12,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 android {
     compileSdk 32
+    namespace 'sju.sejong.capstonedesign'
 
     defaultConfig {
         applicationId "sju.sejong.capstonedesign"
@@ -46,7 +47,8 @@ android {
         viewBinding true
         dataBinding true
     }
-    namespace 'sju.sejong.capstonedesign'
+
+
     kapt {
         correctErrorTypes = true
     }

@@ -51,6 +51,8 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     fun deletePost(boardId: Long) = viewModelScope.launch {
         val response = repository.deletePost(boardId)
         postDeleteResultCode.postValue(response.body()?.code)
+
+        getPostDetailInfo(boardId)
     }
 
     // 게시글별 댓글 조회
@@ -67,6 +69,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
             repository.postLike(boardId)
         }
         getPostDetailInfo(boardId)
+        getAllComments(boardId)
     }
 
     // 댓글 작성
@@ -74,6 +77,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
         val response = repository.writeComments(boardId, content, parentId)
         writeCommentsResultCode.postValue(response.body()?.code)
 
+        getPostDetailInfo(boardId)
         getAllComments(boardId)
     }
 
@@ -88,6 +92,7 @@ class BoardViewModel @Inject constructor(private val repository: BoardRepository
     fun deleteComment(boardId: Long, commentId: Long) = viewModelScope.launch {
         repository.deleteComment(boardId, commentId)
 
+        getPostDetailInfo(boardId)
         getAllComments(boardId)
     }
 
