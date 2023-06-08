@@ -20,6 +20,7 @@ import sju.sejong.capstonedesign.util.SeggeredGridSpaceItemDecoration
 import sju.sejong.capstonedesign.viewmodel.BoardViewModel
 import sju.sejong.capstonedesign.adapter.BoardPostAdapter
 import sju.sejong.capstonedesign.databinding.DialogLoginBinding
+import sju.sejong.capstonedesign.dialog.LoginDialog
 
 @AndroidEntryPoint
 class TipBoardFragment: Fragment() {
@@ -66,36 +67,23 @@ class TipBoardFragment: Fragment() {
 
         tipBoardPostAdapter.setItemClickListener(object :BoardPostAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
+                val loginDialog = LoginDialog(requireContext())
+
                 if (LOGIN_STATUS) {
                     val action = BoardFragmentDirections.actionFragmentBoardToFragmentPostDetail(tipBoardList[position].boardId)
                     findNavController().navigate(action)
                 } else {
-                    setLoginDialog()
+                    loginDialog.showLoginDialog()
+
+                    loginDialog.setItemClickListener(object : LoginDialog.OnItemClickListener {
+                        override fun onCompleteClick(v: View) {
+                            val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
+                            findNavController().navigate(action)
+                        }
+                    })
                 }
             }
         })
-    }
-
-    private fun setLoginDialog() {
-        val loginDialog = Dialog(requireContext())
-        val binding = DialogLoginBinding.inflate(LayoutInflater.from(requireContext()))
-
-        loginDialog.setContentView(binding.root)
-        loginDialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
-        loginDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        loginDialog.setCanceledOnTouchOutside(false)
-        loginDialog.show()
-
-        binding.btnDialogLogin.setOnClickListener {
-            loginDialog.dismiss()
-
-            val action = BoardFragmentDirections.actionFragmentBoardToFragmentLogin()
-            findNavController().navigate(action)
-        }
-
-        binding.btnDialogLoginClose.setOnClickListener {
-            loginDialog.dismiss()
-        }
     }
 
     override fun onDestroy() {

@@ -197,8 +197,6 @@ class PostDetailFragment: Fragment() {
         }
     }
 
-
-
     private fun setCommentModifyDialog(commentId: Long, contents: String) {
         val dialog = Dialog(requireContext())
         val binding = DialogCommentModifyBinding.inflate(LayoutInflater.from(context))
