@@ -18,10 +18,12 @@ import sju.sejong.capstonedesign.adapter.DiseaseGeneratedMonthlyAdapter
 import sju.sejong.capstonedesign.adapter.PopularPostAdapter
 import sju.sejong.capstonedesign.adapter.AllRegionGeneratedAdapter
 import sju.sejong.capstonedesign.databinding.FragmentHomeBinding
+import sju.sejong.capstonedesign.dialog.LoginDialog
 import sju.sejong.capstonedesign.util.Constants.ACCESS_TOKEN
 import sju.sejong.capstonedesign.util.Constants.LOGIN_STATUS
 import sju.sejong.capstonedesign.util.Constants.MEMBER_ID
 import sju.sejong.capstonedesign.util.GridSpaceItemDecoration
+import sju.sejong.capstonedesign.view.board.BoardFragmentDirections
 import sju.sejong.capstonedesign.viewmodel.BoardViewModel
 import sju.sejong.capstonedesign.viewmodel.LoginViewModel
 import sju.sejong.capstonedesign.viewmodel.OpenApiViewModel
@@ -101,8 +103,21 @@ class HomeFragment: Fragment() {
         popularPostAdapter.setItemClickListener(object : PopularPostAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 val boardId = boardViewModel.popularPostResponse.value?.result!![position].boardId
-                val action = HomeFragmentDirections.actionFragmentHomeToFragmentPostDetail(boardId)
-                findNavController().navigate(action)
+                val loginDialog = LoginDialog(requireContext())
+
+                if (LOGIN_STATUS) {
+                    val action = HomeFragmentDirections.actionFragmentHomeToFragmentPostDetail(boardId)
+                    findNavController().navigate(action)
+                } else {
+                    loginDialog.showLoginDialog()
+
+                    loginDialog.setItemClickListener(object : LoginDialog.OnItemClickListener {
+                        override fun onCompleteClick(v: View) {
+                            val action = HomeFragmentDirections.actionFragmentHomeToFragmentLogin()
+                            findNavController().navigate(action)
+                        }
+                    })
+                }
             }
         })
     }
