@@ -18,11 +18,14 @@ class DiseaseGeneratedMonthlyAdapter(private val context: Context, private val r
         fun bind(item: Element) {
             binding.model = item.text().substring(item.text().indexOf('-')+1).replace(')', '-')
 
-            if (rvInt == 2) {
+            if (rvInt == 1) {
+                binding.recHomeAlertMonth.setBackgroundColor(Color.parseColor("#FF4444"))
+            } else if (rvInt == 2) {
                 binding.recHomeAlertMonth.setBackgroundColor(Color.parseColor("#FFE500"))
             } else if (rvInt == 3) {
                 binding.recHomeAlertMonth.setBackgroundColor(context.resources.getColor(R.color.main_green))
             }
+
         }
     }
 

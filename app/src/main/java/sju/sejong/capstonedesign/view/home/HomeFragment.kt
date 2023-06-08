@@ -58,6 +58,17 @@ class HomeFragment: Fragment() {
     }
 
     private fun setRv() {
+        binding.rvHomeAlertMonth1.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = diseaseGeneratedMonthlyAdapter1
+        }
+        diseaseGeneratedMonthlyAdapter1.setItemClickListener(object : DiseaseGeneratedMonthlyAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                val pair = diseaseGeneratedMonthlyAdapter1.getDiseaseName(position)
+                viewModel.getSickKey(pair.first, pair.second)
+            }
+        })
         binding.rvHomeAlertMonth2.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
@@ -123,6 +134,10 @@ class HomeFragment: Fragment() {
     }
 
     private fun setObserver() {
+        viewModel.diseaseGeneratedMonthly1.observe(viewLifecycleOwner) {
+            diseaseGeneratedMonthlyAdapter1.setData(it)
+        }
+
         viewModel.diseaseGeneratedMonthly2.observe(viewLifecycleOwner) {
             diseaseGeneratedMonthlyAdapter2.setData(it)
         }
@@ -172,6 +187,7 @@ class HomeFragment: Fragment() {
             MEMBER_ID = loginViewModel.getMemberId()
         }
 
+        diseaseGeneratedMonthlyAdapter1 = DiseaseGeneratedMonthlyAdapter(requireContext(), 1)
         diseaseGeneratedMonthlyAdapter2 = DiseaseGeneratedMonthlyAdapter(requireContext(), 2)
         diseaseGeneratedMonthlyAdapter3 = DiseaseGeneratedMonthlyAdapter(requireContext(), 3)
         diseaseGeneratedRegionAdapter = AllRegionGeneratedAdapter(requireContext())
