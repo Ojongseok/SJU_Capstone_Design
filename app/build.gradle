@@ -17,8 +17,8 @@ android {
         applicationId "sju.sejong.capstonedesign"
         minSdk 21
         targetSdk 32
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 6
+        versionName "1.0.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "OPEN_API_KEY", properties['OPEN_API_KEY']
